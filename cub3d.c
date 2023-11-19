@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:45:10 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/19 13:08:58 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/19 16:51:48 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char *map[] =
 
 int draw_player(t_game *game)
 {
+    
     int i = 0;
     int j = 0;
     while (j < 10)
@@ -43,19 +44,19 @@ int draw_player(t_game *game)
 
 void draw_pixel(t_game *game, int x, int y, int color)
 {
-    int i = 0;
-    int j = 0;
-    while(j < 64)
+    for (int j = 0; j < TILE_SIZE; j++)
     {
-        i = 0;
-        while(i < 64)
+        for (int i = 0; i < TILE_SIZE; i++)
         {
-            mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
-            i++;
+            int pixel_index = (y + j) * game->data->line_length + (x + i) * (game->data->bits_per_pixel / 8);
+
+            game->data->addr[pixel_index] = (color >> 16) & 0xFF;   
+            game->data->addr[pixel_index + 1] = (color >> 8) & 0xFF; 
+            game->data->addr[pixel_index + 2] = color & 0xFF;        
         }
-        j++;
     }
 }
+
 
 int draw_wall(t_game *game)
 {
@@ -66,8 +67,7 @@ int draw_wall(t_game *game)
         i = 0;
         while(map[j][i])
         {
-            if (map[j][i] == '1')
-                // mlx_pixel_put(game->mlx, game->mlx_win, i * 64, j *64, 0x00FF0000);
+            if (map[j][i] == '1') 
                 draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0x808080);
             else
                 draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0xFFFFFF);
@@ -75,8 +75,15 @@ int draw_wall(t_game *game)
         }
         j++;
     }
-    // draw_player(game);
     return (0);
+}
+
+int draw(t_game *game) {
+    mlx_clear_window(game->mlx, game->mlx_win);
+    draw_wall(game);
+        mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
+    draw_player(game);
+    return 0;
 }
 
 int close_win(t_game *game)
@@ -102,13 +109,14 @@ int key_press(int keycode, t_game *game)
 void ft_game(t_game *game)
 {
     game->mlx = mlx_init();
-    // game->mlx_win = mlx_new_window(game->mlx, 800, 600, "cub3d");
     game->mlx_win = mlx_new_window(game->mlx,strlen(map[0]) * TILE_SIZE, 5 * TILE_SIZE,"cub3d");
-    // mlx_pixel_put(game->mlx, game->mlx_win, 400, 300, 0x00FF0000);
+    game->data->img = mlx_new_image(game->mlx,strlen(map[0]) * TILE_SIZE, 5 * TILE_SIZE);
+    game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length, &game->data->endian);
     draw_wall(game);
+    mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     mlx_hook(game->mlx_win, 2, 0, key_press, game);
     mlx_hook(game->mlx_win,17,0,close_win,game);
-    mlx_loop_hook(game->mlx, draw_player, game);
+    mlx_loop_hook(game->mlx, draw, game);
     mlx_loop(game->mlx);
 }
 
@@ -150,11 +158,12 @@ int main()
 {
     t_game *game;
     t_player *player;
+    t_data *data;
     game = malloc(sizeof(t_game));
     player = malloc(sizeof(t_player));
+    data = malloc(sizeof(t_data));
     init_player(player);
     game->player = player;
-    // printf("x = %f\n", game->player->x);
-    // printf("y = %f\n", game->player->y);
+    game->data = data;
     ft_game(game);
 }
