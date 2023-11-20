@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:46:55 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/19 16:33:15 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:28:23 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,28 @@ typedef struct s_data{
 
 typedef struct s_player
 {
-	double x ;//= game->width / 2;
-	double y ;//= game->height / 2;
+	double x ;
+	double y ;
 	double radius ;//= 3;
-	int turn ;//= 0;
-	int walk ;//= 0;
-	double rotation_angle ;//= PI / 2;
-	double move_speed ;//= 2.0;
+
+
+	
+	int turn ;//= 0;// ig ankhedm biha f left o right 
+	// -1 if left , +1 if right
+	int walk ;//= 0;// ohadi fl qedam ola lor 
+	// -1 if back , +1 if front
+
+	
+	double rotation_angle ;//= PI / 2; 
+	// the angle that the player is looking at
+
+	
+	double move_speed ;//= 2.0; 
+	// how fast or slow the player move
+
+	
 	double rotation_speed ;//= 2 * (PI / 180);
+	// how fast or slow the player rotate
 } t_player;
 
 typedef struct s_game

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:45:10 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/19 16:51:48 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:22:33 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,20 @@ int key_press(int keycode, t_game *game)
 {
     if (keycode == 53)
         close_win(game);
-    if (keycode == 13 || keycode == 126)
+    if (keycode == 1 || keycode == 125)
     {
         game->player->x += cos(game->player->rotation_angle) * game->player->move_speed;
         game->player->y += sin(game->player->rotation_angle) * game->player->move_speed;
+    }
+    if (keycode == 13 || keycode == 126)
+    {
+        game->player->x -= cos(game->player->rotation_angle) * game->player->move_speed;
+        game->player->y -= sin(game->player->rotation_angle) * game->player->move_speed;
+        
+    }
+    if (keycode == 0 || keycode == 123)
+    {
+         
     }
     return 0;
 }
@@ -146,7 +156,7 @@ void get_player_position(t_player *player)
 void init_player(t_player *player) {
 	player->radius = 3;
 	player->turn = 0;
-	player->walk = 1;
+	player->walk = 0;
 	player->rotation_angle = PI / 2;
 	player->move_speed = 2.0;
 	player->rotation_speed = 2 * (PI / 180);
