@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:45:10 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/20 11:22:33 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:52:41 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,79 @@ char *map[] =
 "1111111111111111111111111"
 };
 
+// int draw_player(t_game *game)
+// {
+    
+//     int i = 0;
+//     int j = 0;
+//     while (j < 10)
+//     {
+//         i = 0;
+//         while (i < 10)
+//         {
+//             mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
+//             mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + 5 + cos(game->player->rotation_angle), game->player->y +sin(game->player->rotation_angle) + (j + 10), 0x00FF0000);
+//             i++;
+//         }
+//         j++;
+//     }
+//     return (0);
+// }
+
+void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
+{
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (1)
+    {
+        mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
+
+        if (x0 == x1 && y0 == y1)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+
 int draw_player(t_game *game)
 {
-    
     int i = 0;
     int j = 0;
-    while (j < 10)
-    {
-        i = 0;
-        while (i < 10)
-        {
-             mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
-            i++;
-        }
-        j++;
-    }
+    int playerSize = 10;
+
+    // // Draw the player as a square
+    // while (j < playerSize)
+    // {
+    //     i = 0;
+    //     while (i < playerSize)
+    //     {
+    //         mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
+    //         i++;
+    //     }
+    //     j++;
+    // }
+    
+    // Calculate the line end point
+    double lineLength = 30;
+    double lineEndX = game->player->x + lineLength * cos(game->player->rotation_angle);
+    double lineEndY = game->player->y + lineLength * sin(game->player->rotation_angle);
+
+    // Draw the line from the center of the player to the calculated end point
+    draw_line(game, game->player->x + 5, game->player->y, lineEndX + 5, lineEndY, 0x00FF0000);
     return (0);
 }
 
@@ -94,27 +152,47 @@ int close_win(t_game *game)
 
 int key_press(int keycode, t_game *game)
 {
+    float move_step = game->player->walk * game->player->move_speed; 
     if (keycode == 53)
         close_win(game);
     if (keycode == 1 || keycode == 125)
     {
-        game->player->x += cos(game->player->rotation_angle) * game->player->move_speed;
-        game->player->y += sin(game->player->rotation_angle) * game->player->move_speed;
+        game->player->walk = -1;
+        game->player->x += cos(game->player->rotation_angle) * move_step;
+        game->player->y += sin(game->player->rotation_angle) * move_step;
     }
     if (keycode == 13 || keycode == 126)
     {
-        game->player->x -= cos(game->player->rotation_angle) * game->player->move_speed;
-        game->player->y -= sin(game->player->rotation_angle) * game->player->move_speed;
+        game->player->walk = 1;
+        game->player->x += cos(game->player->rotation_angle) * move_step;
+        game->player->y += sin(game->player->rotation_angle) * move_step;
         
     }
     if (keycode == 0 || keycode == 123)
     {
-         
+        game->player->turn = 1;
+        game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
+    }
+    if (keycode == 2 || keycode == 124)
+    {
+        game->player->turn = -1;
+        game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
     }
     return 0;
 }
 
-
+int key_releas(int keycode, t_game *game)
+{
+    if (keycode == 1 || keycode == 125)
+        game->player->walk = 0;
+    if (keycode == 13 || keycode == 126)
+        game->player->walk = 0;
+    if (keycode == 0 || keycode == 123)
+        game->player->turn = 0;
+    if (keycode == 2 || keycode == 124)
+        game->player->turn = 0;
+    return 0;
+}
 
 void ft_game(t_game *game)
 {
@@ -125,6 +203,7 @@ void ft_game(t_game *game)
     draw_wall(game);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     mlx_hook(game->mlx_win, 2, 0, key_press, game);
+    mlx_hook(game->mlx_win,3,0,key_releas,game);
     mlx_hook(game->mlx_win,17,0,close_win,game);
     mlx_loop_hook(game->mlx, draw, game);
     mlx_loop(game->mlx);
@@ -154,12 +233,12 @@ void get_player_position(t_player *player)
 
 
 void init_player(t_player *player) {
-	player->radius = 3;
+	player->radius = 2;
 	player->turn = 0;
 	player->walk = 0;
-	player->rotation_angle = PI / 2;
+	player->rotation_angle = M_PI / 2;
 	player->move_speed = 2.0;
-	player->rotation_speed = 2 * (PI / 180);
+	player->rotation_speed = 2 * (M_PI / 180);
     get_player_position(player);
 }
 
