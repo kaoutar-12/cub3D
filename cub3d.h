@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 09:39:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:42:29 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 #include <math.h>
 
 #define TILE_SIZE 64 
-#define WINDOW_WIDTH strlen(map[0]) * TILE_SIZE
+#define WINDOW_WIDTH 26 * TILE_SIZE
 #define WINDOW_HEIGHT 5 * TILE_SIZE
 
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP_WIDTH 1
-#define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+// #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+#define NUM_RAYS 1
 
 typedef struct s_data{
 	void	*img;
@@ -64,9 +65,29 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-    double ray_angle;
+    double *wall_hit_x;
+    double *wall_hit_y;
     double *ray_angles;
-} t_ray;
+    double *distances;
+    bool *is_ray_facing_down;
+    bool *is_ray_facing_up;
+    bool *is_ray_facing_right;
+    bool *is_ray_facing_left;
+    double ray_angle;
+    double h_x_intercept;
+    double h_y_intercept;
+    double v_x_intercept;
+    double v_y_intercept;
+    double x_step;
+    double y_step;
+    double h_wall_hit_x;
+    double h_wall_hit_y;
+    double v_wall_hit_x;
+    double v_wall_hit_y;
+    bool *found_h_wall_hit;
+    bool *found_v_wall_hit;
+    
+}t_ray;
 
 typedef struct s_game
 {
@@ -74,6 +95,7 @@ typedef struct s_game
     void *mlx_win;
     t_data *data;
     t_player *player;
+    t_ray *ray;
 } t_game;
 
 // game fuctions

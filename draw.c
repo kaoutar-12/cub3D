@@ -6,11 +6,115 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 09:24:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:50:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void get_direction(t_game *game, int i)
+{
+    if(game->ray->ray_angles[i] > 0 && game->ray->ray_angles[i] < M_PI)
+        game->ray->is_ray_facing_down[i] = true;
+    else
+        game->ray->is_ray_facing_down[i] = false;
+    game->ray->is_ray_facing_up[i] = !game->ray->is_ray_facing_down[i];
+
+    if (game->ray->ray_angles[i] < M_PI / 2 || game->ray->ray_angles[i] > (2 * M_PI) / 3)
+        game->ray->is_ray_facing_right[i] = true;
+    else
+        game->ray->is_ray_facing_right[i] = false;
+    game->ray->is_ray_facing_left[i] = !game->ray->is_ray_facing_right[i];
+}
+
+void cast_horizontal_rays(t_game *game, int i)
+{
+    double next_h_xintercept;
+    double next_h_yintercept;
+
+    next_h_xintercept = 0;
+    next_h_yintercept = 0;
+    
+    get_direction(game, i);
+    game->ray->wall_hit_x = 0;
+    game->ray->wall_hit_y = 0;
+    game->ray->found_h_wall_hit[i] = false;
+    game->ray->h_y_intercept = floor(game->player->y / TILE_SIZE) * TILE_SIZE;
+    
+    if (game->ray->is_ray_facing_down[i])
+        game->ray->h_y_intercept += TILE_SIZE;
+    else
+        game->ray->h_y_intercept += 0;
+    
+    game->ray->h_x_intercept = game->player->x + (game->ray->h_y_intercept - game->player->y) / tan(game->ray->ray_angles[i]);
+    game->ray->y_step = TILE_SIZE;
+    
+    if (game->ray->is_ray_facing_up[i])
+        game->ray->y_step *= -1;
+    else
+        game->ray->y_step *= 1;
+    
+    game->ray->x_step = TILE_SIZE / tan(game->ray->ray_angles[i]);
+    if (game->ray->is_ray_facing_left[i] && game->ray->x_step > 0)
+        game->ray->x_step *= -1;
+    else
+        game->ray->x_step *= 1;
+    
+    if (game->ray->is_ray_facing_right[i] && game->ray->x_step < 0)
+        game->ray->x_step *= -1;
+    else
+        game->ray->x_step *= 1;
+
+    next_h_xintercept = game->ray->h_x_intercept;
+    next_h_yintercept = game->ray->h_y_intercept;
+
+    double x_to_check = next_h_xintercept;
+    double y_to_check = next_h_yintercept;
+    
+    while((next_h_xintercept >= 0 && next_h_xintercept <= WINDOW_WIDTH)
+        && (next_h_yintercept >= 0 && next_h_yintercept <= WINDOW_HEIGHT))
+    {
+        if (game->ray->is_ray_facing_up[i])
+            y_to_check --;
+        if (isWall(x_to_check, y_to_check) == 1)
+        {
+            game->ray->found_h_wall_hit[i] = true;
+            game->ray->h_wall_hit_x = --next_h_xintercept;
+            game->ray->h_wall_hit_y = --next_h_yintercept;
+            draw_line(game, game->player->x, game->player->y, game->ray->h_wall_hit_x, game->ray->h_wall_hit_y, 0x00FF0000);
+            break;
+        }
+        else
+        {
+            next_h_xintercept += game->ray->x_step;
+            next_h_yintercept += game->ray->y_step;
+        }
+    }
+
+}
+
+void cast_v_h_rays(t_game *game, int i)
+{
+    // cast horizontal rays
+    cast_horizontal_rays(game, i);
+    // cast vertical rays
+    cast_vertical_rays(game, i);
+}
+
+void cast_rays(t_game *game)
+{
+    game->ray->ray_angle = game->player->rotation_angle - (FOV_ANGLE / 2);
+    
+    int i = 0;
+    while(i < NUM_RAYS)
+    {
+        game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
+        game->ray->ray_angles[i] = game->ray->ray_angle;
+        cast_v_h_rays(game, i);
+        // game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
+        i++;
+    }
+}
 
 int draw(t_game *game)
 {
@@ -19,6 +123,7 @@ int draw(t_game *game)
     draw_wall(game);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     draw_player(game);
+    cast_rays(game);
     return 0;
 }
 
