@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 12:02:44 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:33:47 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void cast_horizontal_rays(t_game *game, int i)
             game->ray->found_h_wall_hit[i] = true;
             game->ray->h_wall_hit_x = --next_h_xintercept;
             game->ray->h_wall_hit_y = --next_h_yintercept;
-            draw_line(game, game->player->x, game->player->y, game->ray->h_wall_hit_x, game->ray->h_wall_hit_y, 0x00FF0000);
             break;
         }
         else
@@ -100,7 +99,7 @@ void cast_vertical_rays(t_game *game, int i)
     
     next_v_xintercept = 0;
     next_v_yintercept = 0;
-    
+
     get_direction(game, i);
     game->ray->v_wall_hit_x = 0;
     game->ray->v_wall_hit_y = 0;
@@ -143,12 +142,11 @@ void cast_vertical_rays(t_game *game, int i)
     {
         if (game->ray->is_ray_facing_left[i])
             x_to_check--;
-        if(isWall(x_to_check, y_to_check) == 1)
+        if(isWall(x_to_check, y_to_check) == 1 )
         {
             game->ray->found_v_wall_hit[i] = true;
             game->ray->v_wall_hit_x = --next_v_xintercept;
             game->ray->v_wall_hit_y = --next_v_yintercept;
-            draw_line(game, game->player->x, game->player->y, game->ray->v_wall_hit_x, game->ray->v_wall_hit_y, 0x00FF0000);
             break;
         }
         else
@@ -238,7 +236,8 @@ void cast_rays(t_game *game)
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
         game->ray->ray_angles[i] = game->ray->ray_angle;
         cast_v_h_rays(game, i);
-        // game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
+        draw_line(game, game->player->x, game->player->y, game->ray->wall_hit_x[i], game->ray->wall_hit_y[i], 0x00FF0000);
+        game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
         i++;
     }
 }

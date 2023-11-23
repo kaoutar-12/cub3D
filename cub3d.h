@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 11:53:42 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:34:04 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define WALL_STRIP_WIDTH 1
 // #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
-#define NUM_RAYS 1
+#define NUM_RAYS 10
 
 typedef struct s_data{
 	void	*img;
@@ -88,6 +88,7 @@ typedef struct s_ray
     bool *found_h_wall_hit;
     bool *found_v_wall_hit;
     bool *to_hit;
+    bool flag;
     
 }t_ray;
 
