@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 15:33:47 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:59:23 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,13 @@ void cast_horizontal_rays(t_game *game, int i)
 
     next_h_xintercept = game->ray->h_x_intercept;
     next_h_yintercept = game->ray->h_y_intercept;
-
-    double x_to_check = next_h_xintercept;
-    double y_to_check = next_h_yintercept;
     
     while((next_h_xintercept >= 0 && next_h_xintercept <= WINDOW_WIDTH)
         && (next_h_yintercept >= 0 && next_h_yintercept <= WINDOW_HEIGHT))
     {
         if (game->ray->is_ray_facing_up[i])
-            y_to_check--;
-        if (isWall(x_to_check, y_to_check) == 1)
+            next_h_yintercept--;
+        if (isWall(next_h_xintercept, next_h_yintercept) == 1)
         {
             game->ray->found_h_wall_hit[i] = true;
             game->ray->h_wall_hit_x = --next_h_xintercept;
@@ -134,15 +131,13 @@ void cast_vertical_rays(t_game *game, int i)
     next_v_xintercept = game->ray->v_x_intercept;
     next_v_yintercept = game->ray->v_y_intercept;
 
-    double x_to_check = next_v_xintercept;
-    double y_to_check = next_v_yintercept;
 
     while((next_v_xintercept >= 0 && next_v_xintercept <= WINDOW_WIDTH) 
         && (next_v_yintercept >= 0 && next_v_yintercept <= WINDOW_HEIGHT))
     {
         if (game->ray->is_ray_facing_left[i])
-            x_to_check--;
-        if(isWall(x_to_check, y_to_check) == 1 )
+            next_v_xintercept--;
+        if(isWall(next_v_xintercept, next_v_yintercept) == 1 )
         {
             game->ray->found_v_wall_hit[i] = true;
             game->ray->v_wall_hit_x = --next_v_xintercept;
@@ -174,21 +169,14 @@ void cast_v_h_rays(t_game *game, int i)
     double v_distance = 0;
 
     if(game->ray->found_h_wall_hit[i])
-    {
         h_distance = distance_between_points(game->player->x, game->player->y, game->ray->h_wall_hit_x, game->ray->h_wall_hit_y);
-    }
     else
-    {
         h_distance = INT_MAX;
-    }
+
     if(game->ray->found_v_wall_hit)
-    {
         v_distance = distance_between_points(game->player->x, game->player->y, game->ray->v_wall_hit_x, game->ray->v_wall_hit_y);
-    }
     else
-    {
         v_distance = INT_MAX;
-    }
     
     if(h_distance < v_distance)
     {
@@ -200,30 +188,19 @@ void cast_v_h_rays(t_game *game, int i)
     }
     
     if (h_distance < v_distance)
-    {
         game->ray->wall_hit_y[i] = game->ray->h_wall_hit_y;
-    }
     else
-    {
         game->ray->wall_hit_y[i] = game->ray->v_wall_hit_y;
-    }
     
     if(h_distance < v_distance)
-    {
         game->ray->distances[i] = h_distance;
-    }
     else
-    {
         game->ray->distances[i] = v_distance;
-    }
+
     if(v_distance < h_distance)
-    {
         game->ray->to_hit[i] = true;
-    }
     else
-    {
         game->ray->to_hit[i] = false;
-    }
 }
 
 void cast_rays(t_game *game)
@@ -244,12 +221,12 @@ void cast_rays(t_game *game)
 
 int draw(t_game *game)
 {
-    printf("rotation angle: %f\n", game->player->rotation_angle);
+    // printf("rotation angle: %f\n", game->player->rotation_angle);
     mlx_clear_window(game->mlx, game->mlx_win);
-    draw_wall(game);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
-    draw_player(game);
+    // draw_player(game);
     cast_rays(game);
+    draw_wall(game);
     return 0;
 }
 
