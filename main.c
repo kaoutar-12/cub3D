@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 10:42:45 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:54:02 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void init_rays(t_ray *ray)
     ray->is_ray_facing_left = malloc(sizeof(double) * NUM_RAYS);
     ray->found_h_wall_hit = malloc(sizeof(bool) * NUM_RAYS);
     ray->found_v_wall_hit = malloc(sizeof(bool) * NUM_RAYS);
+    ray->to_hit = malloc(sizeof(bool) * NUM_RAYS);
     ray->ray_angle = 0;
 }
 

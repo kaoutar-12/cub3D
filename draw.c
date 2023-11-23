@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 10:50:43 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:02:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void get_direction(t_game *game, int i)
         game->ray->is_ray_facing_down[i] = false;
     game->ray->is_ray_facing_up[i] = !game->ray->is_ray_facing_down[i];
 
-    if (game->ray->ray_angles[i] < M_PI / 2 || game->ray->ray_angles[i] > (2 * M_PI) / 3)
+    if (game->ray->ray_angles[i] < 0.5 * M_PI || game->ray->ray_angles[i] > 1.5 * M_PI)
         game->ray->is_ray_facing_right[i] = true;
     else
         game->ray->is_ray_facing_right[i] = false;
@@ -36,8 +36,8 @@ void cast_horizontal_rays(t_game *game, int i)
     next_h_yintercept = 0;
     
     get_direction(game, i);
-    game->ray->wall_hit_x = 0;
-    game->ray->wall_hit_y = 0;
+    game->ray->h_wall_hit_x = 0;
+    game->ray->h_wall_hit_y = 0;
     game->ray->found_h_wall_hit[i] = false;
     game->ray->h_y_intercept = floor(game->player->y / TILE_SIZE) * TILE_SIZE;
     
@@ -75,7 +75,7 @@ void cast_horizontal_rays(t_game *game, int i)
         && (next_h_yintercept >= 0 && next_h_yintercept <= WINDOW_HEIGHT))
     {
         if (game->ray->is_ray_facing_up[i])
-            y_to_check --;
+            y_to_check--;
         if (isWall(x_to_check, y_to_check) == 1)
         {
             game->ray->found_h_wall_hit[i] = true;
@@ -93,12 +93,139 @@ void cast_horizontal_rays(t_game *game, int i)
 
 }
 
+void cast_vertical_rays(t_game *game, int i)
+{
+    double next_v_xintercept;
+    double next_v_yintercept;
+    
+    next_v_xintercept = 0;
+    next_v_yintercept = 0;
+    
+    get_direction(game, i);
+    game->ray->v_wall_hit_x = 0;
+    game->ray->v_wall_hit_y = 0;
+    game->ray->found_v_wall_hit[i] = false;
+    game->ray->v_x_intercept = floor(game->player->x / TILE_SIZE) * TILE_SIZE;
+
+    if(game->ray->is_ray_facing_right[i])
+        game->ray->v_x_intercept += TILE_SIZE;
+    else
+        game->ray->v_x_intercept += 0;
+    
+    game->ray->v_y_intercept = game->player->y + (game->ray->v_x_intercept - game->player->x) * tan(game->ray->ray_angles[i]);
+    game->ray->x_step = TILE_SIZE;
+
+    if (game->ray->is_ray_facing_left[i])
+        game->ray->x_step *= -1;
+    else
+        game->ray->x_step *= 1;
+    
+    game->ray->y_step = TILE_SIZE * tan(game->ray->ray_angles[i]);
+    
+    if (game->ray->is_ray_facing_up[i] && game->ray->y_step > 0)
+        game->ray->y_step *= -1;
+    else
+        game->ray->y_step *= 1;
+
+    if (game->ray->is_ray_facing_down[i] && game->ray->y_step < 0)
+        game->ray->y_step *= -1;
+    else
+        game->ray->y_step *= 1;
+    
+    next_v_xintercept = game->ray->v_x_intercept;
+    next_v_yintercept = game->ray->v_y_intercept;
+
+    double x_to_check = next_v_xintercept;
+    double y_to_check = next_v_yintercept;
+
+    while((next_v_xintercept >= 0 && next_v_xintercept <= WINDOW_WIDTH) 
+        && (next_v_yintercept >= 0 && next_v_yintercept <= WINDOW_HEIGHT))
+    {
+        if (game->ray->is_ray_facing_left[i])
+            x_to_check--;
+        if(isWall(x_to_check, y_to_check) == 1)
+        {
+            game->ray->found_v_wall_hit[i] = true;
+            game->ray->v_wall_hit_x = --next_v_xintercept;
+            game->ray->v_wall_hit_y = --next_v_yintercept;
+            draw_line(game, game->player->x, game->player->y, game->ray->v_wall_hit_x, game->ray->v_wall_hit_y, 0x00FF0000);
+            break;
+        }
+        else
+        {
+            next_v_xintercept += game->ray->x_step;
+            next_v_yintercept += game->ray->y_step;
+        }
+    }
+}
+
+double distance_between_points(double x1, double y1, double x2, double y2)
+{
+    return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
 void cast_v_h_rays(t_game *game, int i)
 {
     // cast horizontal rays
     cast_horizontal_rays(game, i);
     // cast vertical rays
     cast_vertical_rays(game, i);
+    // calculate the distance
+
+    double h_distance = 0;
+    double v_distance = 0;
+
+    if(game->ray->found_h_wall_hit[i])
+    {
+        h_distance = distance_between_points(game->player->x, game->player->y, game->ray->h_wall_hit_x, game->ray->h_wall_hit_y);
+    }
+    else
+    {
+        h_distance = INT_MAX;
+    }
+    if(game->ray->found_v_wall_hit)
+    {
+        v_distance = distance_between_points(game->player->x, game->player->y, game->ray->v_wall_hit_x, game->ray->v_wall_hit_y);
+    }
+    else
+    {
+        v_distance = INT_MAX;
+    }
+    
+    if(h_distance < v_distance)
+    {
+        game->ray->wall_hit_x[i] = game->ray->h_wall_hit_x;
+    }
+    else
+    {
+        game->ray->wall_hit_x[i] = game->ray->v_wall_hit_x;
+    }
+    
+    if (h_distance < v_distance)
+    {
+        game->ray->wall_hit_y[i] = game->ray->h_wall_hit_y;
+    }
+    else
+    {
+        game->ray->wall_hit_y[i] = game->ray->v_wall_hit_y;
+    }
+    
+    if(h_distance < v_distance)
+    {
+        game->ray->distances[i] = h_distance;
+    }
+    else
+    {
+        game->ray->distances[i] = v_distance;
+    }
+    if(v_distance < h_distance)
+    {
+        game->ray->to_hit[i] = true;
+    }
+    else
+    {
+        game->ray->to_hit[i] = false;
+    }
 }
 
 void cast_rays(t_game *game)
@@ -157,30 +284,47 @@ int draw_player(t_game *game)
 
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 {
+    // int dx = abs(x1 - x0);
+    // int dy = abs(y1 - y0);
+    // int sx = (x0 < x1) ? 1 : -1;
+    // int sy = (y0 < y1) ? 1 : -1;
+    // int err = dx - dy;
+
+    // while (1)
+    // {
+    //     mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
+
+    //     if (x0 == x1 && y0 == y1)
+    //         break;
+
+    //     int e2 = 2 * err;
+    //     if (e2 > -dy)
+    //     {
+    //         err -= dy;
+    //         x0 += sx;
+    //     }
+    //     if (e2 < dx)
+    //     {
+    //         err += dx;
+    //         y0 += sy;
+    //     }
+    // }
+
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-    int err = dx - dy;
+    int steps = fmax(dx, dy);
 
-    while (1)
+    float xIncrement = (float)(x1 - x0) / steps;
+    float yIncrement = (float)(y1 - y0) / steps;
+
+    float x = x0;
+    float y = y0;
+
+    for (int i = 0; i <= steps; i++)
     {
-        mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
-
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
+        mlx_pixel_put(game->mlx, game->mlx_win, round(x), round(y), color);
+        x += xIncrement;
+        y += yIncrement;
     }
 }
 

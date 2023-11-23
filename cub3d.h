@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 10:42:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:53:42 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <mlx.h>
 #include <stdbool.h>
 #include <math.h>
+#include <limits.h>
 
 #define TILE_SIZE 64 
 #define WINDOW_WIDTH 26 * TILE_SIZE
@@ -86,6 +87,7 @@ typedef struct s_ray
     double v_wall_hit_y;
     bool *found_h_wall_hit;
     bool *found_v_wall_hit;
+    bool *to_hit;
     
 }t_ray;
 
