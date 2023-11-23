@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 09:23:37 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:27:05 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ int key_press(int keycode, t_game *game)
         }
         
     }
-    if (keycode == 0 || keycode == 123)
+    if (keycode == 2 || keycode == 124)
     {
         game->player->turn = 1;
         game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
     }
-    if (keycode == 2 || keycode == 124)
+    if (keycode == 0 || keycode == 123)
     {
         game->player->turn = -1;
         game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
