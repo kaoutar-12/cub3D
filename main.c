@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 12:03:02 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:12:49 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 // # include "MLX42/include/MLX42/MLX42_Int.h"
 
 void init_player(t_player *player) {
-	player->radius = 2;
+	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
 	player->rotation_angle = M_PI / 2;
-	player->move_speed = 2.0;
-	player->rotation_speed = 2 * (M_PI / 180);
+	player->move_speed = 4.0;
+	player->rotation_speed = 3 * (M_PI / 180);
     get_player_position(player);
 }
 
