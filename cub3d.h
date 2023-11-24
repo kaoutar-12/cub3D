@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 13:02:59 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:21:04 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define NUM_RAYS 500
-#define WALL_STRIP_WIDTH 10
+#define WALL_STRIP_WIDTH 1
 // #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
@@ -125,12 +125,12 @@ void draw(void *param);
 // void draw_pixel(t_game *game, int x, int y, int color);
 int draw_player(t_game *game);
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
-// void draw_rect(t_game *game, int x, int y, int width, int height, int color);
+void draw_rect(t_game *game, int x, int y, int width, int height, int color);
 
 // // helper functions
 int isWall(double x, double y);
 void get_player_position(t_player *player);
 double normalize_angle(double angle);
-// void projectd_wall(t_game *game);
+void projectd_wall(t_game *game);
 
 #endif

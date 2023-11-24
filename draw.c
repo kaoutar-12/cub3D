@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 13:00:28 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:42:58 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,11 @@ void cast_v_h_rays(t_game *game, int i)
         game->ray->to_hit[i] = false;
 }
 
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
 void cast_rays(t_game *game)
 {
     game->ray->ray_angle = game->player->rotation_angle - (FOV_ANGLE / 2);
@@ -213,7 +218,7 @@ void cast_rays(t_game *game)
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
         game->ray->ray_angles[i] = game->ray->ray_angle;
         cast_v_h_rays(game, i);
-        draw_line(game, game->player->x, game->player->y, game->ray->wall_hit_x[i], game->ray->wall_hit_y[i], 0x00FF0000);
+        draw_line(game, game->player->x *0.2, game->player->y *0.2, game->ray->wall_hit_x[i]*0.2, game->ray->wall_hit_y[i]*0.2, 0x00FF0000);
         game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
         i++;
     }
@@ -230,24 +235,25 @@ void draw(void *param)
     // mlx_clear_window(game->mlx, game->mlx_win);
     // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     // projectd_wall(game);
-    // draw_rect(game, 0,0, 10, 100, 0x00FF0000);
+    // draw_rect(game, 0,0, 10, 300, 0x808080);
 }
 
-// void draw_rect(t_game *game, int x, int y, int width, int height, int color)
-// {
-//     int i = 0;
-//     int j = 0;
-//     while (j < height)
-//     {
-//         i = 0;
-//         while (i < width)
-//         {
-//             mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
-//             i++;
-//         }
-//         j++;
-//     }
-// }
+void draw_rect(t_game *game, int x, int y, int width, int height, int color)
+{
+    int i = 0;
+    int j = 0;
+    while (j < height)
+    {
+        i = 0;
+        while (i < width)
+        {
+            // mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
+            mlx_put_pixel(game->data->img, x + i, y + j, color);
+            i++;
+        }
+        j++;
+    }
+}
 
 int draw_player(t_game *game)
 {
