@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 15:53:59 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:12:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int draw_wall(t_game *game)
         while(map[j][i])
         {
             if (map[j][i] == '1') 
-                draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0x808080);
+                draw_pixel(game, i * TILE_SIZE * 0.2 , j * TILE_SIZE * 0.2, 0x808080);
             else
-                draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0xFFFFFF);
+                draw_pixel(game, i * TILE_SIZE * 0.2, j * TILE_SIZE * 0.2, 0xFFFFFF);
             i++;
         }
         j++;
@@ -76,8 +76,8 @@ void ft_game(t_game *game)
 {
     game->mlx = mlx_init();
     game->mlx_win = mlx_new_window(game->mlx,strlen(map[0]) * TILE_SIZE, 5 * TILE_SIZE,"cub3d");
-    game->data->img = mlx_new_image(game->mlx,strlen(map[0]) * TILE_SIZE, 5 * TILE_SIZE);
-    game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length, &game->data->endian);
+    game->data->img = mlx_new_image(game->mlx,strlen(map[0]) * TILE_SIZE,5 * TILE_SIZE);
+    game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
     draw_wall(game);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     mlx_hook(game->mlx_win, 2, 0, key_press, game);
