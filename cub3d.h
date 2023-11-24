@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 10:16:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:23:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 #define WINDOW_HEIGHT 5 * TILE_SIZE
 
 #define FOV_ANGLE (60 * (M_PI / 180))
-#define WALL_STRIP_WIDTH 1
-// #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 #define NUM_RAYS 50
+#define WALL_STRIP_WIDTH WINDOW_WIDTH  / NUM_RAYS
+// #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
 typedef struct s_data{
 	void	*img;
@@ -101,6 +101,8 @@ typedef struct s_game
     t_ray *ray;
 } t_game;
 
+
+
 // game fuctions
 
 void ft_game(t_game *game);
@@ -119,10 +121,12 @@ int draw_wall(t_game *game);
 void draw_pixel(t_game *game, int x, int y, int color);
 int draw_player(t_game *game);
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void draw_rect(t_game *game, int x, int y, int width, int height, int color);
 
 // helper functions
 int isWall(double x, double y);
 void get_player_position(t_player *player);
 double normalize_angle(double angle);
+void projectd_wall(t_game *game);
 
 #endif

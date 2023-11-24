@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 10:08:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:12:03 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,9 +225,27 @@ int draw(t_game *game)
     mlx_clear_window(game->mlx, game->mlx_win);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
     // draw_player(game);
+    projectd_wall(game);
     cast_rays(game);
     draw_wall(game);
+    // draw_rect(game, 0,0, 10, 100, 0x00FF0000);
     return 0;
+}
+
+void draw_rect(t_game *game, int x, int y, int width, int height, int color)
+{
+    int i = 0;
+    int j = 0;
+    while (j < height)
+    {
+        i = 0;
+        while (i < width)
+        {
+            mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
+            i++;
+        }
+        j++;
+    }
 }
 
 int draw_player(t_game *game)

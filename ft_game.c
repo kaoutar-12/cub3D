@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 10:12:43 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:16:03 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,30 @@ int draw_wall(t_game *game)
     return (0);
 }
 
+void projectd_wall(t_game *game)
+{
+    int i = 0;
+    while(i <= NUM_RAYS)
+    {
+        double ray = game->ray->ray_angles[i];
+        double ray_dist = game->ray->distances[i];
+        
+        // calcule the distence to the projection plane
+        double distence_proj_plane = (900 / 2) / tan(FOV_ANGLE / 2);
+        
+        // projected wall height
+        double wall_strpheight = (TILE_SIZE / ray_dist) * distence_proj_plane;
+        
+        draw_rect(game, i * WALL_STRIP_WIDTH, (900 / 2) - (wall_strpheight / 2), WALL_STRIP_WIDTH, wall_strpheight, 0x0000FF);
+        i++;
+    }
+}
+
 void ft_game(t_game *game)
 {
     game->mlx = mlx_init();
-    game->mlx_win = mlx_new_window(game->mlx,strlen(map[0]) * TILE_SIZE, 5 * TILE_SIZE,"cub3d");
-    game->data->img = mlx_new_image(game->mlx,strlen(map[0]) * TILE_SIZE,5 * TILE_SIZE);
+    game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
+    game->data->img = mlx_new_image(game->mlx,900,900);
     game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
     draw_wall(game);
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
