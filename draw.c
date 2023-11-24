@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 13:42:58 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:07:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ void cast_rays(t_game *game)
 void draw(void *param)
 {
     t_game *game = (t_game *)param;
+    projectd_wall(game);
     draw_map(game);
     // draw_player(game);
     cast_rays(game);
@@ -234,24 +235,18 @@ void draw(void *param)
     // printf("rotation angle: %f\n", game->player->rotation_angle);
     // mlx_clear_window(game->mlx, game->mlx_win);
     // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
-    // projectd_wall(game);
     // draw_rect(game, 0,0, 10, 300, 0x808080);
 }
 
 void draw_rect(t_game *game, int x, int y, int width, int height, int color)
 {
-    int i = 0;
-    int j = 0;
-    while (j < height)
+for (int i = 0; i < width; i++)
     {
-        i = 0;
-        while (i < width)
+        for (int j = 0; j < height; j++)
         {
             // mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
             mlx_put_pixel(game->data->img, x + i, y + j, color);
-            i++;
         }
-        j++;
     }
 }
 

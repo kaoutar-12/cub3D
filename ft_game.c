@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 13:43:47 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:48:55 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,19 @@ int isWall(double x, double y)
 void projectd_wall(t_game *game)
 {
     int i = 0;
-    while(i <= NUM_RAYS)
+    while(i < NUM_RAYS)
     {
-        double ray = game->ray->ray_angles[i];
         double ray_dist = game->ray->distances[i];
         
         // calcule the distence to the projection plane
-        double distence_proj_plane = (25 * TILE_SIZE / 2) / tan(FOV_ANGLE / 2);
+        double distence_proj_plane = (1920 / 2) / tan(FOV_ANGLE / 2);
         
         // projected wall height
-        double wall_strpheight = (TILE_SIZE / ray_dist) * distence_proj_plane;
+        double wall_strip_height = (TILE_SIZE / game->ray->distances[i]) * distence_proj_plane;
+
+        printf("wall_strip_height: %f\n", (1920 / 2) - (wall_strip_height / 2));
         
-        // draw_rect(game, i * WALL_STRIP_WIDTH,
-        //     WINDOW_HEIGHT / 2, WALL_STRIP_WIDTH, 1, 0x808080);
+        // draw_rect(game, i * WALL_STRIP_WIDTH, (1080 / 2) - (wall_strip_height / 2), 1, wall_strip_height, 0x808080);
         i++;
     }
 }
@@ -134,7 +134,7 @@ void ft_game(t_game *game)
 {
     game->mlx = mlx_init(1920, 1080, "Cub3d", false);
     // game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
-    game->data->img = mlx_new_image(game->mlx, 26 * TILE_SIZE, 5 * TILE_SIZE);
+    game->data->img = mlx_new_image(game->mlx, 1920, 1080);
     
     mlx_image_to_window(game->mlx, game->data->img, 0, 0);
 
