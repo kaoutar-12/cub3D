@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 14:07:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:38:27 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void cast_horizontal_rays(t_game *game, int i)
         game->ray->y_step *= -1;
     else
         game->ray->y_step *= 1;
-    
-    game->ray->x_step = TILE_SIZE / tan(game->ray->ray_angles[i]);
+        game->ray->x_step = TILE_SIZE / tan(game->ray->ray_angles[i]);
     if (game->ray->is_ray_facing_left[i] && game->ray->x_step > 0)
         game->ray->x_step *= -1;
     else
@@ -78,6 +77,7 @@ void cast_horizontal_rays(t_game *game, int i)
             game->ray->found_h_wall_hit[i] = true;
             game->ray->h_wall_hit_x = --next_h_xintercept;
             game->ray->h_wall_hit_y = --next_h_yintercept;
+            // draw_line(game, game->player->x , game->player->y , game->ray->h_wall_hit_x, game->ray->h_wall_hit_y, 0x00FF0000);
             break;
         }
         else
@@ -178,29 +178,23 @@ void cast_v_h_rays(t_game *game, int i)
     else
         v_distance = INT_MAX;
     
-    if(h_distance < v_distance)
+    if(h_distance <= v_distance)
     {
         game->ray->wall_hit_x[i] = game->ray->h_wall_hit_x;
+        game->ray->wall_hit_y[i] = game->ray->h_wall_hit_y;
+        game->ray->distances[i] = h_distance;
     }
     else
     {
         game->ray->wall_hit_x[i] = game->ray->v_wall_hit_x;
-    }
-    
-    if (h_distance < v_distance)
-        game->ray->wall_hit_y[i] = game->ray->h_wall_hit_y;
-    else
-        game->ray->wall_hit_y[i] = game->ray->v_wall_hit_y;
-    
-    if(h_distance < v_distance)
-        game->ray->distances[i] = h_distance;
-    else
+         game->ray->wall_hit_y[i] = game->ray->v_wall_hit_y;
         game->ray->distances[i] = v_distance;
+    }
 
-    if(v_distance < h_distance)
-        game->ray->to_hit[i] = true;
-    else
-        game->ray->to_hit[i] = false;
+    // if(v_distance < h_distance)
+    //     game->ray->to_hit[i] = true;
+    // else
+    //     game->ray->to_hit[i] = false;
 }
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
@@ -217,8 +211,9 @@ void cast_rays(t_game *game)
     {
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
         game->ray->ray_angles[i] = game->ray->ray_angle;
+        game->ray->ray_angle = normalize_angle(game->ray->ray_angle);
         cast_v_h_rays(game, i);
-        draw_line(game, game->player->x *0.2, game->player->y *0.2, game->ray->wall_hit_x[i]*0.2, game->ray->wall_hit_y[i]*0.2, 0x00FF0000);
+        draw_line(game, game->player->x , game->player->y , game->ray->wall_hit_x[i], game->ray->wall_hit_y[i], 0x00FF0000);
         game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
         i++;
     }

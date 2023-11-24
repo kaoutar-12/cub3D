@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 14:07:19 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:29:25 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define WINDOW_HEIGHT 5 * TILE_SIZE
 
 #define FOV_ANGLE (60 * (M_PI / 180))
-#define NUM_RAYS 500
+#define NUM_RAYS 1000
 #define WALL_STRIP_WIDTH 1
 // #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 

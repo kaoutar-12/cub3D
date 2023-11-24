@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 14:48:55 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:07:28 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char *map[] = 
 {
 "1111111111111111111111111",
-"10000001P0000000000000001",
+"10000000P0000000000000001",
 "1000000000000010000000001",
 "1000000010000000001000001",
 "1111111111111111111111111"
@@ -80,7 +80,7 @@ void projectd_wall(t_game *game)
         double ray_dist = game->ray->distances[i];
         
         // calcule the distence to the projection plane
-        double distence_proj_plane = (1920 / 2) / tan(FOV_ANGLE / 2);
+        double distence_proj_plane = (1080 / 2) / tan(FOV_ANGLE / 2);
         
         // projected wall height
         double wall_strip_height = (TILE_SIZE / game->ray->distances[i]) * distence_proj_plane;
@@ -119,12 +119,12 @@ void draw_map(t_game *game)
             if (map[i][j] == '1')
             {
                 // Draw a wall
-                draw_wall(game, x*0.2, y*0.2, TILE_SIZE*0.2, 0x808080);
+                draw_wall(game, x, y, TILE_SIZE, 0x808080);
             }
             else
             {
                 // Draw an empty space or floor
-                draw_wall(game, x*0.2, y*0.2, TILE_SIZE*0.2, 0xFFFFFF);
+                draw_wall(game, x, y, TILE_SIZE, 0xFFFFFF);
             }
         }
     }
