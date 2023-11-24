@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 11:12:03 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:00:28 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,40 +213,41 @@ void cast_rays(t_game *game)
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
         game->ray->ray_angles[i] = game->ray->ray_angle;
         cast_v_h_rays(game, i);
-        draw_line(game, game->player->x *0.2, game->player->y*0.2, game->ray->wall_hit_x[i]*0.2, game->ray->wall_hit_y[i]*0.2, 0x00FF0000);
+        draw_line(game, game->player->x, game->player->y, game->ray->wall_hit_x[i], game->ray->wall_hit_y[i], 0x00FF0000);
         game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
         i++;
     }
 }
 
-int draw(t_game *game)
+void draw(void *param)
 {
-    // printf("rotation angle: %f\n", game->player->rotation_angle);
-    mlx_clear_window(game->mlx, game->mlx_win);
-    mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
+    t_game *game = (t_game *)param;
+    draw_map(game);
     // draw_player(game);
-    projectd_wall(game);
     cast_rays(game);
-    draw_wall(game);
+    
+    // printf("rotation angle: %f\n", game->player->rotation_angle);
+    // mlx_clear_window(game->mlx, game->mlx_win);
+    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
+    // projectd_wall(game);
     // draw_rect(game, 0,0, 10, 100, 0x00FF0000);
-    return 0;
 }
 
-void draw_rect(t_game *game, int x, int y, int width, int height, int color)
-{
-    int i = 0;
-    int j = 0;
-    while (j < height)
-    {
-        i = 0;
-        while (i < width)
-        {
-            mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
-            i++;
-        }
-        j++;
-    }
-}
+// void draw_rect(t_game *game, int x, int y, int width, int height, int color)
+// {
+//     int i = 0;
+//     int j = 0;
+//     while (j < height)
+//     {
+//         i = 0;
+//         while (i < width)
+//         {
+//             mlx_pixel_put(game->mlx, game->mlx_win, x + i, y + j, color);
+//             i++;
+//         }
+//         j++;
+//     }
+// }
 
 int draw_player(t_game *game)
 {
@@ -260,7 +261,8 @@ int draw_player(t_game *game)
         i = 0;
         while (i < playerSize)
         {
-            mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
+            mlx_put_pixel(game->data->img, game->player->x + i, game->player->y + j, 0x00FF0000);
+            // mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
             i++;
         }
         j++;
@@ -278,64 +280,48 @@ int draw_player(t_game *game)
 
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 {
-    // int dx = abs(x1 - x0);
-    // int dy = abs(y1 - y0);
-    // int sx = (x0 < x1) ? 1 : -1;
-    // int sy = (y0 < y1) ? 1 : -1;
-    // int err = dx - dy;
-
-    // while (1)
-    // {
-    //     mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
-
-    //     if (x0 == x1 && y0 == y1)
-    //         break;
-
-    //     int e2 = 2 * err;
-    //     if (e2 > -dy)
-    //     {
-    //         err -= dy;
-    //         x0 += sx;
-    //     }
-    //     if (e2 < dx)
-    //     {
-    //         err += dx;
-    //         y0 += sy;
-    //     }
-    // }
-
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
-    int steps = fmax(dx, dy);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
 
-    float xIncrement = (float)(x1 - x0) / steps;
-    float yIncrement = (float)(y1 - y0) / steps;
-
-    float x = x0;
-    float y = y0;
-
-    for (int i = 0; i <= steps; i++)
+    while (1)
     {
-        mlx_pixel_put(game->mlx, game->mlx_win, round(x), round(y), color);
-        x += xIncrement;
-        y += yIncrement;
-    }
-}
+        // mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
+        mlx_put_pixel(game->data->img, x0, y0, color);
 
-void draw_pixel(t_game *game, int x, int y, int color)
-{
-    for (int j = 0; j < TILE_SIZE; j++)
-    {
-        for (int i = 0; i < TILE_SIZE; i++)
+        if (x0 == x1 && y0 == y1)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy)
         {
-            int pixel_index = (y + j) * game->data->line_length + (x + i) * (game->data->bits_per_pixel / 8);
-
-            game->data->addr[pixel_index] = (color >> 16) & 0xFF;   
-            game->data->addr[pixel_index + 1] = (color >> 8) & 0xFF; 
-            game->data->addr[pixel_index + 2] = color & 0xFF;        
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y0 += sy;
         }
     }
 }
+
+// void draw_pixel(t_game *game, int x, int y, int color)
+// {
+//     for (int j = 0; j < TILE_SIZE; j++)
+//     {
+//         for (int i = 0; i < TILE_SIZE; i++)
+//         {
+//             int pixel_index = (y + j) * game->data->line_length + (x + i) * (game->data->bits_per_pixel / 8);
+
+//             game->data->addr[pixel_index] = (color >> 16) & 0xFF;   
+//             game->data->addr[pixel_index + 1] = (color >> 8) & 0xFF; 
+//             game->data->addr[pixel_index + 2] = color & 0xFF;        
+//         }
+//     }
+// }
 
 // int draw_wall(t_game *game)
 // {

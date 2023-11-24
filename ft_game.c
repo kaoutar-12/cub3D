@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 11:16:03 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:51:27 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,56 +52,107 @@ int isWall(double x, double y)
         return (0);
 }
 
-int draw_wall(t_game *game)
+// int draw_wall(t_game *game)
+// {
+//     int i = 0;
+//     int j = 0;
+//     while(map[j])
+//     {
+//         i = 0;
+//         while(map[j][i])
+//         {
+//             if (map[j][i] == '1') 
+//                 draw_pixel(game, i * TILE_SIZE * 0.2 , j * TILE_SIZE * 0.2, 0x808080);
+//             else
+//                 draw_pixel(game, i * TILE_SIZE * 0.2, j * TILE_SIZE * 0.2, 0xFFFFFF);
+//             i++;
+//         }
+//         j++;
+//     }
+//     return (0);
+// }
+
+// void projectd_wall(t_game *game)
+// {
+//     int i = 0;
+//     while(i <= NUM_RAYS)
+//     {
+//         double ray = game->ray->ray_angles[i];
+//         double ray_dist = game->ray->distances[i];
+        
+//         // calcule the distence to the projection plane
+//         double distence_proj_plane = (900 / 2) / tan(FOV_ANGLE / 2);
+        
+//         // projected wall height
+//         double wall_strpheight = (TILE_SIZE / ray_dist) * distence_proj_plane;
+        
+//         draw_rect(game, i * WALL_STRIP_WIDTH, (900 / 2) - (wall_strpheight / 2), WALL_STRIP_WIDTH, wall_strpheight, 0x0000FF);
+//         i++;
+//     }
+// }
+
+void draw_wall(t_game *game, int x, int y, int size, int color)
 {
-    int i = 0;
-    int j = 0;
-    while(map[j])
+    for (int i = 0; i < size; i++)
     {
-        i = 0;
-        while(map[j][i])
+        for (int j = 0; j < size; j++)
         {
-            if (map[j][i] == '1') 
-                draw_pixel(game, i * TILE_SIZE * 0.2 , j * TILE_SIZE * 0.2, 0x808080);
-            else
-                draw_pixel(game, i * TILE_SIZE * 0.2, j * TILE_SIZE * 0.2, 0xFFFFFF);
-            i++;
+            int pixel_x = x + i;
+            int pixel_y = y + j;
+
+            // mlx_pixel_put(game->mlx, game->data->img, pixel_x, pixel_y, color);
+            mlx_put_pixel(game->data->img, pixel_x, pixel_y, color);
         }
-        j++;
     }
-    return (0);
 }
 
-void projectd_wall(t_game *game)
+void draw_map(t_game *game)
 {
-    int i = 0;
-    while(i <= NUM_RAYS)
+    for (int i = 0; i < 5; i++)
     {
-        double ray = game->ray->ray_angles[i];
-        double ray_dist = game->ray->distances[i];
-        
-        // calcule the distence to the projection plane
-        double distence_proj_plane = (900 / 2) / tan(FOV_ANGLE / 2);
-        
-        // projected wall height
-        double wall_strpheight = (TILE_SIZE / ray_dist) * distence_proj_plane;
-        
-        draw_rect(game, i * WALL_STRIP_WIDTH, (900 / 2) - (wall_strpheight / 2), WALL_STRIP_WIDTH, wall_strpheight, 0x0000FF);
-        i++;
+        for (int j = 0; j < 26; j++)
+        {
+            int x = j * TILE_SIZE;
+            int y = i * TILE_SIZE;
+
+            if (map[i][j] == '1')
+            {
+                // Draw a wall
+                draw_wall(game, x, y, TILE_SIZE, 0x808080);
+            }
+            else
+            {
+                // Draw an empty space or floor
+                draw_wall(game, x, y, TILE_SIZE, 0xFFFFFF);
+            }
+        }
     }
 }
 
 void ft_game(t_game *game)
 {
-    game->mlx = mlx_init();
-    game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
-    game->data->img = mlx_new_image(game->mlx,900,900);
-    game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
-    draw_wall(game);
-    mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
-    mlx_hook(game->mlx_win, 2, 0, key_press, game);
-    mlx_hook(game->mlx_win,3,0,key_release,game);
-    mlx_hook(game->mlx_win,17,0,close_win,game);
+    game->mlx = mlx_init(25 * TILE_SIZE, 5 * TILE_SIZE, "Cub3d", false);
+    // game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
+    game->data->img = mlx_new_image(game->mlx, 26 * TILE_SIZE, 5 * TILE_SIZE);
+    
+    mlx_image_to_window(game->mlx, game->data->img, 0, 0);
+
+    // int map[5][5] = {
+    //     {1, 1, 1, 1, 1},
+    //     {1, 0, 0, 0, 1},
+    //     {1, 0, 1, 0, 1},
+    //     {1, 0, 0, 0, 1},
+    //     {1, 1, 1, 1, 1}
+    // };
+
+    // game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
+    // draw_wall(game);
+    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
+    // mlx_hook(game->mlx_win, 2, 0, key_press, game);
+    // mlx_hook(game->mlx_win,3,0,key_release,game);
+    // mlx_hook(game->mlx_win,17,0,close_win,game);
     mlx_loop_hook(game->mlx, draw, game);
+    mlx_loop_hook(game->mlx, ft_hook, game);
     mlx_loop(game->mlx);
+    mlx_terminate(game->mlx);
 }

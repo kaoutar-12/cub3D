@@ -6,11 +6,13 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/23 11:54:02 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:03:02 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// # include "MLX42/include/MLX42/MLX42_Int.h"
 
 void init_player(t_player *player) {
 	player->radius = 2;

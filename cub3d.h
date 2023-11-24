@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 11:23:43 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:02:59 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include "MLX42/include/MLX42/MLX42.h"
 # include <ctype.h>
 # include <fcntl.h>
-# include <mlx.h>
 #include <stdbool.h>
 #include <math.h>
 #include <limits.h>
@@ -30,9 +30,11 @@
 #define WINDOW_HEIGHT 5 * TILE_SIZE
 
 #define FOV_ANGLE (60 * (M_PI / 180))
-#define NUM_RAYS 50
-#define WALL_STRIP_WIDTH WINDOW_WIDTH  / NUM_RAYS
+#define NUM_RAYS 500
+#define WALL_STRIP_WIDTH 10
 // #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+
+// /Users/kmouradi/homebrew
 
 typedef struct s_data{
 	void	*img;
@@ -108,25 +110,27 @@ typedef struct s_game
 void ft_game(t_game *game);
 
 
-// keys functions
+// // keys functions
 
-int key_release(int keycode, t_game *game);
-int key_press(int keycode, t_game *game);
+void ft_hook(void* param);
+// int key_release(int keycode, t_game *game);
+// int key_press(int keycode, t_game *game);
 int close_win(t_game *game);
 
-// draw functions
+// // draw functions
+void draw_map(t_game *game);
 
-int draw(t_game *game);
-int draw_wall(t_game *game);
-void draw_pixel(t_game *game, int x, int y, int color);
+void draw(void *param);
+// int draw_wall(t_game *game);
+// void draw_pixel(t_game *game, int x, int y, int color);
 int draw_player(t_game *game);
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
-void draw_rect(t_game *game, int x, int y, int width, int height, int color);
+// void draw_rect(t_game *game, int x, int y, int width, int height, int color);
 
-// helper functions
+// // helper functions
 int isWall(double x, double y);
 void get_player_position(t_player *player);
 double normalize_angle(double angle);
-void projectd_wall(t_game *game);
+// void projectd_wall(t_game *game);
 
 #endif
