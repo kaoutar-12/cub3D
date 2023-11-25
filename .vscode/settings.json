@@ -12,6 +12,7 @@
         "khrplatform.h": "c",
         "mlx42.h": "c",
         "stdlib.h": "c",
-        "glfw3.h": "c"
+        "glfw3.h": "c",
+        "stdbool.h": "c"
     }
 }

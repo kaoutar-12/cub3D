@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 18:07:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:22:50 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 char *map[] = 
 {
 "1111111111111111111111111",
+"1000000P00000000000000001",
 "1000000000000000000000001",
-"10000000P0000010000000001",
-"1000000010000001001000001",
+"1000000000000000000000001",
+"1001010101010010000000001",
+"1000000000000000000000001",
 "1111111111111111111111111"
 };
 
@@ -79,7 +81,7 @@ void projectd_wall(t_game *game)
     while(i < NUM_RAYS)
     {
         double correct_wall_distance = game->ray->distances[i] * cos(game->ray->ray_angles[i] - game->player->rotation_angle);
-        double distance_projection_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
+        double distance_projection_plane = (WIN_W /2) / tan(FOV_ANGLE / 2);
         double wall_strip_height = (TILE_SIZE / correct_wall_distance) * distance_projection_plane;
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
@@ -107,7 +109,7 @@ void draw_wall2(t_game *game)
 {
     int i = 0;
     int j ;
-    while(i < 5)
+    while(i < 7)
     {
         j = 0;
         while(j < 26)
@@ -124,7 +126,7 @@ void draw_wall2(t_game *game)
 
 void draw_map(t_game *game)
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 7; i++)
     {
         for (int j = 0; j < 25; j++)
         {

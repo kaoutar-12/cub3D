@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 15:31:32 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:22:11 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #include <math.h>
 #include <limits.h>
 
-#define TILE_SIZE 64 
+#define TILE_SIZE 32 
 #define WINDOW_WIDTH 26 * TILE_SIZE
-#define WINDOW_HEIGHT 5 * TILE_SIZE
+#define WINDOW_HEIGHT 7 * TILE_SIZE
 
 #define WIN_W 1920
 #define WIN_H 1080
