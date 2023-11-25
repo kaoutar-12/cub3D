@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:26:15 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 14:10:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void init_player(t_player *player) {
 	player->turn = 0;
 	player->walk = 0;
 	player->rotation_angle = M_PI / 2;
-	player->move_speed = 4.0;
+	player->move_speed = 1.0;
 	player->rotation_speed = 3 * (M_PI / 180);
     get_player_position(player);
 }

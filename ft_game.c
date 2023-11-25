@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:25:48 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:07:29 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char *map[] =
 "1111111111111111111111111",
 "1000000000000000000000001",
 "10000000P0000010000000001",
-"1000000010000000001000001",
+"1000000010000001001000001",
 "1111111111111111111111111"
 };
 
@@ -74,15 +74,16 @@ int isWall(double x, double y)
 
 void projectd_wall(t_game *game)
 {
+    uint32_t color = ft_pixel(255, 0, 0, 255);
     int i = 0;
     while(i < NUM_RAYS)
     {
-        double ray_distence = game->ray->distances[i];
+        double correct_wall_distance = game->ray->distances[i] * cos(game->ray->ray_angles[i] - game->player->rotation_angle);
         double distance_projection_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
-        double wall_strip_height = (TILE_SIZE / ray_distence) * distance_projection_plane;
+        double wall_strip_height = (TILE_SIZE / correct_wall_distance) * distance_projection_plane;
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
-        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x003C9F);
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, color);
         i++;
     }
 }
@@ -114,7 +115,7 @@ void draw_wall2(t_game *game)
             int x = j * TILE_SIZE;
             int y = i * TILE_SIZE;
             if (map[i][j] == '1')
-                draw_wall(game,x * MINI_MAP, y* MINI_MAP,TILE_SIZE* MINI_MAP,0x808080);
+                draw_wall(game,x * MINI_MAP, y* MINI_MAP,TILE_SIZE* MINI_MAP,ft_pixel(255,255,255,255));
             j++;
         }
         i++;
@@ -131,7 +132,7 @@ void draw_map(t_game *game)
             int y = i * TILE_SIZE;
 
                 // Draw an empty space or floor
-                draw_wall(game, x * MINI_MAP, y * MINI_MAP, TILE_SIZE * MINI_MAP, 0xFFFFFF);
+                draw_wall(game, x * MINI_MAP, y * MINI_MAP, TILE_SIZE * MINI_MAP, ft_pixel(0,0,0,255));
         }
     }
 }
@@ -143,18 +144,6 @@ void ft_game(t_game *game)
     game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
     
     mlx_image_to_window(game->mlx, game->img, 0, 0);
-
-    // int map[5][5] = {
-    //     {1, 1, 1, 1, 1},
-    //     {1, 0, 0, 0, 1},
-    //     {1, 0, 1, 0, 1},
-    //     {1, 0, 0, 0, 1},
-    //     {1, 1, 1, 1, 1}
-    // };
-
-    // game->data->addr = mlx_get_data_addr(game->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
-    // draw_wall(game);
-    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
     // mlx_hook(game->mlx_win, 2, 0, key_press, game);
     // mlx_hook(game->mlx_win,3,0,key_release,game);
     // mlx_hook(game->mlx_win,17,0,close_win,game);

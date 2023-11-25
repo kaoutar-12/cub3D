@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 12:28:13 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:57:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void ft_hook(void* param)
 
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		close_win(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_UP)) {
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W)) {
                 game->player->walk = 1;
         newPlayerX = game->player->x + cos(game->player->rotation_angle) * move_step;
         newPlayerY = game->player->y + sin(game->player->rotation_angle) * move_step;
@@ -32,7 +32,7 @@ void ft_hook(void* param)
             game->player->y = newPlayerY;
         }
     }
-	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN)) {
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S)) {
 
                 game->player->walk = -1;
         newPlayerX = game->player->x + cos(game->player->rotation_angle) * move_step;

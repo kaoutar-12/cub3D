@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:26:55 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:31:32 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define WIN_W 1920
 #define WIN_H 1080
-#define MINI_MAP 0.2
+#define MINI_MAP 0.5
 
 #define FOV_ANGLE (60 * (M_PI / 360))
 // #define NUM_RAYS 500
@@ -129,5 +129,6 @@ void get_player_position(t_player *player);
 double normalize_angle(double angle);
 void projectd_wall(t_game *game);
 void draw_wall2(t_game *game);
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 #endif

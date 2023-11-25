@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 13:27:09 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:29:57 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,37 +214,62 @@ void cast_rays(t_game *game)
         game->ray->ray_angle = normalize_angle(game->ray->ray_angle);
         cast_v_h_rays(game, i);
         draw_line(game, game->player->x * MINI_MAP, game->player->y * MINI_MAP,
-            game->ray->wall_hit_x[i] * MINI_MAP, game->ray->wall_hit_y[i] * MINI_MAP, 0x00FF0000);
+            game->ray->wall_hit_x[i] * MINI_MAP, game->ray->wall_hit_y[i] * MINI_MAP, ft_pixel(255,0,0,255));
         game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
         i++;
     }
 }
 
-void black(t_game *game)
+void draw_sky(t_game *game)
 {
-    unsigned int color = 0x00000000;  // Black color
+    int i;
+    int j;
 
-    for (int i = 0; i < game->img->width; i++)
+    i = 0;
+    while (i < game->img->width)
     {
-        for (int j = 0; j < game->img->height; j++)
+        j = 0;
+        while (j < game->img->height / 2)
         {
             int pixel_x = i;
             int pixel_y = j;
-
-            mlx_put_pixel(game->img, pixel_x, pixel_y, color);
+            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(0,0,0, 255));
+            j++;
         }
+        i++;
+    }
+}
+
+void    draw_floor(t_game *game)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < game->img->width)
+    {
+        j = game->img->height / 2;
+        while (j < game->img->height)
+        {
+            int pixel_x = i;
+            int pixel_y = j;
+            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(0,0,0, 255));
+            j++;
+        }
+        i++;
     }
 }
 
 void draw(void *param)
 {
     t_game *game = (t_game *)param;
-    black(game);
+    draw_sky(game);
+    draw_floor(game);
+    projectd_wall(game);
     draw_map(game);
     draw_player(game);
-    draw_wall2(game);
     cast_rays(game);
-    projectd_wall(game);
+    draw_wall2(game);
 }
 
 void draw_rect(t_game *game, int x, int y, int width, int height, int color)
@@ -262,7 +287,6 @@ for (int i = 0; i < width; i++)
 int draw_player(t_game *game)
 {
     // int playerRadius = 10; // Adjust the radius as needed
-    int playerColor = 0x00FF0000;
     
     for (int y = -game->player->radius; y <= game->player->radius; y++)
     {
@@ -274,9 +298,8 @@ int draw_player(t_game *game)
                 // Calculate the actual coordinates in the game window
                 int drawX = game->player->x + x;
                 int drawY = game->player->y + y;
-
                 // Draw the pixel
-                mlx_put_pixel(game->img, drawX * MINI_MAP, drawY * MINI_MAP, playerColor);
+                mlx_put_pixel(game->img, drawX * MINI_MAP, drawY * MINI_MAP, ft_pixel(255,0,0,255));
             }
         }
     }
