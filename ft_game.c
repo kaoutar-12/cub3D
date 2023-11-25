@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 19:51:23 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 09:24:26 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int isWall(double x, double y)
 void projectd_wall(t_game *game)
 {
     int i = 0;
-    double distence_proj_plane = (1280 * tan(FOV_ANGLE / 2)) / 4 ;
+    double distence_proj_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 4 ;
     double ray_dist;
     double wall_strip_height;
     double correct_wall_dist;
@@ -90,13 +90,13 @@ void projectd_wall(t_game *game)
         // projected wall height
         wall_strip_height = (TILE_SIZE * correct_wall_dist) / game->ray->distances[i];
 
-        printf("wall_strip_height Screen: %f\n", (720 / 2) - (wall_strip_height / 2));
+        printf("wall_strip_height Screen: %f\n", (WIN_H / 2) - (wall_strip_height / 2));
         printf("wall_strip_height: %f\n",wall_strip_height);
         // printf("distence_proj_plane: %f\n", distence_proj_plane);
         // printf("First x: %d\n", i * WALL_STRIP_WIDTH);
         // printf("ray_dist: %f\n", ray_dist);
         
-        draw_rect(game, i * WALL_STRIP_WIDTH, (720 / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x3600E1);
+        draw_rect(game, i * WALL_STRIP_WIDTH, (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x3600E1);
         i++;
     }
 }
@@ -141,9 +141,9 @@ void draw_map(t_game *game)
 
 void ft_game(t_game *game)
 {
-    game->mlx = mlx_init(1280, 720, "Cub3d", false);
+    game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d", false);
     // game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
-    game->data->img = mlx_new_image(game->mlx, 1280, 720);
+    game->data->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
     
     mlx_image_to_window(game->mlx, game->data->img, 0, 0);
 

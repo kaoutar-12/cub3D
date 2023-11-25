@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 19:46:25 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 09:25:11 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@
 #define WINDOW_WIDTH 26 * TILE_SIZE
 #define WINDOW_HEIGHT 5 * TILE_SIZE
 
+#define WIN_W 1920
+#define WIN_H 1080
+#define MINI_MAP 0.4
+
 #define FOV_ANGLE (60 * (M_PI / 360))
-#define NUM_RAYS 500
-#define WALL_STRIP_WIDTH 30
-// #define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+// #define NUM_RAYS 500
+#define WALL_STRIP_WIDTH 1
+#define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
 

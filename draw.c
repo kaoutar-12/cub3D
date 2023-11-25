@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 19:09:57 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 09:23:59 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,11 +226,6 @@ void draw(void *param)
     draw_map(game);
     // draw_player(game);
     cast_rays(game);
-    
-    // printf("rotation angle: %f\n", game->player->rotation_angle);
-    // mlx_clear_window(game->mlx, game->mlx_win);
-    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
-    // draw_rect(game, 0,0, 10, 300, 0x808080);
 }
 
 void draw_rect(t_game *game, int x, int y, int width, int height, int color)
