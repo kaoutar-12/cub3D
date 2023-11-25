@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 09:23:59 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:46:49 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void draw(void *param)
     t_game *game = (t_game *)param;
     projectd_wall(game);
     draw_map(game);
-    // draw_player(game);
+    draw_player(game);
     cast_rays(game);
 }
 
@@ -242,30 +242,25 @@ for (int i = 0; i < width; i++)
 
 int draw_player(t_game *game)
 {
-    int i = 0;
-    int j = 0;
-    int playerSize = 10;
-
-    // Draw the player as a square
-    while (j < playerSize)
-    {
-        i = 0;
-        while (i < playerSize)
-        {
-            mlx_put_pixel(game->data->img, game->player->x + i, game->player->y + j, 0x00FF0000);
-            // mlx_pixel_put(game->mlx, game->mlx_win, game->player->x + i, game->player->y + j, 0x00FF0000);
-            i++;
-        }
-        j++;
-    }
+    // int playerRadius = 10; // Adjust the radius as needed
+    int playerColor = 0x00FF0000;
     
-    // Calculate the line end point
-    double lineLength = 300;
-    double lineEndX = game->player->x + lineLength * cos(game->player->rotation_angle);
-    double lineEndY = game->player->y + lineLength * sin(game->player->rotation_angle);
+    for (int y = -game->player->radius; y <= game->player->radius; y++)
+    {
+        for (int x = -game->player->radius; x <= game->player->radius; x++)
+        {
+            // Check if the pixel is inside the circular boundary
+            if (x * x + y * y <= game->player->radius * game->player->radius)
+            {
+                // Calculate the actual coordinates in the game window
+                int drawX = game->player->x + x;
+                int drawY = game->player->y + y;
 
-    // Draw the line from the center of the player to the calculated end point
-    // draw_line(game, game->player->x + 5, game->player->y , lineEndX + 5, lineEndY , 0x00FF0000);
+                // Draw the pixel
+                mlx_put_pixel(game->data->img, drawX, drawY, playerColor);
+            }
+        }
+    }
     return (0);
 }
 

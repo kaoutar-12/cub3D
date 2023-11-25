@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 09:24:26 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:42:10 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,28 +75,17 @@ int isWall(double x, double y)
 void projectd_wall(t_game *game)
 {
     int i = 0;
-    double distence_proj_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 4 ;
-    double ray_dist;
-    double wall_strip_height;
-    double correct_wall_dist;
+    // double distence_proj_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
     while(i < NUM_RAYS)
     {
-        ray_dist = game->ray->distances[i];
-        printf("ray_dist: %f\n", ray_dist);
-        
-        // calcule the distence to the projection plane
-        
-        correct_wall_dist = ray_dist * cos(game->ray->ray_angles[i] - game->player->rotation_angle);
-        // projected wall height
-        wall_strip_height = (TILE_SIZE * correct_wall_dist) / game->ray->distances[i];
-
-        printf("wall_strip_height Screen: %f\n", (WIN_H / 2) - (wall_strip_height / 2));
-        printf("wall_strip_height: %f\n",wall_strip_height);
-        // printf("distence_proj_plane: %f\n", distence_proj_plane);
-        // printf("First x: %d\n", i * WALL_STRIP_WIDTH);
-        // printf("ray_dist: %f\n", ray_dist);
-        
-        draw_rect(game, i * WALL_STRIP_WIDTH, (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x3600E1);
+        double ray_distence = game->ray->distances[i];
+        // double ray_distence = game->ray->distances[i] * cos(FOV_ANGLE - game->ray->ray_angles[i]);
+        double distance_projection_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
+        double wall_strip_height = (TILE_SIZE / ray_distence) * distance_projection_plane;
+        // wall_strip_height = fmin(wall_strip_height, WIN_H);
+        // printf("----->%f\n", wall_strip_height);
+        printf("----------------> %f\n", (WIN_H / 2) - (wall_strip_height / 2));
+        // draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x003C9F);
         i++;
     }
 }
