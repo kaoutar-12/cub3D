@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 10:46:49 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:39:14 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,10 +222,11 @@ void cast_rays(t_game *game)
 void draw(void *param)
 {
     t_game *game = (t_game *)param;
-    projectd_wall(game);
     draw_map(game);
     draw_player(game);
     cast_rays(game);
+    draw_wall2(game);
+    projectd_wall(game);
 }
 
 void draw_rect(t_game *game, int x, int y, int width, int height, int color)

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 10:42:10 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:46:49 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,17 @@ void projectd_wall(t_game *game)
         // double ray_distence = game->ray->distances[i] * cos(FOV_ANGLE - game->ray->ray_angles[i]);
         double distance_projection_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
         double wall_strip_height = (TILE_SIZE / ray_distence) * distance_projection_plane;
+        if (wall_strip_height >= WIN_H)
+            wall_strip_height = WIN_H;
         // wall_strip_height = fmin(wall_strip_height, WIN_H);
         // printf("----->%f\n", wall_strip_height);
-        printf("----------------> %f\n", (WIN_H / 2) - (wall_strip_height / 2));
-        // draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x003C9F);
+        // double positive;
+        // if ((WIN_H / 2) - (wall_strip_height / 2) < 0)
+        //      positive = (WIN_H / 2) - (wall_strip_height / 2) * -1;
+        // else
+        //     positive = (WIN_H / 2) - (wall_strip_height / 2);
+        // printf("----------------> %f\n", wall_strip_height);
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x003C9F);
         i++;
     }
 }
@@ -105,25 +112,36 @@ void draw_wall(t_game *game, int x, int y, int size, int color)
     }
 }
 
+void draw_wall2(t_game *game)
+{
+    int i = 0;
+    int j ;
+    while(i < 5)
+    {
+        j = 0;
+        while(j < 26)
+        {
+            int x = j * TILE_SIZE;
+            int y = i * TILE_SIZE;
+            if (map[i][j] == '1')
+                draw_wall(game,x, y,TILE_SIZE,0x808080);
+            j++;
+        }
+        i++;
+    }
+}
+
 void draw_map(t_game *game)
 {
     for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < 26; j++)
+        for (int j = 0; j < 25; j++)
         {
             int x = j * TILE_SIZE;
             int y = i * TILE_SIZE;
 
-            if (map[i][j] == '1')
-            {
-                // Draw a wall
-                draw_wall(game, x, y, TILE_SIZE, 0x808080);
-            }
-            else
-            {
                 // Draw an empty space or floor
                 draw_wall(game, x, y, TILE_SIZE, 0xFFFFFF);
-            }
         }
     }
 }

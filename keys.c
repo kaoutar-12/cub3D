@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 13:00:13 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:28:13 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void ft_hook(void* param)
             game->player->y = newPlayerY;
         }
     }
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)) {
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)) {
         game->player->turn = 1;
         game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);
     }
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)) {
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)) {
         game->player->turn = -1;
         game->player->rotation_angle += game->player->rotation_speed * game->player->turn;
         game->player->rotation_angle = normalize_angle(game->player->rotation_angle);

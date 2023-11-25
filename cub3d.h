@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 10:31:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:43:14 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ int isWall(double x, double y);
 void get_player_position(t_player *player);
 double normalize_angle(double angle);
 void projectd_wall(t_game *game);
+void draw_wall2(t_game *game);
 
 #endif
