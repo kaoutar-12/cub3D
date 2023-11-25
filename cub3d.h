@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 12:43:14 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:26:55 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define WIN_W 1920
 #define WIN_H 1080
-#define MINI_MAP 0.4
+#define MINI_MAP 0.2
 
 #define FOV_ANGLE (60 * (M_PI / 360))
 // #define NUM_RAYS 500
@@ -39,14 +39,6 @@
 #define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
-
-typedef struct s_data{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
 
 typedef struct s_player
 {
@@ -102,9 +94,9 @@ typedef struct s_game
 {
     void *mlx;
     void *mlx_win;
-    t_data *data;
     t_player *player;
     t_ray *ray;
+    mlx_image_t	*img;
 } t_game;
 
 

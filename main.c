@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/24 19:12:49 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:26:15 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,13 @@ int main()
 {
     t_game *game;
     t_player *player;
-    t_data *data;
     t_ray *ray;
     game = malloc(sizeof(t_game));
     player = malloc(sizeof(t_player));
-    data = malloc(sizeof(t_data));
     ray = malloc(sizeof(t_ray));
     init_rays(ray);
     init_player(player);
     game->player = player;
-    game->data = data;
     game->ray = ray;
     ft_game(game);
 }

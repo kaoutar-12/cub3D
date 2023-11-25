@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 12:46:49 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:25:48 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char *map[] = 
 {
 "1111111111111111111111111",
-"10000000P0000000000000001",
-"1000000000000010000000001",
+"1000000000000000000000001",
+"10000000P0000010000000001",
 "1000000010000000001000001",
 "1111111111111111111111111"
 };
@@ -75,23 +75,13 @@ int isWall(double x, double y)
 void projectd_wall(t_game *game)
 {
     int i = 0;
-    // double distence_proj_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
     while(i < NUM_RAYS)
     {
         double ray_distence = game->ray->distances[i];
-        // double ray_distence = game->ray->distances[i] * cos(FOV_ANGLE - game->ray->ray_angles[i]);
         double distance_projection_plane = (WIN_W * tan(FOV_ANGLE / 2)) / 2;
         double wall_strip_height = (TILE_SIZE / ray_distence) * distance_projection_plane;
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
-        // wall_strip_height = fmin(wall_strip_height, WIN_H);
-        // printf("----->%f\n", wall_strip_height);
-        // double positive;
-        // if ((WIN_H / 2) - (wall_strip_height / 2) < 0)
-        //      positive = (WIN_H / 2) - (wall_strip_height / 2) * -1;
-        // else
-        //     positive = (WIN_H / 2) - (wall_strip_height / 2);
-        // printf("----------------> %f\n", wall_strip_height);
         draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, 0x003C9F);
         i++;
     }
@@ -106,8 +96,8 @@ void draw_wall(t_game *game, int x, int y, int size, int color)
             int pixel_x = x + i;
             int pixel_y = y + j;
 
-            // mlx_pixel_put(game->mlx, game->data->img, pixel_x, pixel_y, color);
-            mlx_put_pixel(game->data->img, pixel_x, pixel_y, color);
+            // mlx_pixel_put(game->mlx, game->img, pixel_x, pixel_y, color);
+            mlx_put_pixel(game->img, pixel_x, pixel_y, color);
         }
     }
 }
@@ -124,7 +114,7 @@ void draw_wall2(t_game *game)
             int x = j * TILE_SIZE;
             int y = i * TILE_SIZE;
             if (map[i][j] == '1')
-                draw_wall(game,x, y,TILE_SIZE,0x808080);
+                draw_wall(game,x * MINI_MAP, y* MINI_MAP,TILE_SIZE* MINI_MAP,0x808080);
             j++;
         }
         i++;
@@ -141,7 +131,7 @@ void draw_map(t_game *game)
             int y = i * TILE_SIZE;
 
                 // Draw an empty space or floor
-                draw_wall(game, x, y, TILE_SIZE, 0xFFFFFF);
+                draw_wall(game, x * MINI_MAP, y * MINI_MAP, TILE_SIZE * MINI_MAP, 0xFFFFFF);
         }
     }
 }
@@ -150,9 +140,9 @@ void ft_game(t_game *game)
 {
     game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d", false);
     // game->mlx_win = mlx_new_window(game->mlx,900, 900,"cub3d");
-    game->data->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
+    game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
     
-    mlx_image_to_window(game->mlx, game->data->img, 0, 0);
+    mlx_image_to_window(game->mlx, game->img, 0, 0);
 
     // int map[5][5] = {
     //     {1, 1, 1, 1, 1},
@@ -162,9 +152,9 @@ void ft_game(t_game *game)
     //     {1, 1, 1, 1, 1}
     // };
 
-    // game->data->addr = mlx_get_data_addr(game->data->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
+    // game->data->addr = mlx_get_data_addr(game->img, &game->data->bits_per_pixel, &game->data->line_length , &game->data->endian);
     // draw_wall(game);
-    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->data->img, 0, 0);
+    // mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
     // mlx_hook(game->mlx_win, 2, 0, key_press, game);
     // mlx_hook(game->mlx_win,3,0,key_release,game);
     // mlx_hook(game->mlx_win,17,0,close_win,game);
