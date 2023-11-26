@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaoutar <kaoutar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 18:22:11 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:49:33 by kaoutar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_ray
     double h_y_intercept;
     double v_x_intercept;
     double v_y_intercept;
+    double x_check;
+    double y_check;
     double x_step;
     double y_step;
     double h_wall_hit_x;

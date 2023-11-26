@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaoutar <kaoutar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 18:25:15 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:55:37 by kaoutar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ void cast_horizontal_rays(t_game *game, int i)
     while((next_h_xintercept >= 0 && next_h_xintercept <= WINDOW_WIDTH)
         && (next_h_yintercept >= 0 && next_h_yintercept <= WINDOW_HEIGHT))
     {
+        game->ray->x_check = next_h_xintercept;
+        game->ray->y_check = next_h_yintercept;
         if (game->ray->is_ray_facing_up[i])
-            next_h_yintercept--;
-        if (isWall(next_h_xintercept, next_h_yintercept) == 1)
+            game->ray->y_check--;
+        if (isWall(game->ray->x_check, game->ray->y_check) == 1)
         {
             game->ray->found_h_wall_hit[i] = true;
             game->ray->h_wall_hit_x = --next_h_xintercept;
@@ -135,9 +137,11 @@ void cast_vertical_rays(t_game *game, int i)
     while((next_v_xintercept >= 0 && next_v_xintercept <= WINDOW_WIDTH) 
         && (next_v_yintercept >= 0 && next_v_yintercept <= WINDOW_HEIGHT))
     {
+        game->ray->x_check = next_v_xintercept;
+        game->ray->y_check = next_v_yintercept;
         if (game->ray->is_ray_facing_left[i])
-            next_v_xintercept--;
-        if(isWall(next_v_xintercept, next_v_yintercept) == 1 )
+            game->ray->x_check--;
+        if(isWall(game->ray->x_check, game->ray->y_check) == 1 )
         {
             game->ray->found_v_wall_hit[i] = true;
             game->ray->v_wall_hit_x = --next_v_xintercept;
