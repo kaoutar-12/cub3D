@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 10:51:44 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:07:05 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int isWall(double x, double y)
 
 void projectd_wall(t_game *game)
 {
-    uint32_t color = ft_pixel(255, 0, 0, 255);
+    // uint32_t color = ft_pixel(255, 0, 0, 255);
     int i = 0;
     while(i < NUM_RAYS)
     {
@@ -85,7 +85,14 @@ void projectd_wall(t_game *game)
         double wall_strip_height = (TILE_SIZE / correct_wall_distance) * distance_projection_plane;
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
-        // draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, color);
+        if (game->ray->is_ray_facing_up[i] && game->ray->to_hit[i] == false)
+            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 97, 51, 255));
+        else if (game->ray->is_ray_facing_down[i] && game->ray->to_hit[i] == false)
+            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 94, 97, 255));
+        else if (game->ray->is_ray_facing_left[i] && game->ray->to_hit[i] == true)
+            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(97, 0, 9, 255));
+        else
+            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(72, 0, 97, 255));
         i++;
     }
 }

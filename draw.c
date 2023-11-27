@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 10:55:16 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:59:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,10 +202,10 @@ void cast_v_h_rays(t_game *game, int i)
         game->ray->distances[i] = v_distance;
     }
 
-    // if(v_distance < h_distance)
-    //     game->ray->to_hit[i] = true;
-    // else
-    //     game->ray->to_hit[i] = false;
+    if(v_distance < h_distance)
+        game->ray->to_hit[i] = true;
+    else
+        game->ray->to_hit[i] = false;
 }
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
