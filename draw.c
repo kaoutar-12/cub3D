@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 11:59:44 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:18:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void draw_sky(t_game *game)
         {
             int pixel_x = i;
             int pixel_y = j;
-            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(0,0,0, 255));
+            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(47, 177, 255, 255));
             j++;
         }
         i++;
@@ -264,7 +264,7 @@ void    draw_floor(t_game *game)
         {
             int pixel_x = i;
             int pixel_y = j;
-            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(0,0,0, 255));
+            mlx_put_pixel(game->img, pixel_x, pixel_y, ft_pixel(0, 147, 36, 255));
             j++;
         }
         i++;
@@ -346,38 +346,3 @@ void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
         }
     }
 }
-
-// void draw_pixel(t_game *game, int x, int y, int color)
-// {
-//     for (int j = 0; j < TILE_SIZE; j++)
-//     {
-//         for (int i = 0; i < TILE_SIZE; i++)
-//         {
-//             int pixel_index = (y + j) * game->data->line_length + (x + i) * (game->data->bits_per_pixel / 8);
-
-//             game->data->addr[pixel_index] = (color >> 16) & 0xFF;   
-//             game->data->addr[pixel_index + 1] = (color >> 8) & 0xFF; 
-//             game->data->addr[pixel_index + 2] = color & 0xFF;        
-//         }
-//     }
-// }
-
-// int draw_wall(t_game *game)
-// {
-//     int i = 0;
-//     int j = 0;
-//     while(map[j])
-//     {
-//         i = 0;
-//         while(map[j][i])
-//         {
-//             if (map[j][i] == '1') 
-//                 draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0x808080);
-//             else
-//                 draw_pixel(game, i * TILE_SIZE, j * TILE_SIZE, 0xFFFFFF);
-//             i++;
-//         }
-//         j++;
-//     }
-//     return (0);
-// }

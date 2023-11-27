@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 12:07:05 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:34:52 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ int isWall(double x, double y)
 //     return (0);
 // }
 
+void draw_textures(t_game *game, int i, double wall_strip_height, char *direction)
+{
+    // mlx_texture_t *image = mlx_load_png("./textures/3iw.png");
+    if (!ft_strcmp(direction, NORTH))
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 97, 51, 255));
+    if (!ft_strcmp(direction, SOUTH))
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 94, 97, 255));
+    if (!ft_strcmp(direction, EAST)) 
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(97, 0, 9, 255));
+    if (!ft_strcmp(direction, WEST))
+        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(72, 0, 97, 255));
+}
+
 void projectd_wall(t_game *game)
 {
     // uint32_t color = ft_pixel(255, 0, 0, 255);
@@ -86,13 +99,13 @@ void projectd_wall(t_game *game)
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
         if (game->ray->is_ray_facing_up[i] && game->ray->to_hit[i] == false)
-            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 97, 51, 255));
-        else if (game->ray->is_ray_facing_down[i] && game->ray->to_hit[i] == false)
-            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 94, 97, 255));
-        else if (game->ray->is_ray_facing_left[i] && game->ray->to_hit[i] == true)
-            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(97, 0, 9, 255));
-        else
-            draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(72, 0, 97, 255));
+            draw_textures(game, i, wall_strip_height, NORTH);
+        if (game->ray->is_ray_facing_down[i] && game->ray->to_hit[i] == false)
+            draw_textures(game, i, wall_strip_height, SOUTH);
+        if (game->ray->is_ray_facing_left[i] && game->ray->to_hit[i] == true)
+            draw_textures(game, i, wall_strip_height, EAST);
+        if (game->ray->is_ray_facing_right[i] && game->ray->to_hit[i] == true)
+            draw_textures(game, i, wall_strip_height, WEST);
         i++;
     }
 }

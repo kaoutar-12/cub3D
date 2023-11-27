@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 10:57:19 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:32:46 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 #define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
+
+#define NORTH "NO"
+#define SOUTH "SO"
+#define WEST  "WE"
+#define EAST  "EA"
 
 typedef struct s_player
 {
@@ -132,5 +137,6 @@ double normalize_angle(double angle);
 void projectd_wall(t_game *game);
 void draw_wall2(t_game *game);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int	ft_strcmp(char *s1, char *s2);
 
 #endif
