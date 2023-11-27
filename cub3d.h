@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 12:32:46 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:04:53 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,31 +69,31 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-    double *wall_hit_x;
-    double *wall_hit_y;
-    double *ray_angles;
-    double *distances;
-    bool *is_ray_facing_down;
-    bool *is_ray_facing_up;
-    bool *is_ray_facing_right;
-    bool *is_ray_facing_left;
-    double ray_angle;
-    double h_x_intercept;
-    double h_y_intercept;
-    double v_x_intercept;
-    double v_y_intercept;
-    double x_check;
-    double y_check;
-    double x_step;
-    double y_step;
-    double h_wall_hit_x;
-    double h_wall_hit_y;
-    double v_wall_hit_x;
-    double v_wall_hit_y;
-    bool *found_h_wall_hit;
-    bool *found_v_wall_hit;
-    bool *to_hit;
-    bool flag;
+    double  *wall_hit_x;
+    double  *wall_hit_y;
+    double  *ray_angles;
+    double  *distances;
+    bool    *is_ray_facing_down;
+    bool    *is_ray_facing_up;
+    bool    *is_ray_facing_right;
+    bool    *is_ray_facing_left;
+    double  ray_angle;
+    double  h_x_intercept;
+    double  h_y_intercept;
+    double  v_x_intercept;
+    double  v_y_intercept;
+    double  x_check;
+    double  y_check;
+    double  x_step;
+    double  y_step;
+    double  h_wall_hit_x;
+    double  h_wall_hit_y;
+    double  v_wall_hit_x;
+    double  v_wall_hit_y;
+    bool    *found_h_wall_hit;
+    bool    *found_v_wall_hit;
+    bool    *to_hit;
+    bool    flag;
     
 }t_ray;
 
@@ -106,37 +106,33 @@ typedef struct s_game
     mlx_image_t	*img;
 } t_game;
 
-
-
-// game fuctions
-
-void ft_game(t_game *game);
-
-
-// // keys functions
-
-void ft_hook(void* param);
-// int key_release(int keycode, t_game *game);
-// int key_press(int keycode, t_game *game);
-int close_win(t_game *game);
-
-// // draw functions
-void draw_map(t_game *game);
-
-void draw(void *param);
-// int draw_wall(t_game *game);
-// void draw_pixel(t_game *game, int x, int y, int color);
-int draw_player(t_game *game);
-void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
-void draw_rect(t_game *game, int x, int y, int width, int height, int color);
-
-// // helper functions
-int isWall(double x, double y);
-void get_player_position(t_player *player);
-double normalize_angle(double angle);
-void projectd_wall(t_game *game);
-void draw_wall2(t_game *game);
+void    get_direction(t_game *game, int i);
+void    cast_horizontal_rays(t_game *game, int i);
+void    cast_vertical_rays(t_game *game, int i);
+double  distance_between_points(double x1, double y1, double x2, double y2);
+void    cast_v_h_rays(t_game *game, int i);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-int	ft_strcmp(char *s1, char *s2);
+void    cast_rays(t_game *game);
+void    draw_sky(t_game *game);
+void    draw_floor(t_game *game);
+void    draw(void *param);
+void    draw_rect(t_game *game, int x, int y, int width, int height, int color);
+int     draw_player(t_game *game);
+void    draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void    get_player_position(t_player *player);
+int     isWall(double x, double y) ;
+void    draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
+void    projectd_wall(t_game *game);
+void    draw_wall(t_game *game, int x, int y, int size, int color);
+void    draw_wall2(t_game *game);
+void    draw_map(t_game *game);
+void    ft_game(t_game *game);
+int     ft_strcmp(char *s1, char *s2);
+void    ft_hook(void* param);
+double  normalize_angle(double angle);
+int     close_win(t_game *game);
+void    init_player(t_player *player);
+void    init_rays(t_ray *ray);
+
 
 #endif
