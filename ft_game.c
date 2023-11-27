@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/25 18:22:50 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/27 10:51:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 char *map[] = 
 {
 "1111111111111111111111111",
-"1000000P00000000000000001",
+"1P00000000000000000000001",
 "1000000000000000000000001",
 "1000000000000000000000001",
-"1001010101010010000000001",
+"1000000001010010000000001",
 "1000000000000000000000001",
 "1111111111111111111111111"
 };
@@ -46,8 +46,8 @@ void get_player_position(t_player *player)
 
 int isWall(double x, double y) 
 {
-    int mapGridIndexX = floor(x / TILE_SIZE);
-    int mapGridIndexY = floor(y / TILE_SIZE);
+    int mapGridIndexX = (int)floor(x / TILE_SIZE);
+    int mapGridIndexY = (int)floor(y / TILE_SIZE);
     if (map[mapGridIndexY][mapGridIndexX] == '1')
         return (1);
     else
@@ -85,7 +85,7 @@ void projectd_wall(t_game *game)
         double wall_strip_height = (TILE_SIZE / correct_wall_distance) * distance_projection_plane;
         if (wall_strip_height >= WIN_H)
             wall_strip_height = WIN_H;
-        draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, color);
+        // draw_rect(game, i * WALL_STRIP_WIDTH , (WIN_H / 2) - (wall_strip_height / 2), WALL_STRIP_WIDTH, wall_strip_height, color);
         i++;
     }
 }

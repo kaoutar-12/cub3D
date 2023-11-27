@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaoutar <kaoutar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/26 21:55:37 by kaoutar          ###   ########.fr       */
+/*   Updated: 2023/11/27 10:55:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void cast_horizontal_rays(t_game *game, int i)
             game->ray->found_h_wall_hit[i] = true;
             game->ray->h_wall_hit_x = --next_h_xintercept;
             game->ray->h_wall_hit_y = --next_h_yintercept;
-            // draw_line(game, game->player->x , game->player->y , game->ray->h_wall_hit_x, game->ray->h_wall_hit_y, 0x00FF0000);
+            // printf("X---> %f\n", game->ray->h_wall_hit_x);
+            // printf("Y---> %f\n", game->ray->h_wall_hit_y);
+            // draw_line(game, game->player->x * MINI_MAP, game->player->y * MINI_MAP, game->ray->h_wall_hit_x * MINI_MAP, game->ray->h_wall_hit_y * MINI_MAP, ft_pixel(255, 0, 0, 255));
             break;
         }
         else
@@ -112,6 +114,8 @@ void cast_vertical_rays(t_game *game, int i)
     
     game->ray->v_y_intercept = game->player->y + (game->ray->v_x_intercept - game->player->x) * tan(game->ray->ray_angles[i]);
     game->ray->x_step = TILE_SIZE;
+    // printf("X---> %f\n", game->player->x);
+    // printf("Y---> %f\n", game->player->y);
 
     if (game->ray->is_ray_facing_left[i])
         game->ray->x_step *= -1;
@@ -146,6 +150,9 @@ void cast_vertical_rays(t_game *game, int i)
             game->ray->found_v_wall_hit[i] = true;
             game->ray->v_wall_hit_x = --next_v_xintercept;
             game->ray->v_wall_hit_y = --next_v_yintercept;
+            // printf("X---> %f\n", game->ray->v_wall_hit_x);
+            // printf("Y---> %f\n", game->ray->v_wall_hit_y);
+            // draw_line(game, game->player->x * MINI_MAP, game->player->y * MINI_MAP, game->ray->v_wall_hit_x * MINI_MAP, game->ray->v_wall_hit_y * MINI_MAP, ft_pixel(255, 0, 0, 255));
             break;
         }
         else
@@ -164,9 +171,9 @@ double distance_between_points(double x1, double y1, double x2, double y2)
 void cast_v_h_rays(t_game *game, int i)
 {
     // cast horizontal rays
+    cast_vertical_rays(game, i);
     cast_horizontal_rays(game, i);
     // cast vertical rays
-    cast_vertical_rays(game, i);
     // calculate the distance
 
     double h_distance = 0;
@@ -177,7 +184,7 @@ void cast_v_h_rays(t_game *game, int i)
     else
         h_distance = INT_MAX;
 
-    if(game->ray->found_v_wall_hit)
+    if(game->ray->found_v_wall_hit[i])
         v_distance = distance_between_points(game->player->x, game->player->y, game->ray->v_wall_hit_x, game->ray->v_wall_hit_y);
     else
         v_distance = INT_MAX;
@@ -208,7 +215,7 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 
 void cast_rays(t_game *game)
 {
-    game->ray->ray_angle = game->player->rotation_angle - (FOV_ANGLE / 2);
+    game->ray->ray_angle = normalize_angle(game->player->rotation_angle) - (FOV_ANGLE / 2);
     
     int i = 0;
     while(i < NUM_RAYS)
