@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/27 12:54:19 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/11/28 12:00:09 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ LINKS= MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/g
 SOURCE= draw.c\
 		ft_game.c\
 		helpers.c\
-		keys.c\
-		main.c
+		keys_hooks.c\
+		main.c\
+		movements.c
 
 
 OBJECT=${SOURCE:.c=.o}

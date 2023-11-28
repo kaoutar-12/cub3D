@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 09:52:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:17:25 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	cast_horizontal_rays(t_game *game, int i)
 		game->ray->y_check = next_h_yintercept;
 		if (game->ray->is_ray_facing_up[i])
 			game->ray->y_check--;
-		if (isWall(game->ray->x_check, game->ray->y_check) == 1)
+		if (is_wall(game->ray->x_check, game->ray->y_check) == 1)
 		{
 			game->ray->found_h_wall_hit[i] = true;
 			game->ray->h_wall_hit_x = --next_h_xintercept;
@@ -126,7 +126,7 @@ void	cast_vertical_rays(t_game *game, int i)
 		game->ray->y_check = next_v_yintercept;
 		if (game->ray->is_ray_facing_left[i])
 			game->ray->x_check--;
-		if (isWall(game->ray->x_check, game->ray->y_check) == 1)
+		if (is_wall(game->ray->x_check, game->ray->y_check) == 1)
 		{
 			game->ray->found_v_wall_hit[i] = true;
 			game->ray->v_wall_hit_x = --next_v_xintercept;
@@ -267,7 +267,7 @@ void	draw(void *param)
 	draw_map(game);
 	draw_player(game);
 	cast_rays(game);
-	draw_wall2(game);
+	draw_wall(game);
 }
 
 void	draw_rect(t_game *game, int x, int y, int width, int height, int color)

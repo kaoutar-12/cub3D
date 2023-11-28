@@ -6,13 +6,12 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 10:00:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:59:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -47,110 +46,105 @@
 
 typedef struct s_player
 {
-	double x ;
-	double y ;
-	double radius ;//= 3;
-
-	int turn ;//= 0;// ig ankhedm biha f left o right 
-	// -1 if left , +1 if right
-	int walk ;//= 0;// ohadi fl qedam ola lor 
-	// -1 if back , +1 if front
-	
-	double rotation_angle ;//= PI / 2; 
-	// the angle that the player is looking at
-	
-	double move_speed ;//= 2.0; 
-	// how fast or slow the player move
-	
-	double rotation_speed ;//= 2 * (PI / 180);
-	// how fast or slow the player rotate
-
-} t_player;
+	double	x;
+	double	y;
+	double	radius;
+	int		turn;
+	int		walk;
+	double	rotation_angle;
+	double	move_speed;
+	double	rotation_speed;
+}	t_player;
 
 typedef struct s_ray
 {
-    double  *wall_hit_x;
-    double  *wall_hit_y;
-    double  *ray_angles;
-    double  *distances;
-    bool    *is_ray_facing_down;
-    bool    *is_ray_facing_up;
-    bool    *is_ray_facing_right;
-    bool    *is_ray_facing_left;
-    double  ray_angle;
-    double  h_x_intercept;
-    double  h_y_intercept;
-    double  v_x_intercept;
-    double  v_y_intercept;
-    double  x_check;
-    double  y_check;
-    double  x_step;
-    double  y_step;
-    double  h_wall_hit_x;
-    double  h_wall_hit_y;
-    double  v_wall_hit_x;
-    double  v_wall_hit_y;
-    bool    *found_h_wall_hit;
-    bool    *found_v_wall_hit;
-    bool    *to_hit;
-    bool    flag;
-    
-}t_ray;
+	double	*wall_hit_x;
+	double	*wall_hit_y;
+	double	*ray_angles;
+	double	*distances;
+	bool	*is_ray_facing_down;
+	bool	*is_ray_facing_up;
+	bool	*is_ray_facing_right;
+	bool	*is_ray_facing_left;
+	double	ray_angle;
+	double	h_x_intercept;
+	double	h_y_intercept;
+	double	v_x_intercept;
+	double	v_y_intercept;
+	double	x_check;
+	double	y_check;
+	double	x_step;
+	double	y_step;
+	double	h_wall_hit_x;
+	double	h_wall_hit_y;
+	double	v_wall_hit_x;
+	double	v_wall_hit_y;
+	bool	*found_h_wall_hit;
+	bool	*found_v_wall_hit;
+	bool	*to_hit;
+}	t_ray;
 
 typedef struct s_rgb
 {
-    int red;
-    int green;
-    int blue;
-}   t_rgb;
+	int	red;
+	int	green;
+	int	blue;
+}	t_rgb;
 
 typedef struct s_parse
 {
-    char    **map;
-    char    *no;
-    char    *so;
-    char    *ea;
-    char    *we;
-    t_rgb   *rgb;
-}   t_parse;
+	char	**map;
+	int		map_h;
+	int		map_w;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	t_rgb	*rgb;
+}	t_parse;
 
 typedef struct s_game
 {
-    void    *mlx;
-    void    *mlx_win;
-    t_player *player;
-    t_ray *ray;
-    // t_rgb *rgb;
-    mlx_image_t	*img;
-} t_game;
+	void		*mlx;
+	void		*mlx_win;
+	t_player	*player;
+	t_ray		*ray;
+	t_parse		*parse;
+	mlx_image_t	*img;
+}	t_game;
 
-void    get_direction(t_game *game, int i);
-void    cast_horizontal_rays(t_game *game, int i);
-void    cast_vertical_rays(t_game *game, int i);
-double  distance_between_points(double x1, double y1, double x2, double y2);
-void    cast_v_h_rays(t_game *game, int i);
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-void    cast_rays(t_game *game);
-void    draw_sky(t_game *game);
-void    draw_floor(t_game *game);
-void    draw(void *param);
-void    draw_rect(t_game *game, int x, int y, int width, int height, int color);
-int     draw_player(t_game *game);
-void    draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
-void    get_player_position(t_player *player);
-int     isWall(double x, double y) ;
-void    draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
-void    projectd_wall(t_game *game);
-void    draw_wall(t_game *game, int x, int y, int size, int color);
-void    draw_wall2(t_game *game);
-void    draw_map(t_game *game);
-void    ft_game(t_game *game);
-int     ft_strcmp(char *s1, char *s2);
-void    ft_hook(void* param);
-double  normalize_angle(double angle);
-int     close_win(t_game *game);
-void    init_player(t_player *player);
-void    init_rays(t_ray *ray);
+// movements.c
+void	move_down(t_game *game, double move_step);
+void	move_up(t_game *game, double move_step);
+void	move_left(t_game *game, double move_step);
+void	move_right(t_game *game, double move_step);
 
+void	get_direction(t_game *game, int i);
+void	cast_horizontal_rays(t_game *game, int i);
+void	cast_vertical_rays(t_game *game, int i);
+double	distance_between_points(double x1, double y1, double x2, double y2);
+void	cast_v_h_rays(t_game *game, int i);
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+void	cast_rays(t_game *game);
+void	draw_sky(t_game *game);
+void	draw_floor(t_game *game);
+void	draw(void *param);
+void	draw_rect(t_game *game, int x, int y, int width, int height, int color);
+int		draw_player(t_game *game);
+void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void	get_player_position(t_player *player);
+int		is_wall(double x, double y);
+void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
+void	projectd_wall(t_game *game);
+void	draw_square(t_game *game, int x, int y, int color);
+void	draw_wall(t_game *game);
+void	draw_map(t_game *game);
+void	ft_game(t_game *game);
+int		ft_strcmp(char *s1, char *s2);
+void	ft_hook(void *param);
+double	normalize_angle(double angle);
+int		close_win(t_game *game);
+void	init_player(t_player *player);
+void	init_rays(t_ray *ray);
 
 #endif
