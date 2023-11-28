@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:59:43 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:28:07 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,27 @@ void	move_up(t_game *game, double move_step);
 void	move_left(t_game *game, double move_step);
 void	move_right(t_game *game, double move_step);
 
-void	get_direction(t_game *game, int i);
+// key_hooks.c
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+void	ft_hook(void *param);
+
+// draw.c
+
+
+// cast_horizontal.c
+void	calculate_horizontal_interception(t_game *game, int i);
+void	next_horizontal_intercept(t_game *game, double next_h_xintercept,
+			double next_h_yintercept, int i);
 void	cast_horizontal_rays(t_game *game, int i);
+
+// cast_verticl.c
+void	calculate_vertical_interception(t_game *game, int i);
+void	next_vertical_intercept(t_game *game, double next_v_xintercept,
+			double next_v_yintercept, int i);
 void	cast_vertical_rays(t_game *game, int i);
+
+void	get_direction(t_game *game, int i);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 void	cast_v_h_rays(t_game *game, int i);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
@@ -141,7 +159,6 @@ void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 void	ft_game(t_game *game);
 int		ft_strcmp(char *s1, char *s2);
-void	ft_hook(void *param);
 double	normalize_angle(double angle);
 int		close_win(t_game *game);
 void	init_player(t_player *player);

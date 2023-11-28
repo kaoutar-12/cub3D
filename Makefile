@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/28 12:00:09 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/11/28 12:28:23 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SOURCE= draw.c\
 		ft_game.c\
 		helpers.c\
 		keys_hooks.c\
+		cast_horizontal.c\
+		cast_vertical.c\
 		main.c\
 		movements.c
 
