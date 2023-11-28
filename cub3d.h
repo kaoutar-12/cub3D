@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:28:07 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:37:04 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
 void	ft_hook(void *param);
 
-// draw.c
+// cast_rays.c
+
+
+// ft_draw.c
 
 
 // cast_horizontal.c
@@ -139,10 +142,15 @@ void	next_vertical_intercept(t_game *game, double next_v_xintercept,
 			double next_v_yintercept, int i);
 void	cast_vertical_rays(t_game *game, int i);
 
-void	get_direction(t_game *game, int i);
+// helpers.c
+int		ft_strcmp(char *s1, char *s2);
+double	normalize_angle(double angle);
 double	distance_between_points(double x1, double y1, double x2, double y2);
+int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+
+
+void	get_direction(t_game *game, int i);
 void	cast_v_h_rays(t_game *game, int i);
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void	cast_rays(t_game *game);
 void	draw_sky(t_game *game);
 void	draw_floor(t_game *game);
@@ -158,8 +166,6 @@ void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 void	ft_game(t_game *game);
-int		ft_strcmp(char *s1, char *s2);
-double	normalize_angle(double angle);
 int		close_win(t_game *game);
 void	init_player(t_player *player);
 void	init_rays(t_ray *ray);

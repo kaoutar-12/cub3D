@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:12:53 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:33:45 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ void	draw_textures(t_game *game, int i,
 	if (!ft_strcmp(direction, NORTH))
 		draw_rect(game, i * WALL_STRIP_WIDTH,
 			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 97, 51, 255));
+			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(0, 97, 51, 255));
 	if (!ft_strcmp(direction, SOUTH))
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
 			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(0, 94, 97, 255));
+			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(0, 94, 97, 255));
 	if (!ft_strcmp(direction, EAST)) 
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
 			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(97, 0, 9, 255));
+			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(97, 0, 9, 255));
 	if (!ft_strcmp(direction, WEST))
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
 			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_pixel(72, 0, 97, 255));
+			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(72, 0, 97, 255));
 }
 
 void	projectd_wall(t_game *game)
@@ -148,7 +148,7 @@ void	draw_wall(t_game *game)
 			y = i * TILE_SIZE;
 			if (map[i][j] == '1')
 				draw_square(game, x * MINI_MAP,
-					y * MINI_MAP, ft_pixel(255, 255, 255, 255));
+					y * MINI_MAP, ft_rgba(255, 255, 255, 255));
 			j++;
 		}
 		i++;
@@ -172,7 +172,7 @@ void	draw_map(t_game *game)
 			x = j * TILE_SIZE;
 			y = i * TILE_SIZE;
 			draw_square(game, x * MINI_MAP, y * MINI_MAP,
-				ft_pixel(0, 0, 0, 255));
+				ft_rgba(0, 0, 0, 255));
 			j++;
 		}
 		i++;

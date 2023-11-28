@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/28 12:28:23 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/11/28 12:45:10 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,16 @@ FLAGS= -Wall -Wextra -Werror
 LINKS= MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
 
 
-SOURCE= draw.c\
+SOURCE= cast_rays.c\
+		ft_draw.c\
 		ft_game.c\
 		helpers.c\
 		keys_hooks.c\
 		cast_horizontal.c\
 		cast_vertical.c\
 		main.c\
-		movements.c
+		movements.c\
+		draw_minimap.c\
 
 
 OBJECT=${SOURCE:.c=.o}

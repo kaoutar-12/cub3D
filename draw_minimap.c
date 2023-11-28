@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 12:39:15 by kmouradi          #+#    #+#             */
+/*   Updated: 2023/11/28 12:40:11 by kmouradi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+int	draw_player(t_game *game)
+{
+	int	y;
+	int	x;
+	int	draw_x;
+	int	draw_y;
+
+	y = -game->player->radius;
+	while (y <= game->player->radius)
+	{
+		x = -game->player->radius;
+		while (x <= game->player->radius)
+		{
+			if (x * x + y * y <= game->player->radius * game->player->radius)
+			{
+				draw_x = game->player->x;
+				draw_y = game->player->y;
+				mlx_put_pixel(game->img, draw_x * MINI_MAP,
+					draw_y * MINI_MAP, ft_rgba(255, 0, 0, 255));
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
