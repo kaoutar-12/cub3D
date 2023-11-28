@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 13:04:53 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:00:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,29 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include <ctype.h>
 # include <fcntl.h>
-#include <stdbool.h>
-#include <math.h>
-#include <limits.h>
+# include <stdbool.h>
+# include <math.h>
+# include <limits.h>
 
-#define TILE_SIZE 32 
-#define WINDOW_WIDTH 26 * TILE_SIZE
-#define WINDOW_HEIGHT 7 * TILE_SIZE
+# define TILE_SIZE 32 
+# define WINDOW_WIDTH 26 * TILE_SIZE
+# define WINDOW_HEIGHT 7 * TILE_SIZE
 
-#define WIN_W 1920
-#define WIN_H 1080
-#define MINI_MAP 0.5
+# define WIN_W 1920
+# define WIN_H 1080
+# define MINI_MAP 0.5
 
-#define FOV_ANGLE (60 * (M_PI / 360))
+# define FOV_ANGLE (60 * (M_PI / 360))
 // #define NUM_RAYS 500
-#define WALL_STRIP_WIDTH 1
-#define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
+# define WALL_STRIP_WIDTH 1
+# define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
 
-#define NORTH "NO"
-#define SOUTH "SO"
-#define WEST  "WE"
-#define EAST  "EA"
+# define NORTH "NO"
+# define SOUTH "SO"
+# define WEST  "WE"
+# define EAST  "EA"
 
 typedef struct s_player
 {
@@ -97,12 +97,30 @@ typedef struct s_ray
     
 }t_ray;
 
+typedef struct s_rgb
+{
+    int red;
+    int green;
+    int blue;
+}   t_rgb;
+
+typedef struct s_parse
+{
+    char    **map;
+    char    *no;
+    char    *so;
+    char    *ea;
+    char    *we;
+    t_rgb   *rgb;
+}   t_parse;
+
 typedef struct s_game
 {
-    void *mlx;
-    void *mlx_win;
+    void    *mlx;
+    void    *mlx_win;
     t_player *player;
     t_ray *ray;
+    // t_rgb *rgb;
     mlx_image_t	*img;
 } t_game;
 

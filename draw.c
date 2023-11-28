@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/27 13:23:41 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:52:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,25 +290,32 @@ void	draw_rect(t_game *game, int x, int y, int width, int height, int color)
 
 int	draw_player(t_game *game)
 {
-	
-	for (int y = -game->player->radius; y <= game->player->radius; y++)
+	int	y;
+	int	x;
+	int	draw_x;
+	int	draw_y;
+
+	y = -game->player->radius;
+	while (y <= game->player->radius)
 	{
-		for (int x = -game->player->radius; x <= game->player->radius; x++)
+		x = -game->player->radius;
+		while (x <= game->player->radius)
 		{
-			// Check if the pixel is inside the circular boundary
 			if (x * x + y * y <= game->player->radius * game->player->radius)
 			{
-				// Calculate the actual coordinates in the game window
-				int drawX = game->player->x + x;
-				int drawY = game->player->y + y;
-				// Draw the pixel
-				mlx_put_pixel(game->img, drawX * MINI_MAP, drawY * MINI_MAP, ft_pixel(255,0,0,255));
+				draw_x = game->player->x;
+				draw_y = game->player->y;
+				mlx_put_pixel(game->img, draw_x * MINI_MAP,
+					draw_y * MINI_MAP, ft_pixel(255, 0, 0, 255));
 			}
+			x++;
 		}
+		y++;
 	}
 	return (0);
 }
 
+//! REMOVE
 void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 {
 	int dx = abs(x1 - x0);

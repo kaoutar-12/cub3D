@@ -13,6 +13,7 @@
         "mlx42.h": "c",
         "stdlib.h": "c",
         "glfw3.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "unistd.h": "c"
     }
 }
