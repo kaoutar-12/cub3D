@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:58:21 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:55:45 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	ft_hook(void *param)
 		move_up(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S)) 
 		move_down(game, move_step);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_left(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		move_left(game, move_step);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		move_right(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)) 
 		rotate_right(game);

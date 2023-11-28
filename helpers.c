@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:32:19 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:41:55 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:52:01 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	draw_rect(t_game *game, int x, int y, int width, int height, int color)
+void	draw_rect(t_game *game, int x, int height, int color)
 {
 	int	i;
 	int	j;
+	int	y;
 
 	i = 0;
-	while (i < width)
+	y = (WIN_H / 2) - (height / 2);
+	while (i < WALL_STRIP_WIDTH)
 	{
 		j = 0;
 		while (j < height)

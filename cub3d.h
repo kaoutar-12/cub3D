@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:37:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:53:10 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int		ft_strcmp(char *s1, char *s2);
 double	normalize_angle(double angle);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
-
+void	draw_rect(t_game *game, int x, int height, int color);
 
 void	get_direction(t_game *game, int i);
 void	cast_v_h_rays(t_game *game, int i);
@@ -155,7 +155,6 @@ void	cast_rays(t_game *game);
 void	draw_sky(t_game *game);
 void	draw_floor(t_game *game);
 void	draw(void *param);
-void	draw_rect(t_game *game, int x, int y, int width, int height, int color);
 int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);

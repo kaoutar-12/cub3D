@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:33:45 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:01:57 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,16 @@ void	draw_textures(t_game *game, int i,
 {
 	if (!ft_strcmp(direction, NORTH))
 		draw_rect(game, i * WALL_STRIP_WIDTH,
-			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(0, 97, 51, 255));
+			wall_strip_height, ft_rgba(0, 97, 51, 255));
 	if (!ft_strcmp(direction, SOUTH))
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
-			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(0, 94, 97, 255));
+			wall_strip_height, ft_rgba(0, 94, 97, 255));
 	if (!ft_strcmp(direction, EAST)) 
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
-			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(97, 0, 9, 255));
+			wall_strip_height, ft_rgba(97, 0, 9, 255));
 	if (!ft_strcmp(direction, WEST))
-		draw_rect(game, i * WALL_STRIP_WIDTH, 
-			(WIN_H / 2) - (wall_strip_height / 2),
-			WALL_STRIP_WIDTH, wall_strip_height, ft_rgba(72, 0, 97, 255));
+		draw_rect(game, i * WALL_STRIP_WIDTH,
+			wall_strip_height, ft_rgba(72, 0, 97, 255));
 }
 
 void	projectd_wall(t_game *game)
@@ -177,17 +173,4 @@ void	draw_map(t_game *game)
 		}
 		i++;
 	}
-}
-
-void	ft_game(t_game *game)
-{
-	game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d", false);
-	if (!game->mlx)
-		write(2, "Error\n", 6); 
-	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
-	mlx_loop_hook(game->mlx, draw, game);
-	mlx_loop_hook(game->mlx, ft_hook, game);
-	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
 }
