@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/28 12:45:10 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/11/28 14:05:42 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOURCE= cast_rays.c\
 		main.c\
 		movements.c\
 		draw_minimap.c\
+		init.c\
 
 
 OBJECT=${SOURCE:.c=.o}

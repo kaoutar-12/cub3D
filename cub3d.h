@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:53:10 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:11:42 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@
 # define WIN_H 1080
 # define MINI_MAP 0.5
 
-# define FOV_ANGLE (60 * (M_PI / 360))
 // #define NUM_RAYS 500
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
+// # define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
 
@@ -54,10 +53,12 @@ typedef struct s_player
 	double	rotation_angle;
 	double	move_speed;
 	double	rotation_speed;
+	double	fov_angle;
 }	t_player;
 
 typedef struct s_ray
 {
+	double	num_rays;
 	double	*wall_hit_x;
 	double	*wall_hit_y;
 	double	*ray_angles;
@@ -125,9 +126,16 @@ void	rotate_right(t_game *game);
 void	ft_hook(void *param);
 
 // cast_rays.c
-
+void	get_direction(t_game *game, int i);
+void	check_distance(t_game *game, double h_distance, 
+			double v_distance, int i);
+void	cast_v_h_rays(t_game *game, int i);
+void	cast_rays(t_game *game);
 
 // ft_draw.c
+void	draw_sky(t_game *game);
+void	draw_floor(t_game *game);
+void	draw(void *param);
 
 
 // cast_horizontal.c
@@ -149,12 +157,11 @@ double	distance_between_points(double x1, double y1, double x2, double y2);
 int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
 void	draw_rect(t_game *game, int x, int height, int color);
 
-void	get_direction(t_game *game, int i);
-void	cast_v_h_rays(t_game *game, int i);
-void	cast_rays(t_game *game);
-void	draw_sky(t_game *game);
-void	draw_floor(t_game *game);
-void	draw(void *param);
+// init.c
+void	init_rays(t_ray *ray);
+void	ft_game(t_game *game);
+void	init_player(t_player *player);
+
 int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
@@ -164,9 +171,6 @@ void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
-void	ft_game(t_game *game);
 int		close_win(t_game *game);
-void	init_player(t_player *player);
-void	init_rays(t_ray *ray);
 
 #endif

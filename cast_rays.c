@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 13:01:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:11:36 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	cast_rays(t_game *game)
 	int	i;
 
 	game->ray->ray_angle = normalize_angle(game->player->rotation_angle) 
-		- (FOV_ANGLE / 2);
+		- (game->player->fov_angle / 2);
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < game->ray->num_rays)
 	{
 		game->player->rotation_angle = 
 			normalize_angle(game->player->rotation_angle);
@@ -87,7 +87,7 @@ void	cast_rays(t_game *game)
 		draw_line(game, game->player->x * MINI_MAP, game->player->y * MINI_MAP,
 			game->ray->wall_hit_x[i] * MINI_MAP, game->ray->wall_hit_y[i] 
 			* MINI_MAP, ft_rgba(255, 0, 0, 255));
-		game->ray->ray_angle += FOV_ANGLE / NUM_RAYS;
+		game->ray->ray_angle += game->player->fov_angle / game->ray->num_rays;
 		i++;
 	}
 }

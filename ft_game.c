@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 13:01:57 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:11:36 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void	projectd_wall(t_game *game)
 	double	wall_strip_height;
 
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < game->ray->num_rays)
 	{
 		correct_wall_distance = game->ray->distances[i] * 
 			cos(game->ray->ray_angles[i] - game->player->rotation_angle);
-		distance_projection_plane = (WIN_W / 2) / tan(FOV_ANGLE / 2);
+		distance_projection_plane = (WIN_W / 2) / tan(game->player->fov_angle / 2);
 		wall_strip_height = (TILE_SIZE / correct_wall_distance)
 			* distance_projection_plane;
 		if (wall_strip_height >= WIN_H)
