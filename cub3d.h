@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 15:38:31 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:56:38 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_rgb
 typedef struct s_parse
 {
 	char	**map;
+	int		player_x;
+	int		player_y;
+	int		player_direction;
 	int		map_h;
 	int		map_w;
 	char	*no;
