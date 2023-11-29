@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 14:04:18 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:52:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,50 +60,49 @@ int	is_wall(double x, double y)
 		return (0);
 }
 
-uint32_t	get_pixel_color(mlx_texture_t *ll, int x, int y)
+uint32_t	get_pixel_color(mlx_texture_t *texture, int x, int y)
 {
 	int index;
 	uint32_t color;
 
-	index = (y * ll->width + x) * ll->bytes_per_pixel;
-	color = ft_rgba(ll->pixels[index],ll->pixels[index + 1],
-			ll->pixels[index + 2],ll->pixels[index + 3]);
+	if (x < texture->width || x >= 0 || y < texture->height || y >= 0)
+	{	
+		index = (y * texture->width + x) * texture->bytes_per_pixel;
+		color = ft_rgba(texture->pixels[index],texture->pixels[index + 1],
+				texture->pixels[index + 2],texture->pixels[index + 3]);
+	}
+	else
+		color = ft_rgba(0, 0, 0, 255);
 
 	return (color);
 }
 
+
 void	draw_textures(t_game *game, int i,
-	double wall_strip_height, char *direction)
+	double wall_strip_height, int direction)
 {
 	double	init_x;
 	double	init_y;
-	double	tex_x;
+	double	texture_x;
+	double	texture_y;
 	double	y;
-	double	tex_y;
 
-	if (game->ray->to_hit[i] == false)
-		init_x = remainder(game->ray->wall_hit_x[i], TILE_SIZE);
+	if (direction == NORTH || direction == SOUTH)
+		init_x = (int)game->ray->wall_hit_x[i] % TILE_SIZE;
 	else
-		init_x = remainder(game->ray->wall_hit_y[i], TILE_SIZE);
-
-	tex_x = init_x * (game->no_texture->width / TILE_SIZE);
+		init_x = (int)game->ray->wall_hit_y[i] % TILE_SIZE;
+	texture_x = init_x * (game->textures[direction]->width / TILE_SIZE);
 	init_y = (WIN_H / 2) - (wall_strip_height / 2);
 	y = init_y;
 	while (y < (WIN_H / 2) + (wall_strip_height / 2))
 	{
-		tex_y = (y - init_y) * (game->no_texture->height / wall_strip_height);
-		mlx_put_pixel(game->img, i, y, get_pixel_color(game->no_texture, tex_x, tex_y));
+		if (i >= 0 && i < WIN_W && y >= 0 && y < WIN_H)
+		{
+			texture_y = (y - init_y) * (game->textures[direction]->height / wall_strip_height);
+			mlx_put_pixel(game->img, i, y, get_pixel_color(game->textures[direction], texture_x, texture_y));
+		}
 		y++;
 	}
-	if (!ft_strcmp(direction, SOUTH))
-		draw_rect(game, i * WALL_STRIP_WIDTH, 
-			wall_strip_height, ft_rgba(0, 94, 97, 255));
-	if (!ft_strcmp(direction, EAST)) 
-		draw_rect(game, i * WALL_STRIP_WIDTH, 
-			wall_strip_height, ft_rgba(97, 0, 9, 255));
-	if (!ft_strcmp(direction, WEST))
-		draw_rect(game, i * WALL_STRIP_WIDTH,
-			wall_strip_height, ft_rgba(72, 0, 97, 255));
 }
 
 void	projectd_wall(t_game *game)
@@ -121,8 +120,6 @@ void	projectd_wall(t_game *game)
 		distance_projection_plane = (WIN_W / 2) / tan(game->player->fov_angle / 2);
 		wall_strip_height = (TILE_SIZE / correct_wall_distance)
 			* distance_projection_plane;
-		if (wall_strip_height >= WIN_H)
-			wall_strip_height = WIN_H;
 		if (game->ray->is_ray_facing_up[i] && game->ray->to_hit[i] == false)
 			draw_textures(game, i, wall_strip_height, NORTH);
 		if (game->ray->is_ray_facing_down[i] && game->ray->to_hit[i] == false)

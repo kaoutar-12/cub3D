@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 11:21:49 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:38:31 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,16 @@
 # define WINDOW_WIDTH 26 * TILE_SIZE
 # define WINDOW_HEIGHT 7 * TILE_SIZE
 
-# define WIN_W 1920
-# define WIN_H 1080
+# define WIN_W 1440
+# define WIN_H 900
 # define MINI_MAP 0.5
 
-// #define NUM_RAYS 500
 # define WALL_STRIP_WIDTH 1
-// # define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
-// /Users/kmouradi/homebrew
-
-# define NORTH "NO"
-# define SOUTH "SO"
-# define WEST  "WE"
-# define EAST  "EA"
+# define NORTH 0
+# define SOUTH 1
+# define WEST  2
+# define EAST  3
 
 typedef struct s_player
 {
@@ -111,10 +107,7 @@ typedef struct s_game
 	t_player		*player;
 	t_ray			*ray;
 	t_parse			*parse;
-	mlx_texture_t	*no_texture;
-	mlx_texture_t	*so_texture;
-	mlx_texture_t	*ea_texture;
-	mlx_texture_t	*we_texture;
+	mlx_texture_t	**textures;
 	mlx_image_t		*img;
 }	t_game;
 
@@ -170,7 +163,7 @@ int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
 int		is_wall(double x, double y);
-void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
+void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);

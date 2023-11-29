@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 13:54:53 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:47:19 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	init_player(t_player *player)
 
 void	init_textures(t_game *game)
 {
-	game->no_texture = mlx_load_png("./textures/3iw.png");
+	game->textures = malloc(sizeof(mlx_texture_t) * 4);
+	game->textures[NORTH] = mlx_load_png("./textures/north.png");
+	game->textures[SOUTH] = mlx_load_png("./textures/north.png");
+	game->textures[WEST] = mlx_load_png("./textures/north.png");
+	game->textures[EAST] = mlx_load_png("./textures/north.png");
 }
 
 void	ft_game(t_game *game)

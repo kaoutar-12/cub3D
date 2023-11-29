@@ -6,13 +6,13 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/28 14:05:42 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/11/29 15:14:59 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=cc
 CN=rm -rf
-FLAGS= -Wall -Wextra -Werror
+FLAGS=
 LINKS= MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
 
 
