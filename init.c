@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:10:31 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:54:53 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,16 @@ void	init_player(t_player *player)
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->rotation_angle = M_PI / 2;
+	player->rotation_angle = M_PI * 1.5;
 	player->move_speed = 2.0;
 	player->rotation_speed = 3 * (M_PI / 180);
 	get_player_position(player);
+}
+// game->no_texture = mlx_load_png(game->parse->no);
+
+void	init_textures(t_game *game)
+{
+	game->no_texture = mlx_load_png("./textures/3iw.png");
 }
 
 void	ft_game(t_game *game)
@@ -31,6 +37,7 @@ void	ft_game(t_game *game)
 		write(2, "Error\n", 6); 
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
+	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
 	mlx_loop(game->mlx);

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:11:42 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:21:49 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,16 @@ typedef struct s_parse
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_player	*player;
-	t_ray		*ray;
-	t_parse		*parse;
-	mlx_image_t	*img;
+	void			*mlx;
+	void			*mlx_win;
+	t_player		*player;
+	t_ray			*ray;
+	t_parse			*parse;
+	mlx_texture_t	*no_texture;
+	mlx_texture_t	*so_texture;
+	mlx_texture_t	*ea_texture;
+	mlx_texture_t	*we_texture;
+	mlx_image_t		*img;
 }	t_game;
 
 // movements.c

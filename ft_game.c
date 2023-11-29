@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:11:36 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:04:18 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 char *map[] = 
 {
 "1111111111111111111111111",
-"1P00000000000000000000001",
+"1000000000000000000000001",
 "1000000000000000000000001",
 "1000000000000000000000001",
 "1000000001010010000000001",
-"1000000000000000000000001",
+"1000P00000000000000000001",
 "1111111111111111111111111"
 };
 
@@ -60,12 +60,41 @@ int	is_wall(double x, double y)
 		return (0);
 }
 
+uint32_t	get_pixel_color(mlx_texture_t *ll, int x, int y)
+{
+	int index;
+	uint32_t color;
+
+	index = (y * ll->width + x) * ll->bytes_per_pixel;
+	color = ft_rgba(ll->pixels[index],ll->pixels[index + 1],
+			ll->pixels[index + 2],ll->pixels[index + 3]);
+
+	return (color);
+}
+
 void	draw_textures(t_game *game, int i,
 	double wall_strip_height, char *direction)
 {
-	if (!ft_strcmp(direction, NORTH))
-		draw_rect(game, i * WALL_STRIP_WIDTH,
-			wall_strip_height, ft_rgba(0, 97, 51, 255));
+	double	init_x;
+	double	init_y;
+	double	tex_x;
+	double	y;
+	double	tex_y;
+
+	if (game->ray->to_hit[i] == false)
+		init_x = remainder(game->ray->wall_hit_x[i], TILE_SIZE);
+	else
+		init_x = remainder(game->ray->wall_hit_y[i], TILE_SIZE);
+
+	tex_x = init_x * (game->no_texture->width / TILE_SIZE);
+	init_y = (WIN_H / 2) - (wall_strip_height / 2);
+	y = init_y;
+	while (y < (WIN_H / 2) + (wall_strip_height / 2))
+	{
+		tex_y = (y - init_y) * (game->no_texture->height / wall_strip_height);
+		mlx_put_pixel(game->img, i, y, get_pixel_color(game->no_texture, tex_x, tex_y));
+		y++;
+	}
 	if (!ft_strcmp(direction, SOUTH))
 		draw_rect(game, i * WALL_STRIP_WIDTH, 
 			wall_strip_height, ft_rgba(0, 94, 97, 255));
