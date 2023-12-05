@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 15:56:38 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:59:04 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include "gnl/get_next_line.h"
+# include "libft/libft.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -28,16 +31,20 @@
 # define WINDOW_WIDTH 26 * TILE_SIZE
 # define WINDOW_HEIGHT 7 * TILE_SIZE
 
-# define WIN_W 1440
-# define WIN_H 900
+# define WIN_W 1920
+# define WIN_H 1080
 # define MINI_MAP 0.5
 
+// #define NUM_RAYS 500
 # define WALL_STRIP_WIDTH 1
+// # define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
-# define NORTH 0
-# define SOUTH 1
-# define WEST  2
-# define EAST  3
+// /Users/kmouradi/homebrew
+
+# define NORTH "NO"
+# define SOUTH "SO"
+# define WEST  "WE"
+# define EAST  "EA"
 
 typedef struct s_player
 {
@@ -81,37 +88,42 @@ typedef struct s_ray
 	bool	*to_hit;
 }	t_ray;
 
-typedef struct s_rgb
+typedef struct s_rgb_f
 {
 	int	red;
 	int	green;
 	int	blue;
-}	t_rgb;
+}	t_rgb_f;
+
+typedef struct s_rgb_c
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_rgb_c;
 
 typedef struct s_parse
 {
 	char	**map;
-	int		player_x;
-	int		player_y;
-	int		player_direction;
 	int		map_h;
 	int		map_w;
 	char	*no;
 	char	*so;
 	char	*ea;
 	char	*we;
-	t_rgb	*rgb;
+	t_rgb_f	f_rgb;
+	t_rgb_c	c_rgb;
+	char **data_color;
 }	t_parse;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*mlx_win;
-	t_player		*player;
-	t_ray			*ray;
-	t_parse			*parse;
-	mlx_texture_t	**textures;
-	mlx_image_t		*img;
+	void		*mlx;
+	void		*mlx_win;
+	t_player	*player;
+	t_ray		*ray;
+	t_parse		*parse;
+	mlx_image_t	*img;
 }	t_game;
 
 // movements.c
@@ -166,11 +178,82 @@ int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
 int		is_wall(double x, double y);
-void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
+void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 int		close_win(t_game *game);
+
+typedef	struct	s_it
+{
+	int	i;
+	int	j;
+	int	k;
+} t_it;
+
+typedef	struct	s_rgb_data
+{
+	char	**rgb_f;
+	char	**rgb_c;
+} t_rgb_data;
+
+typedef struct s_var_calc
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+} t_var_calc;
+
+
+enum				e_directions
+{
+	NO,
+	SO,
+	WE,
+	EA
+};
+
+enum				e_colors
+{
+	F = 5,
+	C
+};
+
+// map_operations.c
+void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
+void	map_operations(char *map_name, t_parse *vars);
+void	check_color(char **color, t_rgb_data *data);
+int		is_surrounded(t_parse *vars, int i, int j);
+void	set_color(t_parse *vars, char **colors);
+void	check_path(t_parse *vars, char **path);
+void	set_path(t_parse *vars, char **paths);
+char	*allocate_space(int count, int size);
+void	set_data(t_parse *vars, char *arr);
+void	set_map_size(t_parse *vars, int y);
+void	set_map(char **map, int longest);
+void	check_calc(t_var_calc	*calc);
+int		detect_type(char *element);
+char	**set_color2(char *color);
+void	check_array(char **array);
+int		check_map2(t_parse *vars);
+int		ft_chrstr(char *s, int c);
+void	set_map2(t_parse *vars);
+int		ft_my_atoi(char *color);
+void	free_2d(char **data);
+
+//allocation.c
+void	*gc_malloc(int size);
+void	garbage_collector(void	*ptr, int delete);
+
+//read_map.c
+void	check_player(char *map);
+char	*read_map(int fd, t_parse *vars);
+void	check_map(char *map, int length);
+
+
 
 #endif

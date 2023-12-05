@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 15:27:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:03:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_sky(t_game *game)
 			pixel_x = i;
 			pixel_y = j;
 			mlx_put_pixel(game->img, pixel_x, pixel_y,
-				ft_rgba(101, 30, 22, 255));
+				ft_rgba(47, 177, 255, 255));
 			j++;
 		}
 		i++;
@@ -51,7 +51,7 @@ void	draw_floor(t_game *game)
 			pixel_x = i;
 			pixel_y = j;
 			mlx_put_pixel(game->img, pixel_x, pixel_y,
-				ft_rgba(102, 107, 103, 255));
+				ft_rgba(0, 147, 36, 255));
 			j++;
 		}
 		i++;

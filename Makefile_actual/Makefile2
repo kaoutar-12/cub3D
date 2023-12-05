@@ -1,0 +1,44 @@
+CC = cc
+CN = rm -rf
+FLAGS = 
+USER = mboukaiz
+LINKS = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+
+SOURCE = main.c \
+		 cast_rays.c \
+		 ft_draw.c \
+		 ft_game.c \
+		 helpers.c \
+		 keys_hooks.c \
+		 cast_horizontal.c \
+		 cast_vertical.c \
+		 movements.c \
+		 draw_minimap.c \
+		 init.c \
+		 map_operations.c \
+		 libft/ft_libft.c libft/ft_libft_extra.c\
+		 libft/ft_memcpy.c libft/ft_memset.c libft/ft_strtrim.c\
+		 gnl/get_next_line.c gnl/get_next_line_utils.c \
+
+OBJECT = $(addprefix build/, $(SOURCE:.c=.o))
+
+NAME = Cub3d
+
+all: ${NAME}
+
+${NAME}: ${OBJECT} $(SOURCE)
+	${CC} ${FLAGS} ${OBJECT} ${LINKS} -o ${NAME}
+
+build/%.o: %.c cub3d.h
+	@mkdir -p $(dir $@)
+	${CC} ${FLAGS} -c $< -o $@
+
+clean:
+	${CN} build
+
+fclean: clean
+	${CN} ${NAME}
+
+re: fclean all
+
+.PHONY: all clean fclean re

@@ -3,27 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:56:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:33:07 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	t_game		*game;
-	t_player	*player;
-	t_ray		*ray;
+	// t_game		*game;
+	// t_player	*player;
+	// t_ray		*ray;
+	t_parse		vars;
 
-	game = malloc(sizeof(t_game));
-	player = malloc(sizeof(t_player));
-	ray = malloc(sizeof(t_ray));
-	init_rays(ray);
-	init_player(player);
-	game->player = player;
-	game->ray = ray;
-	ft_game(game);
+	if (ac == 2)
+		map_operations(av[1], &vars);
+	else
+	{
+		write(2, "Invalid Arguments\n", 18);
+		return (1);
+	}
+	// while (1);
+	// game = malloc(sizeof(t_game));
+	// player = malloc(sizeof(t_player));
+	// ray = malloc(sizeof(t_ray));
+	// init_rays(ray);
+	// init_player(player);
+	// game->player = player;
+	// game->ray = ray;
+	// ft_game(game);
+	system("leaks Cub3d");
 }

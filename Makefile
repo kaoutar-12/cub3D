@@ -3,50 +3,55 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/11/29 15:14:59 by kmouradi         ###   ########.fr        #
+#    Created: 2023/11/29 18:08:33 by mboukaiz          #+#    #+#              #
+#    Updated: 2023/12/05 13:21:39 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC=cc
-CN=rm -rf
-FLAGS=
-LINKS= MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
+#this makefile is temporary
 
+CC = cc
 
-SOURCE= cast_rays.c\
-		ft_draw.c\
-		ft_game.c\
-		helpers.c\
-		keys_hooks.c\
-		cast_horizontal.c\
-		cast_vertical.c\
-		main.c\
-		movements.c\
-		draw_minimap.c\
-		init.c\
+# CFLAGS = -Wall -Wextra -Werror
 
+NAME = Cub3d
 
-OBJECT=${SOURCE:.c=.o}
+USER = mboukaiz
 
-NAME=Cub3d
+LINKS = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 
-all: ${NAME}
+HEADER = cub3d.h libft/libft.h gnl/get_next_line.h
 
-${NAME}:${OBJECT}
-	${CC} ${FLAGS} ${OBJECT} ${LINKS} -o ${NAME}
+SOURCE = ./main.c \
+		 cast_rays.c \
+		 ft_draw.c \
+		 ft_game.c \
+		 helpers.c \
+		 keys_hooks.c \
+		 cast_horizontal.c \
+		 cast_vertical.c \
+		 movements.c \
+		 draw_minimap.c \
+		 init.c \
+		 parsing/map_operations.c parsing/read_map.c parsing/allocation.c\
+		 libft/ft_libft.c libft/ft_libft_extra.c\
+		 libft/ft_memcpy.c libft/ft_memset.c libft/ft_strtrim.c libft/ft_isdigit.c\
+		 libft/ft_strcpy.c libft/lst_funcs.c\
+		 gnl/get_next_line.c gnl/get_next_line_utils.c \
+		 libft/ft_strncmp.c libft/ft_strnstr.c libft/ft_atoi.c\
 
-%.o: %.c  cub3d.h
-	${CC} ${FLAGS} -c $<
+all : $(NAME)
+
+$(NAME) : $(SOURCE) $(HEADER)
+	$(CC) $(SOURCE) $(CFLAGS) $(LINKS) -o $(NAME)
 
 clean:
-	${CN} ${OBJECT}
 
 fclean: clean
-	${CN} ${NAME}
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

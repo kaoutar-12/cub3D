@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:57:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:55:45 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,5 @@ void	ft_hook(void *param)
 int	close_win(t_game *game)
 {
 	mlx_close_window(game->mlx);
-	free(game->ray->wall_hit_x);
-	free(game->ray->wall_hit_y);
-	free(game->ray->ray_angles);
-	free(game->ray->distances);
-	free(game->ray->is_ray_facing_down);
-	free(game->ray->is_ray_facing_up);
-	free(game->ray->is_ray_facing_right);
-	free(game->ray->is_ray_facing_left);
-	free(game->ray->found_h_wall_hit);
-	free(game->ray->found_v_wall_hit);
-	free(game->ray->to_hit);
-	free(game->ray);
-	free(game->player);
-	free(game);
-	printf("Game Over\n");
 	exit(0);
 }

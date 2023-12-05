@@ -6,16 +6,11 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:51:25 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:10:31 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	player_direction(player)
-// {
-	
-// }
 
 void	init_player(t_player *player)
 {
@@ -24,24 +19,9 @@ void	init_player(t_player *player)
 	player->turn = 0;
 	player->walk = 0;
 	player->rotation_angle = M_PI / 2;
-	// player_direction(player);
 	player->move_speed = 2.0;
-	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
-		player->move_speed = 2.0;
 	player->rotation_speed = 3 * (M_PI / 180);
 	get_player_position(player);
-}
-
-void	init_textures(t_game *game)
-{
-	game->textures = malloc(sizeof(mlx_texture_t) * 4);
-	game->textures[NORTH] = mlx_load_png("./textures/north.png");
-	game->textures[SOUTH] = mlx_load_png("./textures/north.png");
-	game->textures[WEST] = mlx_load_png("./textures/north.png");
-	game->textures[EAST] = mlx_load_png("./textures/north.png");
-	if (!game->textures[NORTH] || !game->textures[SOUTH] ||
-		!game->textures[WEST] || !game->textures[EAST])
-		write(2, "Error\n", 6);
 }
 
 void	ft_game(t_game *game)
@@ -51,7 +31,6 @@ void	ft_game(t_game *game)
 		write(2, "Error\n", 6); 
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
-	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
 	mlx_loop(game->mlx);
