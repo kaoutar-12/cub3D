@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:09:47 by mboukaiz          #+#    #+#             */
-/*   Updated: 2022/11/12 15:12:33 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:02:30 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ char	**ft_split(char const *s, char c)
 	if (ft_count(strs, s, c) == -1)
 	{
 		i = 0;
-		while (strs[i])
-		{
-			free(strs[i]);
-			i++;
-		}
-		free(strs);
 		return (NULL);
 	}
 	return (strs);

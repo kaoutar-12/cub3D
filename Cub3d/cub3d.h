@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 13:59:04 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:19:48 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@
 // # define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
-# define NORTH "NO"
-# define SOUTH "SO"
-# define WEST  "WE"
-# define EAST  "EA"
+// # define NORTH "NO"
+// # define SOUTH "SO"
+// # define WEST  "WE"
+// # define EAST  "EA"
 
 typedef struct s_player
 {
@@ -105,6 +109,9 @@ typedef struct s_rgb_c
 typedef struct s_parse
 {
 	char	**map;
+	int		player_x;
+	int		player_y;
+	int		player_direction;
 	int		map_h;
 	int		map_w;
 	char	*no;
@@ -113,7 +120,6 @@ typedef struct s_parse
 	char	*we;
 	t_rgb_f	f_rgb;
 	t_rgb_c	c_rgb;
-	char **data_color;
 }	t_parse;
 
 typedef struct s_game
@@ -178,7 +184,7 @@ int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
 int		is_wall(double x, double y);
-void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
+// void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
@@ -248,6 +254,7 @@ void	free_2d(char **data);
 //allocation.c
 void	*gc_malloc(int size);
 void	garbage_collector(void	*ptr, int delete);
+void	custom_exit(int status);
 
 //read_map.c
 void	check_player(char *map);

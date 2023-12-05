@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 14:33:07 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:26:58 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ int	main(int ac, char **av)
 	t_parse		vars;
 
 	if (ac == 2)
+	{
 		map_operations(av[1], &vars);
+		// printf ("Player[%d][%d] and it's direction is %d equivalent to %c\n", vars.player_x, vars.player_y,
+		// 		vars.player_direction, vars.map[vars.player_x][vars.player_y]);
+	}
 	else
 	{
 		write(2, "Invalid Arguments\n", 18);
 		return (1);
 	}
+	// garbage_collector(NULL, 1);
 	// while (1);
 	// game = malloc(sizeof(t_game));
 	// player = malloc(sizeof(t_player));
@@ -35,5 +40,5 @@ int	main(int ac, char **av)
 	// game->player = player;
 	// game->ray = ray;
 	// ft_game(game);
-	system("leaks Cub3d");
+	// system("leaks Cub3d");
 }

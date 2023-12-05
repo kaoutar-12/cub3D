@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 14:06:08 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:19:06 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,12 @@ char	*ft_next_str(char *str)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!str[i])
-	{
-		free(str);
-		return (NULL);
-	}
 	tab = (char *)gc_malloc(sizeof(char) * (ft_strlen2(str) - i + 1));
-	if (!tab)
-	{
-		free(str);
-		return (NULL);
-	}
 	i++;
 	j = 0;
 	while (str[i])
 		tab[j++] = str[i++];
 	tab[j] = '\0';
-	free(str);
 	return (tab);
 }
 
@@ -89,7 +78,6 @@ char	*ft_allocate(int fd, char *str)
 		buffer[readed] = '\0';
 		str = ft_strjoin2(str, buffer);
 	}
-	free (buffer);
 	return (str);
 }
 

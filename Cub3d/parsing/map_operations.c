@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 14:33:18 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:10:55 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,18 +138,18 @@ void	check_path(t_parse *vars, char **path)
 	if (it.i != 2)
 	{
 		write(2, "Invalid map content", 20);
-		exit (1);
+		custom_exit(1);
 	}
 	// printf ("|%s|\n", path[1]);
 	if (ft_strcmp(path[1] + strlen(path[1]) - 4, ".png"))
 	{
 		write(2, "Error\nInvalid path extention\n", 29);
-		exit (1);
+		custom_exit(1);
 	}
 	if (access(path[1], R_OK))
 	{
 		perror("IMAGE");
-		exit (1);
+		custom_exit(1);
 	}
 	else
 	{
@@ -184,7 +184,7 @@ void	check_color(char **color, t_rgb_data *data)
 	if (it.i != 2)
 	{
 		write(2, "Invalid map content", 20);
-		exit (1);
+		custom_exit(1);
 	}
 	it.i = 0;
 	// printf ("%s\n", color[0]);
@@ -195,14 +195,17 @@ void	check_color(char **color, t_rgb_data *data)
 		if (it.j > 2)
 		{
 			printf ("More than 2 commas\n");
-			exit (1);
+			custom_exit(1);
 		}
 		it.i++;
 	}
-	if (!strcmp(color[0], "F"))
+	if (!ft_strcmp(color[0], "F"))
 		data->rgb_f = set_color2(color[1]);
-	if (!strcmp(color[0], "C"))
+	if (!ft_strcmp(color[0], "C"))
 		data->rgb_c = set_color2(color[1]);
+	free(color[0]);
+	free(color[1]);
+	free(color);
 }
 
 int	ft_my_atoi(char *color)
@@ -217,7 +220,7 @@ int	ft_my_atoi(char *color)
 		if (!ft_isdigit(color[it.i]))
 		{
 			write(2, "Error:\nMap content must be in the format \"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
-			exit (1);
+			custom_exit(1);
 		}
 		it.i++;
 	}
@@ -243,7 +246,7 @@ void	set_color3(t_parse *vars, t_rgb_data *rgb_data)
 		|| vars->f_rgb.green > 255 || vars->f_rgb.green < 0)
 		{
 			write(2, "Error\nvalue of rgb must be 0 to 255", 36);
-			exit (1);
+			custom_exit(1);
 		}
 }
 
@@ -251,12 +254,13 @@ void	set_color(t_parse *vars, char **colors)
 {
 	t_it		it;
 	t_rgb_data	rgb_data;
+	char		**data_color;
 
 	it.i = 0;
 	while (colors[it.i])
 	{
-		vars->data_color = ft_split (colors[it.i], ' ');
-		check_color(vars->data_color, &rgb_data);
+		data_color = ft_split(colors[it.i], ' ');
+		check_color(data_color, &rgb_data);
 		it.i++;
 	}
 	set_color3(vars, &rgb_data);
@@ -285,7 +289,7 @@ void	check_calc(t_var_calc	*calc)
 		|| calc->ea != 1 || calc->we != 1)
 	{
 		write(2, "Error\nInvalid map content", 26);
-		exit (1);
+		custom_exit(1);
 	}
 }
 
@@ -359,11 +363,10 @@ void	set_data(t_parse *vars, char *arr)//
 	if (it.j != 4 || it.k != 2)
 	{
 		write(2, "Invalid map content", 20);
-		exit (1);
+		custom_exit(1);
 	}
 	set_path(vars, paths);
 	set_color(vars, colors);
-	// garbage_collector(NULL, 1);
 }
 
 
@@ -376,38 +379,39 @@ void	map_operations(char *map_name, t_parse *vars)
 	if (ft_strcmp(map_name + strlen(map_name) - 4, ".cub"))
 	{
 		write(2, "Error\nInvalid map extention\n", 29);
-		exit (1);
+		custom_exit(1);
 	}
 	if (fd == -1)
 	{
 		perror("Error\nCub3d");
-		exit (1);
+		custom_exit(1);
 	}
 	arr = read_map(fd, vars);
 	set_data(vars, arr);
-	// if (check_map2(vars))
-	// {
-	// 	printf("c_rgb.blue : %d\n", vars->c_rgb.blue);
-	// 	printf("c_rgb.green : %d\n", vars->c_rgb.green);
-	// 	printf("c_rgb.red : %d\n", vars->c_rgb.red);
+	if (check_map2(vars))
+	{
+		printf ("Valid Map\n");
+		// printf("c_rgb.blue : %d\n", vars->c_rgb.blue);
+		// printf("c_rgb.green : %d\n", vars->c_rgb.green);
+		// printf("c_rgb.red : %d\n", vars->c_rgb.red);
 
-	// 	printf("\nf_rgb.blue : %d\n", vars->f_rgb.blue);
-	// 	printf("f_rgb.green : %d\n", vars->f_rgb.green);
-	// 	printf("f_rgb.red : %d\n", vars->f_rgb.red);
+		// printf("\nf_rgb.blue : %d\n", vars->f_rgb.blue);
+		// printf("f_rgb.green : %d\n", vars->f_rgb.green);
+		// printf("f_rgb.red : %d\n", vars->f_rgb.red);
 
-	// 	printf("\npath NO %s\n", vars->no);
-	// 	printf("path SO %s\n", vars->so);
-	// 	printf("path WE %s\n", vars->we);
-	// 	printf("path EA %s\n", vars->ea);
+		// printf("\npath NO %s\n", vars->no);
+		// printf("path SO %s\n", vars->so);
+		// printf("path WE %s\n", vars->we);
+		// printf("path EA %s\n", vars->ea);
 
-	// 	printf ("\n------------MAP-----------\n\n");
-	// 	for (int i = 0; vars->map[i]; i++)
-	// 	{
-	// 		printf ("|%s|\n", vars->map[i]);
-	// 	}
-	// }
-	// else
-	// {
-	// 	printf ("CHECK MAP AGAIN!\n");
-	// }
+		// printf ("\n------------MAP-----------\n\n");
+		// for (int i = 0; vars->map[i]; i++)
+		// {
+		// 	printf ("|%s|\n", vars->map[i]);
+		// }
+	}
+	else
+	{
+		printf ("CHECK MAP AGAIN!\n");
+	}
 }

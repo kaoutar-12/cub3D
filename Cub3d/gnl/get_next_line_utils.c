@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:17 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 13:35:25 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:01:52 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*ft_strjoin2(char *s1, char *s2)
 	while (s2[j])
 		res[i++] = s2[j++];
 	res[i] = '\0';
-	free(s1);
 	return (res);
 }
 

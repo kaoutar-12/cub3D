@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:09:57 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 14:07:37 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:28:35 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
 
-	str = gc_malloc(count * size);
+	str =  gc_malloc(count * size);
 	if (!str)
 		return (0);
 	ft_bzero(str, count * size);

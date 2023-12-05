@@ -6,11 +6,12 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:08:44 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 13:24:22 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:36:08 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
 
 void	garbage_collector(void	*ptr, int delete)
 {
@@ -23,8 +24,13 @@ void	garbage_collector(void	*ptr, int delete)
 	{
 		node = ft_lstnew(ptr);
 		ft_lstadd_back(&head, node);
-		printf ("size of nodes is : %d\n", ft_lstsize(head));
 	}
+}
+
+void	custom_exit(int status)
+{
+	garbage_collector(NULL, 1);
+	exit(status);
 }
 
 void	*gc_malloc(int size)

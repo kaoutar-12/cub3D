@@ -6,7 +6,7 @@
 #    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 18:08:33 by mboukaiz          #+#    #+#              #
-#    Updated: 2023/12/05 13:21:39 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/05 15:12:19 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LINKS = MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw
 
 HEADER = cub3d.h libft/libft.h gnl/get_next_line.h
 
-SOURCE = ./main.c \
+SOURCE = main.c \
 		 cast_rays.c \
 		 ft_draw.c \
 		 ft_game.c \
