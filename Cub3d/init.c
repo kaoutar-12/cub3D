@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:10:31 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:42:26 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_player(t_player *player)
 	player->rotation_angle = M_PI / 2;
 	player->move_speed = 2.0;
 	player->rotation_speed = 3 * (M_PI / 180);
-	get_player_position(player);
+	// get_player_position(player);
 }
 
 void	ft_game(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:56:58 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:58:13 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:59:54 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	move_down(t_game *game, double move_step)
 		cos(game->player->rotation_angle) * move_step;
 	new_player_y = game->player->y + 
 		sin(game->player->rotation_angle) * move_step;
-	if (is_wall(new_player_x, new_player_y) == 0)
+	if (is_wall(game, new_player_x, new_player_y) == 0)
 	{
 		game->player->x = new_player_x;
 		game->player->y = new_player_y;
@@ -39,7 +39,7 @@ void	move_up(t_game *game, double move_step)
 		cos(game->player->rotation_angle) * move_step;
 	new_player_y = game->player->y + 
 		sin(game->player->rotation_angle) * move_step;
-	if (is_wall(new_player_x, new_player_y) == 0)
+	if (is_wall(game, new_player_x, new_player_y) == 0)
 	{
 		game->player->x = new_player_x;
 		game->player->y = new_player_y;
@@ -56,7 +56,7 @@ void	move_left(t_game *game, double move_step)
 		cos(game->player->rotation_angle + M_PI_2) * move_step;
 	new_player_y = game->player->y + 
 		sin(game->player->rotation_angle + M_PI_2) * move_step;
-	if (is_wall(new_player_x, new_player_y) == 0)
+	if (is_wall(game, new_player_x, new_player_y) == 0)
 	{
 		game->player->x = new_player_x;
 		game->player->y = new_player_y;
@@ -73,7 +73,7 @@ void	move_right(t_game *game, double move_step)
 		cos(game->player->rotation_angle - M_PI_2) * move_step;
 	new_player_y = game->player->y + 
 		sin(game->player->rotation_angle - M_PI_2) * move_step;
-	if (is_wall(new_player_x, new_player_y) == 0)
+	if (is_wall(game, new_player_x, new_player_y) == 0)
 	{
 		game->player->x = new_player_x;
 		game->player->y = new_player_y;

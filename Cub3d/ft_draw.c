@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 15:08:28 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:09:39 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	draw(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	draw_sky(game);
-	draw_floor(game);
+	// draw_sky(game);
+	// draw_floor(game);
 	draw_map(game);
-	projectd_wall(game);
+	// projectd_wall(game);
 	draw_player(game);
 	cast_rays(game);
 	draw_wall(game);

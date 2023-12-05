@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 16:26:58 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:12:33 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	// t_game		*game;
-	// t_player	*player;
-	// t_ray		*ray;
+	t_game		*game;
+	t_player	*player;
+	t_ray		*ray;
 	t_parse		vars;
 
 	if (ac == 2)
@@ -30,15 +30,22 @@ int	main(int ac, char **av)
 		write(2, "Invalid Arguments\n", 18);
 		return (1);
 	}
-	// garbage_collector(NULL, 1);
-	// while (1);
-	// game = malloc(sizeof(t_game));
-	// player = malloc(sizeof(t_player));
-	// ray = malloc(sizeof(t_ray));
-	// init_rays(ray);
-	// init_player(player);
-	// game->player = player;
-	// game->ray = ray;
-	// ft_game(game);
-	// system("leaks Cub3d");
+	// garbage_collector(NULL, 1);;
+	game = malloc(sizeof(t_game));
+	player = malloc(sizeof(t_player));
+	ray = malloc(sizeof(t_ray));
+	init_rays(ray);
+	init_player(player);
+	game->player = player;
+	game->ray = ray;
+	game->parse = &vars;
+	printf("Player[%d][%d] and it's direction is %d equivalent to %c\n", game->parse->player_x, game->parse->player_y,
+			game->parse->player_direction, game->parse->map[game->parse->player_x][game->parse->player_y]);
+	game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
+	game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
+
+	// for (int i = 0; i < game->parse->map_h; i++) {
+	// 	printf("%s\n", game->parse->map[i]);
+	// }
+	ft_game(game);
 }

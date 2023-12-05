@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 16:19:48 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:52:22 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // #define NUM_RAYS 500
 # define WALL_STRIP_WIDTH 1
-// # define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
+# define NUM_RAYS WIN_W / WALL_STRIP_WIDTH
 
 // /Users/kmouradi/homebrew
 # define NORTH 0
@@ -183,8 +183,8 @@ void	init_player(t_player *player);
 int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
-int		is_wall(double x, double y);
-// void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
+int		is_wall(t_game *game, double x, double y);
+void	draw_textures(t_game *game, int i, double wall_strip_height, char *direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
