@@ -6,43 +6,53 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/05 19:28:45 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/06 12:55:29 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC=cc
-CN=rm -rf
-FLAGS=
-LINKS= MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
+NAME= Cub3d
+CC= cc
+CN= rm -rf
+FLAGS= -Wall -Wextra -Werror -g -fsanitize=address
+LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
+
+PREFIX = ./obj/
+
+SOURCE= mandatory/cast_rays.c \
+		mandatory/ft_draw.c \
+		mandatory/ft_game.c \
+		mandatory/helpers.c \
+		mandatory/keys_hooks.c \
+		mandatory/cast_horizontal.c \
+		mandatory/cast_vertical.c \
+		mandatory/main.c \
+		mandatory/movements.c \
+		mandatory/draw_minimap.c \
+		mandatory/init.c \
 
 
-SOURCE= cast_rays.c\
-		ft_draw.c\
-		ft_game.c\
-		helpers.c\
-		keys_hooks.c\
-		cast_horizontal.c\
-		cast_vertical.c\
-		main.c\
-		movements.c\
-		draw_minimap.c\
-		init.c\
-
-
-OBJECT=${SOURCE:.c=.o}
-
-NAME=Cub3d
+OBJECT = $(addprefix ${PREFIX}, $(SOURCE:.c=.o))
 
 all: ${NAME}
 
-${NAME}:${OBJECT}
+libmlx42:
+	make -C libraries/MLX42/build
+
+${PREFIX}:
+	mkdir -p ${PREFIX}
+	mkdir -p ${PREFIX}mandatory
+
+${NAME}: ${PREFIX} ${OBJECT}
 	${CC} ${FLAGS} ${OBJECT} ${LINKS} -o ${NAME}
 
-%.o: %.c  cub3d.h
-	${CC} ${FLAGS} -c $<
+${PREFIX}%.o: %.c mandatory/cub3d.h libmlx42
+	${CC} ${FLAGS} -c $< -o $@
 
 clean:
+	${CN} ${PREFIX}
+	${CN} ${PREFIX}mandatory
 	${CN} ${OBJECT}
+	make -C libraries/MLX42/build clean
 
 fclean: clean
 	${CN} ${NAME}
