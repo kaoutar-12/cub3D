@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 15:56:38 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:25:24 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <limits.h>
 
 # define TILE_SIZE 32 
-# define WINDOW_WIDTH 26 * TILE_SIZE
-# define WINDOW_HEIGHT 7 * TILE_SIZE
+# define WINDOW_WIDTH 33 * TILE_SIZE
+# define WINDOW_HEIGHT 14 * TILE_SIZE
 
 # define WIN_W 1440
 # define WIN_H 900
