@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 17:52:22 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:21:20 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_rgb_c
 typedef struct s_parse
 {
 	char	**map;
+	char	**actual_map;
 	int		player_x;
 	int		player_y;
 	int		player_direction;
@@ -232,15 +233,16 @@ enum				e_colors
 // map_operations.c
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
 void	map_operations(char *map_name, t_parse *vars);
+void	set_map(char **a_map,char **map, int longest);
 void	check_color(char **color, t_rgb_data *data);
 int		is_surrounded(t_parse *vars, int i, int j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
+void	surround_map(char **a_map, char **map);
 void	set_path(t_parse *vars, char **paths);
 char	*allocate_space(int count, int size);
 void	set_data(t_parse *vars, char *arr);
 void	set_map_size(t_parse *vars, int y);
-void	set_map(char **map, int longest);
 void	check_calc(t_var_calc	*calc);
 int		detect_type(char *element);
 char	**set_color2(char *color);
@@ -250,6 +252,7 @@ int		ft_chrstr(char *s, int c);
 void	set_map2(t_parse *vars);
 int		ft_my_atoi(char *color);
 void	free_2d(char **data);
+int		table_size(char **map);
 
 //allocation.c
 void	*gc_malloc(int size);

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 16:10:55 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:25:25 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,29 @@ char	*allocate_space(int count, int size)
 	return (str);
 }
 
-void	set_map(char **map, int longest)
+void	surround_map(char **a_map, char **map)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (map[i])
+	{
+		a_map[i] = ft_strdup2(map[i]);
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == ' ')
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+	a_map[i] = NULL;
+}
+
+void	set_map(char **a_map,char **map, int longest)
 {
 	int		i;
 	char	*tmp;
@@ -78,6 +100,7 @@ void	set_map(char **map, int longest)
 		map[i] = tmp;
 		i++;
 	}
+	surround_map(a_map, map);
 }
 
 int		check_map2(t_parse *vars)
@@ -205,6 +228,7 @@ void	check_color(char **color, t_rgb_data *data)
 		data->rgb_c = set_color2(color[1]);
 	free(color[0]);
 	free(color[1]);
+	free(color[2]);
 	free(color);
 }
 

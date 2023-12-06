@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 18:08:33 by mboukaiz          #+#    #+#              #
-#    Updated: 2023/12/05 17:40:20 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/06 15:56:14 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = Cub3d
 
 USER = mboukaiz
 
-LINKS = MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/homebrew/opt/glfw/lib/
+LINKS = MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/
 
 HEADER = cub3d.h libft/libft.h gnl/get_next_line.h
 

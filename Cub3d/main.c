@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/05 19:12:33 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:17:21 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		map_operations(av[1], &vars);
+		for (int i = 0; vars.actual_map[i]; i++)
+			printf ("|%s|\n", vars.actual_map[i]);
 		// printf ("Player[%d][%d] and it's direction is %d equivalent to %c\n", vars.player_x, vars.player_y,
 		// 		vars.player_direction, vars.map[vars.player_x][vars.player_y]);
 	}
