@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:51:25 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:16:58 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,21 @@ void	init_player(t_player *player)
 void	init_textures(t_game *game)
 {
 	game->textures = malloc(sizeof(mlx_texture_t) * 4);
-	game->textures[NORTH] = mlx_load_png("./textures/north.png");
-	game->textures[SOUTH] = mlx_load_png("./textures/north.png");
-	game->textures[WEST] = mlx_load_png("./textures/north.png");
-	game->textures[EAST] = mlx_load_png("./textures/north.png");
+	game->textures[NORTH] = mlx_load_png("mandatory/textures/north.png");
+	game->textures[SOUTH] = mlx_load_png("mandatory/textures/north.png");
+	game->textures[WEST] = mlx_load_png("mandatory/textures/north.png");
+	game->textures[EAST] = mlx_load_png("mandatory/textures/north.png");
 	if (!game->textures[NORTH] || !game->textures[SOUTH] ||
 		!game->textures[WEST] || !game->textures[EAST])
+	{
 		write(2, "Error\n", 6);
+		exit(1);
+	}
 }
 
 void	ft_game(t_game *game)
 {
-	game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d", false);
+	game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d_bonus", false);
 	if (!game->mlx)
 		write(2, "Error\n", 6); 
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
@@ -54,6 +57,8 @@ void	ft_game(t_game *game)
 	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
+	mlx_cursor_hook(game->mlx, mouse_hook, game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:11:36 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:04:53 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,41 +84,8 @@ void	cast_rays(t_game *game)
 		game->ray->ray_angles[i] = game->ray->ray_angle;
 		game->ray->ray_angle = normalize_angle(game->ray->ray_angle);
 		cast_v_h_rays(game, i);
-		draw_line(game, game->player->x * MINI_MAP, game->player->y * MINI_MAP,
-			game->ray->wall_hit_x[i] * MINI_MAP, game->ray->wall_hit_y[i] 
-			* MINI_MAP, ft_rgba(255, 0, 0, 255));
 		game->ray->ray_angle += game->player->fov_angle / game->ray->num_rays;
 		i++;
 	}
 }
 
-//! REMOVE
-void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
-{
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int sy = (y0 < y1) ? 1 : -1;
-	int err = dx - dy;
-
-	while (1)
-	{
-		// mlx_pixel_put(game->mlx, game->mlx_win, x0, y0, color);
-		mlx_put_pixel(game->img, x0, y0, color);
-
-		if (x0 == x1 && y0 == y1)
-			break;
-
-		int e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-	}
-}

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/29 15:27:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:04:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ void	draw(void *param)
 	game = (t_game *)param;
 	draw_sky(game);
 	draw_floor(game);
-	draw_map(game);
 	projectd_wall(game);
-	draw_player(game);
 	cast_rays(game);
-	draw_wall(game);
 }

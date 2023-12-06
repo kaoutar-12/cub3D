@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:56:58 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 10:44:30 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:52:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int wall_close(double x, double y)
 	double new_x;
 	double new_y;
 	
-	new_x = x - 20;
-	while(new_x <= x + 20)
+	new_x = x - 5;
+	while(new_x <= x + 5)
 	{
-		new_y = y - 20;
-		while(new_y <= y + 20)
+		new_y = y - 5;
+		while(new_y <= y + 5)
 		{
 			if (is_wall(new_x, new_y) == 1)
 				return (1);

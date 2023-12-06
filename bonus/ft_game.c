@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 10:40:13 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:56:37 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char *map[] = 
 {
-"        1111111111111111111111111",
-"        1000000000110000000000001",
-"        1011000001110000000000001",
-"        1001000000000000000000001",
+"111111111111111111111111111111111",
+"111111111000000000110000000000001",
+"111111111011000001110000000000001",
+"111111111001000000000000000000001",
 "111111111011000001110000000000001",
 "100000000011000001110111111111111",
 "111101111111110111000000100011111",
@@ -67,7 +67,7 @@ int	is_wall(double x, double y)
 		return (0);
 }
 
-uint32_t	get_pixel_color(mlx_texture_t *texture, int x, int y)
+uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y)
 {
 	int index;
 	uint32_t color;
@@ -88,11 +88,11 @@ uint32_t	get_pixel_color(mlx_texture_t *texture, int x, int y)
 void	draw_textures(t_game *game, int i,
 	double wall_strip_height, int direction)
 {
-	double	init_x;
-	double	init_y;
-	double	texture_x;
-	double	texture_y;
-	double	y;
+	double		init_x;
+	double		init_y;
+	double		y;
+	uint32_t	texture_x;
+	uint32_t	texture_y;
 
 	if (direction == NORTH || direction == SOUTH)
 		init_x = (int)game->ray->wall_hit_x[i] % TILE_SIZE;

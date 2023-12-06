@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 10:51:55 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:20:22 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include "../libraries/MLX42/include/MLX42/MLX42.h"
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -123,6 +124,7 @@ void	move_right(t_game *game, double move_step);
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
 void	ft_hook(void *param);
+void	mouse_hook(double xpos, double ypos, void* param);
 
 // cast_rays.c
 void	get_direction(t_game *game, int i);

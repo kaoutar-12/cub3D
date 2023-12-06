@@ -6,11 +6,34 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:57:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:28:14 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	mouse_hook(double xpos, double ypos, void* param)
+{
+	t_game *game;
+	int			diff;
+	double		sens;
+	static double last = -1.0;
+	
+	sens = 0.0075;
+	game = (t_game *)param;
+
+	if (xpos > 0 && xpos < WIN_W && ypos > 0 && ypos < WIN_H)
+	{
+		if (last != -1)
+		{
+			diff = xpos - last;
+			game->player->rotation_angle += diff * sens;
+		}
+		last = xpos;
+	}
+	else
+		last = -1;
+}
 
 void	rotate_left(t_game *game)
 {
