@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 12:05:06 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:18:22 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 int		close_win(t_game *game);
+void	error_msg(void);
 
 // map_operations.c
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);

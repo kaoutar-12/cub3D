@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/30 09:57:04 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:36:40 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void	rotate_left(t_game *game)
 {
 	game->player->turn = -1;
-	game->player->rotation_angle += 
-		game->player->rotation_speed * game->player->turn;
-	game->player->rotation_angle = 
-		normalize_angle(game->player->rotation_angle);
+	game->player->rotation_angle
+		+= game->player->rotation_speed * game->player->turn;
+	game->player->rotation_angle
+		= normalize_angle(game->player->rotation_angle);
 }
 
 void	rotate_right(t_game *game)
 {
 	game->player->turn = 1;
-	game->player->rotation_angle += 
-		game->player->rotation_speed * game->player->turn;
-	game->player->rotation_angle = 
-		normalize_angle(game->player->rotation_angle);
+	game->player->rotation_angle
+		+= game->player->rotation_speed * game->player->turn;
+	game->player->rotation_angle
+		= normalize_angle(game->player->rotation_angle);
 }
 
 void	ft_hook(void *param)
@@ -36,22 +36,22 @@ void	ft_hook(void *param)
 	double	move_step;
 
 	game = (t_game *)param;
-	move_step = game->player->walk * game->player->move_speed; 
-	game->player->rotation_angle = 
-		normalize_angle(game->player->rotation_angle);
+	move_step = game->player->walk * game->player->move_speed;
+	game->player->rotation_angle
+		= normalize_angle(game->player->rotation_angle);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		close_win(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W)) 
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		move_up(game, move_step);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S)) 
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_down(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_left(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		move_right(game, move_step);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT)) 
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_right(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT)) 
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_left(game);
 }
 

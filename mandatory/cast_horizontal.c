@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:04:13 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 11:50:06 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:25:41 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	calculate_horizontal_interception(t_game *game, int i)
 		game->ray->h_y_intercept += TILE_SIZE;
 	else
 		game->ray->h_y_intercept += 0;
-	game->ray->h_x_intercept = game->player->x 
-		+ (game->ray->h_y_intercept - game->player->y) 
+	game->ray->h_x_intercept = game->player->x
+		+ (game->ray->h_y_intercept - game->player->y)
 		/ tan(game->ray->ray_angles[i]);
 	game->ray->y_step = TILE_SIZE;
 	if (game->ray->is_ray_facing_up[i])
@@ -46,8 +46,10 @@ void	next_horizontal_intercept(t_game *game, double next_h_xintercept,
 {
 	next_h_xintercept = game->ray->h_x_intercept;
 	next_h_yintercept = game->ray->h_y_intercept;
-	while ((next_h_xintercept >= 0 && next_h_xintercept <= game->parse->map_w * TILE_SIZE)
-		&& (next_h_yintercept >= 0 && next_h_yintercept <= game->parse->map_h * TILE_SIZE))
+	while ((next_h_xintercept >= 0 && next_h_xintercept
+			<= game->parse->map_w * TILE_SIZE)
+		&& (next_h_yintercept >= 0 && next_h_yintercept
+			<= game->parse->map_h * TILE_SIZE))
 	{
 		game->ray->x_check = next_h_xintercept;
 		game->ray->y_check = next_h_yintercept;

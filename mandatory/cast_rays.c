@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:09:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 13:04:53 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:26:40 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_direction(t_game *game, int i)
 	else
 		game->ray->is_ray_facing_down[i] = false;
 	game->ray->is_ray_facing_up[i] = !game->ray->is_ray_facing_down[i];
-	if (game->ray->ray_angles[i] < 0.5 * M_PI 
+	if (game->ray->ray_angles[i] < 0.5 * M_PI
 		|| game->ray->ray_angles[i] > 1.5 * M_PI)
 		game->ray->is_ray_facing_right[i] = true;
 	else
@@ -74,13 +74,13 @@ void	cast_rays(t_game *game)
 {
 	int	i;
 
-	game->ray->ray_angle = normalize_angle(game->player->rotation_angle) 
+	game->ray->ray_angle = normalize_angle(game->player->rotation_angle)
 		- (game->player->fov_angle / 2);
 	i = 0;
 	while (i < game->ray->num_rays)
 	{
-		game->player->rotation_angle = 
-			normalize_angle(game->player->rotation_angle);
+		game->player->rotation_angle
+			= normalize_angle(game->player->rotation_angle);
 		game->ray->ray_angles[i] = game->ray->ray_angle;
 		game->ray->ray_angle = normalize_angle(game->ray->ray_angle);
 		cast_v_h_rays(game, i);
@@ -88,4 +88,3 @@ void	cast_rays(t_game *game)
 		i++;
 	}
 }
-

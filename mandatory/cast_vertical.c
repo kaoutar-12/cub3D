@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:04:22 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 11:51:26 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:27:30 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	calculate_vertical_interception(t_game *game, int i)
 		game->ray->v_x_intercept += TILE_SIZE;
 	else
 		game->ray->v_x_intercept += 0;
-	game->ray->v_y_intercept = game->player->y 
-		+ (game->ray->v_x_intercept - game->player->x) 
+	game->ray->v_y_intercept = game->player->y
+		+ (game->ray->v_x_intercept - game->player->x)
 		* tan(game->ray->ray_angles[i]);
 	game->ray->x_step = TILE_SIZE;
 	if (game->ray->is_ray_facing_left[i])
@@ -46,8 +46,10 @@ void	next_vertical_intercept(t_game *game, double next_v_xintercept,
 {
 	next_v_xintercept = game->ray->v_x_intercept;
 	next_v_yintercept = game->ray->v_y_intercept;
-	while ((next_v_xintercept >= 0 && next_v_xintercept <= game->parse->map_w * TILE_SIZE) 
-		&& (next_v_yintercept >= 0 && next_v_yintercept <= game->parse->map_h * TILE_SIZE))
+	while ((next_v_xintercept >= 0 && next_v_xintercept
+			<= game->parse->map_w * TILE_SIZE)
+		&& (next_v_yintercept >= 0 && next_v_yintercept
+			<= game->parse->map_h * TILE_SIZE))
 	{
 		game->ray->x_check = next_v_xintercept;
 		game->ray->y_check = next_v_yintercept;

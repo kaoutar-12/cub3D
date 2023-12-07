@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 11:52:39 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:32:53 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ int	is_wall(t_game *game, double x, double y)
 
 uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y)
 {
-	int index;
-	uint32_t color;
+	int			index;
+	uint32_t	color;
 
 	if (x < texture->width || x >= 0 || y < texture->height || y >= 0)
-	{	
+	{
 		index = (y * texture->width + x) * texture->bytes_per_pixel;
-		color = ft_rgba(texture->pixels[index],texture->pixels[index + 1],
-				texture->pixels[index + 2],texture->pixels[index + 3]);
+		color = ft_rgba(texture->pixels[index], texture->pixels[index + 1],
+				texture->pixels[index + 2], texture->pixels[index + 3]);
 	}
 	else
 		color = ft_rgba(0, 0, 0, 255);
-
 	return (color);
 }
-
 
 void	draw_textures(t_game *game, int i,
 	double wall_strip_height, int direction)
@@ -63,8 +61,11 @@ void	draw_textures(t_game *game, int i,
 	{
 		if (i >= 0 && i < WIN_W && y >= 0 && y < WIN_H)
 		{
-			texture_y = (y - init_y) * (game->textures[direction]->height / wall_strip_height);
-			mlx_put_pixel(game->img, i, y, get_pixel_color(game->textures[direction], texture_x, texture_y));
+			texture_y = (y - init_y) * (game->textures[direction]->height
+					/ wall_strip_height);
+			mlx_put_pixel(game->img, i, y,
+				get_pixel_color(game->textures[direction],
+					texture_x, texture_y));
 		}
 		y++;
 	}
@@ -80,9 +81,10 @@ void	projectd_wall(t_game *game)
 	i = 0;
 	while (i < game->ray->num_rays)
 	{
-		correct_wall_distance = game->ray->distances[i] * 
-			cos(game->ray->ray_angles[i] - game->player->rotation_angle);
-		distance_projection_plane = (WIN_W / 2) / tan(game->player->fov_angle / 2);
+		correct_wall_distance = game->ray->distances[i]
+			* cos(game->ray->ray_angles[i] - game->player->rotation_angle);
+		distance_projection_plane = (WIN_W / 2)
+			/ tan(game->player->fov_angle / 2);
 		wall_strip_height = (TILE_SIZE / correct_wall_distance)
 			* distance_projection_plane;
 		if (game->ray->is_ray_facing_up[i] && game->ray->to_hit[i] == false)
