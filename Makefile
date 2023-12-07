@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/06 13:05:31 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/07 10:42:22 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,11 @@ SOURCE =	mandatory/cast_rays.c \
 			mandatory/main.c \
 			mandatory/movements.c \
 			mandatory/init.c \
+			mandatory/parsing/allocation.c \
+			mandatory/parsing/map_operations.c \
+			mandatory/parsing/read_map.c \
+			libraries/gnl/get_next_line.c \
+			libraries/gnl/get_next_line_utils.c \
 
 SOURCE_B = 	bonus/cast_rays.c \
 			bonus/ft_draw.c \
@@ -50,15 +55,21 @@ OBJECT_B = $(addprefix ${PREFIX}, $(SOURCE_B:.c=.o))
 all: ${NAME}
 
 libmlx42:
+	cmake -B ./libraries/MLX42/build ./libraries/MLX42
 	make -C libraries/MLX42/build
+
+libft:
+	make -C libraries/libft
 
 ${PREFIX}:
 	mkdir -p ${PREFIX}
 	mkdir -p ${PREFIX}mandatory
+	mkdir -p ${PREFIX}mandatory/parsing
+	mkdir -p ${PREFIX}libraries/gnl
 	mkdir -p ${PREFIX}bonus
 
-${NAME}: ${PREFIX} ${OBJECT}
-	${CC} ${FLAGS} ${OBJECT} ${LINKS} -o ${NAME}
+${NAME}: ${PREFIX} ${OBJECT} libft
+	${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
 
 ${PREFIX}%.o: %.c mandatory/cub3d.h libmlx42
 	${CC} ${FLAGS} -c $< -o $@
@@ -73,10 +84,12 @@ clean:
 	${CN} ${PREFIX}bonus
 	${CN} ${OBJECT_B}
 	make -C libraries/MLX42/build clean
+	make -C libraries/libft clean
 
 fclean: clean
 	${CN} ${NAME}
 	${CN} ${NAME_B}
+	make -C libraries/libft fclean
 
 re: fclean all
 
