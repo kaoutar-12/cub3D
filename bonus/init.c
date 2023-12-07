@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 14:16:58 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:08:07 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	init_player(t_player *player)
 {
-	player->fov_angle = 60 * (M_PI / 360);
+	player->fov_angle = 120 * (M_PI / 360);
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
