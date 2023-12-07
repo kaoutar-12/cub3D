@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/07 11:56:37 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/07 13:44:40 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,10 +68,10 @@ ${PREFIX}:
 	mkdir -p ${PREFIX}libraries/gnl
 	mkdir -p ${PREFIX}bonus
 
-${NAME}: ${PREFIX} ${OBJECT} libft
+${NAME}: ${PREFIX} ${OBJECT} libft libmlx42
 	${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
 
-${PREFIX}%.o: %.c mandatory/cub3d.h libmlx42
+${PREFIX}%.o: %.c mandatory/cub3d.h
 	${CC} ${FLAGS} -c $< -o $@
 
 bonus: ${PREFIX} ${OBJECT_B}
