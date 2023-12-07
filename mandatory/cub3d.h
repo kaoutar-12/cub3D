@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 09:58:36 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:05:06 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "../libraries/libft/libft.h"
 # include "../libraries/gnl/get_next_line.h"
 
-# define TILE_SIZE 32 
+# define TILE_SIZE 64 
 # define WINDOW_WIDTH 33 * TILE_SIZE
 # define WINDOW_HEIGHT 14 * TILE_SIZE
 
@@ -214,7 +214,7 @@ void	init_player(t_player *player);
 int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
-int		is_wall(double x, double y);
+int		is_wall(t_game *game, double x, double y);
 void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);

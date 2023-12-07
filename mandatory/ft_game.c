@@ -6,62 +6,20 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 12:56:37 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:52:39 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char *map[] = 
-{
-"111111111111111111111111111111111",
-"111111111000000000110000000000001",
-"111111111011000001110000000000001",
-"111111111001000000000000000000001",
-"111111111011000001110000000000001",
-"100000000011000001110111111111111",
-"111101111111110111000000100011111",
-"111101111111110111010100100011111",
-"110000001101010111000000100011111",
-"10000P000000000011000000100011111",
-"100000000000000011010100100011111",
-"110000011101010111110111100011111",
-"111101111111010111011110100011111",
-"111111111111111111111111111111111",
-};
-
-void	get_player_position(t_player *player)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (map[j])
-	{
-		i = 0;
-		while (map[j][i])
-		{
-			if (map[j][i] == 'P')
-			{
-				player->x = i * TILE_SIZE + TILE_SIZE / 2;
-				player->y = j * TILE_SIZE + TILE_SIZE / 2;
-				return ;
-			}
-			i++;
-		}
-		j++;
-	}
-}
-
-int	is_wall(double x, double y)
+int	is_wall(t_game *game, double x, double y)
 {
 	int	mapindex_x;
 	int	mapindex_y;
 
 	mapindex_x = floor(x / TILE_SIZE);
 	mapindex_y = floor(y / TILE_SIZE);
-	if (map[mapindex_y][mapindex_x] == '1')
+	if (game->parse->map[mapindex_y][mapindex_x] == '1')
 		return (1);
 	else
 		return (0);
@@ -153,55 +111,6 @@ void	draw_square(t_game *game, int x, int y, int color)
 		while (j < size)
 		{
 			mlx_put_pixel(game->img, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
-}
-
-//TODO change 7 and 26 
-void	draw_wall(t_game *game)
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < 14)
-	{
-		j = 0;
-		while (j < 33)
-		{
-			x = j * TILE_SIZE;
-			y = i * TILE_SIZE;
-			if (map[i][j] == '1')
-				draw_square(game, x * MINI_MAP,
-					y * MINI_MAP, ft_rgba(255, 255, 255, 255));
-			j++;
-		}
-		i++;
-	}
-}
-
-//TODO change 7 and 26 
-void	draw_map(t_game *game)
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < 14)
-	{
-		j = 0;
-		while (j < 33)
-		{
-			x = j * TILE_SIZE;
-			y = i * TILE_SIZE;
-			draw_square(game, x * MINI_MAP, y * MINI_MAP,
-				ft_rgba(0, 0, 0, 255));
 			j++;
 		}
 		i++;

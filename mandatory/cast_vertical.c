@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:04:22 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:26:59 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:51:26 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void	next_vertical_intercept(t_game *game, double next_v_xintercept,
 {
 	next_v_xintercept = game->ray->v_x_intercept;
 	next_v_yintercept = game->ray->v_y_intercept;
-	while ((next_v_xintercept >= 0 && next_v_xintercept <= WINDOW_WIDTH) 
-		&& (next_v_yintercept >= 0 && next_v_yintercept <= WINDOW_HEIGHT))
+	while ((next_v_xintercept >= 0 && next_v_xintercept <= game->parse->map_w * TILE_SIZE) 
+		&& (next_v_yintercept >= 0 && next_v_yintercept <= game->parse->map_h * TILE_SIZE))
 	{
 		game->ray->x_check = next_v_xintercept;
 		game->ray->y_check = next_v_yintercept;
 		if (game->ray->is_ray_facing_left[i])
 			game->ray->x_check--;
-		if (is_wall(game->ray->x_check, game->ray->y_check) == 1)
+		if (is_wall(game, game->ray->x_check, game->ray->y_check) == 1)
 		{
 			game->ray->found_v_wall_hit[i] = true;
 			game->ray->v_wall_hit_x = --next_v_xintercept;

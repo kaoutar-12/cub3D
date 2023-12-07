@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 09:48:39 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 12:21:06 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@ void	init_player(t_player *player)
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->rotation_angle = M_PI / 2;
+	// player->rotation_angle = M_PI / 2;
 	player->move_speed = 2.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
 	player->rotation_speed = 3 * (M_PI / 180);
-	get_player_position(player);
 }
 
 void	init_textures(t_game *game)
 {
 	game->textures = malloc(sizeof(mlx_texture_t) * 4);
-	game->textures[NORTH] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[SOUTH] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[WEST] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[EAST] = mlx_load_png("mandatory/textures/north.png");
+	game->textures[NORTH] = mlx_load_png(game->parse->no);
+	game->textures[SOUTH] = mlx_load_png(game->parse->so);
+	game->textures[WEST] = mlx_load_png(game->parse->we);
+	game->textures[EAST] = mlx_load_png(game->parse->ea);
 	if (!game->textures[NORTH] || !game->textures[SOUTH] ||
 		!game->textures[WEST] || !game->textures[EAST])
 	{
