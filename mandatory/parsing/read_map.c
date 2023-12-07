@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:17:14 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 18:16:42 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:32:20 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_direction(char c, t_parse *vars)
 		vars->player_direction = EAST;
 	else
 	{
-		write(2, "Player is nowhere to be found", 30);
+		write(2, "Error\nPlayer is nowhere to be found", 36);
 		custom_exit(1);
 	}
 }
@@ -87,7 +87,7 @@ void	check_map(char *map, int length)
 	int i = 0;
 	if (length < 9)
 	{
-		write(2, "Error\nInvalid map content\n", 13);
+		write(2, "Error\nInvalid map content\n", 27);
 		custom_exit(1);
 	}
 	while (map[i])
@@ -138,11 +138,13 @@ char	*read_map(int fd, t_parse *vars)
 		else if (line[0] == '\n' && length > 6)
 		{
 			write(2, "Invalid map content", 20);
+			close(fd);
 			custom_exit(1);
 		}
 		else if (line[0] != '\n' && !ptr[0])
 		{
 			write(2, "Invalid map content", 20);
+			close(fd);
 			custom_exit(1);
 		}
 		line = get_next_line(fd);
@@ -150,7 +152,7 @@ char	*read_map(int fd, t_parse *vars)
 	close(fd);
 	check_map(map, length);
 	vars->map = ft_split(map, '\n');
-	vars->actual_map = gc_malloc(sizeof(char *) * table_size(vars->map));
+	vars->actual_map = ft_split(map, '\n');
 	set_map(vars->actual_map, vars->map, longest_line);
 	set_map_size(vars, longest_line);
 	find_player(vars);

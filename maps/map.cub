@@ -1,15 +1,12 @@
 NO /Users/mboukaiz/Desktop/clone3/mandatory/textures/north.png
 SO /Users/mboukaiz/Desktop/clone3/mandatory/textures/south.png
 WE /Users/mboukaiz/Desktop/clone3/mandatory/textures/west.png
-EA /Users/mboukaiz/Desktop/clone3/mandatory/textures/east.png
-
-
 F 103,60,25
-
-
+EA /Users/mboukaiz/Desktop/clone3/mandatory/textures/east.png
 C 0,139,161
+
 11111111111111111111111111111111
-        1000000000110000000000001
+        1000000000110000000011111
         1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001

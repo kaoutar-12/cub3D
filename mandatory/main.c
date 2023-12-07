@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 18:17:14 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:45:39 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,20 @@ int	main(int ac, char **av)
 	{
 		atexit(fun);
 		map_operations(av[1], &parse);
-		custom_exit(0);
-		// while()
-		// game = malloc(sizeof(t_game));
-		// player = malloc(sizeof(t_player));
-		// ray = malloc(sizeof(t_ray));
-		// if (!game || !player || !ray)
-		// 	error_msg();
-		// init_rays(ray);
-		// init_player(player);
-		// game->player = player;
-		// game->ray = ray;
-		// game->parse = &parse;
-		// game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
-		// game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
-		// set_player_direction(game);
-		// ft_game(game);
+		game = malloc(sizeof(t_game));
+		player = malloc(sizeof(t_player));
+		ray = malloc(sizeof(t_ray));
+		if (!game || !player || !ray)
+			error_msg();
+		init_rays(ray);
+		init_player(player);
+		game->player = player;
+		game->ray = ray;
+		game->parse = &parse;
+		game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
+		game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
+		set_player_direction(game);
+		ft_game(game);
 	}
 	else
 		error_msg();

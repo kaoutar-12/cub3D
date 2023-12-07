@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 18:27:49 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:45:13 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	surround_map(char **a_map, char **map)
 	j = 0;
 	while (map[i])
 	{
+		free(a_map[i]);
 		a_map[i] = ft_strdup2(map[i]);
 		j = 0;
 		while (map[i][j])
@@ -88,6 +89,7 @@ void	surround_map(char **a_map, char **map)
 		}
 		i++;
 	}
+	free(a_map[i]);
 	a_map[i] = NULL;
 }
 
@@ -164,7 +166,7 @@ void	check_path(t_parse *vars, char **path)
 		it.i++;
 	if (it.i != 2)
 	{
-		write(2, "Invalid map content", 20);
+		write(2, "Error\nInvalid map content", 26);
 		custom_exit(1);
 	}
 	// printf ("|%s|\n", path[1]);
@@ -175,7 +177,7 @@ void	check_path(t_parse *vars, char **path)
 	}
 	if (access(path[1], R_OK))
 	{
-		perror("IMAGE");
+		perror("Error\n");
 		custom_exit(1);
 	}
 	else
@@ -202,7 +204,7 @@ void	check_color(char **color)
 		it.i++;
 	if (it.i != 2)
 	{
-		write(2, "Invalid map content", 20);
+		write(2, "Error\nInvalid map content", 26);
 		custom_exit (1);
 	}
 	it.i = 0;
@@ -212,7 +214,7 @@ void	check_color(char **color)
 			it.j++;
 		if (it.j > 2)
 		{
-			printf ("More than 2 commas\n");
+			write(2, "Error\nMore than 2 commas\n", 26);
 			custom_exit(1);
 		}
 		it.i++;
@@ -268,7 +270,7 @@ void	set_color3(t_parse *vars, t_rgb_data *rgb_data)
 	it.i = 0;
 	if (!rgb_data->rgb_c || !rgb_data->rgb_f)
 	{
-		printf ("Error\n");
+		write(2, "Error\n", 6);
 		custom_exit(1);
 	}
 	vars->c_rgb.red = ft_my_atoi(rgb_data->rgb_c[0]);
@@ -390,7 +392,7 @@ void		set_data(t_parse *vars, char *arr)//
 	// printf ("more than 4 paths %d or more than 2 color sets %d\n", it.j, it.k);
 	if (it.j != 4 || it.k != 2)
 	{
-		write(2, "Invalid map content", 20);
+		write(2, "Error\nInvalid map content", 26);
 		custom_exit(1);
 	}
 	set_path(vars, paths);
@@ -406,6 +408,7 @@ void	map_operations(char *map_name, t_parse *vars)
 	fd = open (map_name, O_RDONLY);
 	if (ft_strcmp(map_name + strlen(map_name) - 4, ".cub"))
 	{
+		close (fd);
 		write(2, "Error\nInvalid map extention\n", 29);
 		custom_exit(1);
 	}
@@ -416,12 +419,9 @@ void	map_operations(char *map_name, t_parse *vars)
 	}
 	arr = read_map(fd, vars);
 	set_data(vars, arr);
-	if (check_map2(vars))
+	if (!check_map2(vars))
 	{
-		printf ("Valid Map\n");
-	}
-	else
-	{
-		error_msg();
+		write(2, "Error\nMap is not valid\n", 24);
+		custom_exit(1);
 	}
 }
