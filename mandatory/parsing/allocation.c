@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   allocation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:08:44 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 09:54:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:13:19 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	garbage_collector(void	*ptr, int del)
 	static t_list	*head;
 	t_list			*node;
 
-	if (del)
+	if (del && head && head->content)
 		ft_lstclear(&head, free);
 	else
 	{
@@ -38,6 +38,11 @@ void	*gc_malloc(int size)
 	void	*ptr;
 
 	ptr = malloc (size);
+	if (!ptr)
+	{
+		free(ptr);
+		error_msg();
+	}
 	ft_memset(ptr, 0, size);
 	garbage_collector (ptr, 0);
 	return (ptr);

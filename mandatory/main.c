@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 13:44:14 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:17:14 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	set_player_direction(t_game *game)
 		game->player->rotation_angle = M_PI;
 }
 
+void	fun()
+{
+	system("leaks Cub3d");
+}
+
 int	main(int ac, char **av)
 {
 	t_game		*game;
@@ -37,23 +42,27 @@ int	main(int ac, char **av)
 	t_ray		*ray;
 	t_parse		parse;
 
+
 	if (ac == 2)
 	{
+		atexit(fun);
 		map_operations(av[1], &parse);
-		game = malloc(sizeof(t_game));
-		player = malloc(sizeof(t_player));
-		ray = malloc(sizeof(t_ray));
-		if (!game || !player || !ray)
-			error_msg();
-		init_rays(ray);
-		init_player(player);
-		game->player = player;
-		game->ray = ray;
-		game->parse = &parse;
-		game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
-		game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
-		set_player_direction(game);
-		ft_game(game);
+		custom_exit(0);
+		// while()
+		// game = malloc(sizeof(t_game));
+		// player = malloc(sizeof(t_player));
+		// ray = malloc(sizeof(t_ray));
+		// if (!game || !player || !ray)
+		// 	error_msg();
+		// init_rays(ray);
+		// init_player(player);
+		// game->player = player;
+		// game->ray = ray;
+		// game->parse = &parse;
+		// game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
+		// game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
+		// set_player_direction(game);
+		// ft_game(game);
 	}
 	else
 		error_msg();

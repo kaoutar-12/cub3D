@@ -6,11 +6,22 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:09:57 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 15:28:35 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:43:10 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+void	*ft_calloc2(size_t count, size_t size)
+{
+	char	*str;
+
+	str =  malloc(count * size);
+	if (!str)
+		return (0);
+	ft_bzero(str, count * size);
+	return (str);
+}
 
 void	*ft_calloc(size_t count, size_t size)
 {

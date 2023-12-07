@@ -1,14 +1,14 @@
-NO /Users/kmouradi/Desktop/new/mandatory/textures/north.png
-SO /Users/kmouradi/Desktop/new/mandatory/textures/south.png
-WE /Users/kmouradi/Desktop/new/mandatory/textures/west.png
-EA /Users/kmouradi/Desktop/new/mandatory/textures/east.png
+NO /Users/mboukaiz/Desktop/clone3/mandatory/textures/north.png
+SO /Users/mboukaiz/Desktop/clone3/mandatory/textures/south.png
+WE /Users/mboukaiz/Desktop/clone3/mandatory/textures/west.png
+EA /Users/mboukaiz/Desktop/clone3/mandatory/textures/east.png
 
 
 F 103,60,25
+
+
 C 0,139,161
-
-
-        1111111111111111111111111
+11111111111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001

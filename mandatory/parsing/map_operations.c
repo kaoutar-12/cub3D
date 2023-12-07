@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/06 16:25:25 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:27:49 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 void	free_2d(char **data)
 {
-	while (*data)
+	int i;
+
+	i = 0;
+	while (data[i])
 	{
-		free(*data);
+		free(data[i]);
+		i++;
 	}
 	free(data);
 }
@@ -43,12 +47,12 @@ int		ft_chrstr(char *s, int c)
 
 int	is_surrounded(t_parse *vars, int i, int j)
 {
-	if (ft_chrstr("0SWNEP", vars->map[i][j]))
+	if (ft_chrstr("0SWNEP", vars->actual_map[i][j]))
 	{
-		if (ft_chrstr("01SWNEP", vars->map[i][j + 1])
-		&& ft_chrstr("01SWNEP", vars->map[i][j - 1])
-		&& ft_chrstr("01SWNEP", vars->map[i + 1][j])
-		&& ft_chrstr("01SWNEP", vars->map[i - 1][j]))
+		if (ft_chrstr("01SWNEP", vars->actual_map[i][j + 1])
+		&& ft_chrstr("01SWNEP", vars->actual_map[i][j - 1])
+		&& ft_chrstr("01SWNEP", vars->actual_map[i + 1][j])
+		&& ft_chrstr("01SWNEP", vars->actual_map[i - 1][j]))
 			return (1);
 		else
 			return (0);
@@ -188,15 +192,7 @@ void	check_path(t_parse *vars, char **path)
 	}
 }
 
-char	**set_color2(char *color)
-{
-	char	**rgb;
-
-	rgb = ft_split (color, ',');
-	return (rgb);
-}
-
-void	check_color(char **color, t_rgb_data *data)
+void	check_color(char **color)
 {
 	t_it	it;
 
@@ -207,10 +203,9 @@ void	check_color(char **color, t_rgb_data *data)
 	if (it.i != 2)
 	{
 		write(2, "Invalid map content", 20);
-		custom_exit(1);
+		custom_exit (1);
 	}
 	it.i = 0;
-	// printf ("%s\n", color[0]);
 	while(color[1][it.i])
 	{
 		if (color[1][it.i] == ',')
@@ -222,14 +217,6 @@ void	check_color(char **color, t_rgb_data *data)
 		}
 		it.i++;
 	}
-	if (!ft_strcmp(color[0], "F"))
-		data->rgb_f = set_color2(color[1]);
-	if (!ft_strcmp(color[0], "C"))
-		data->rgb_c = set_color2(color[1]);
-	free(color[0]);
-	free(color[1]);
-	free(color[2]);
-	free(color);
 }
 
 int	ft_my_atoi(char *color)
@@ -251,11 +238,39 @@ int	ft_my_atoi(char *color)
 	return (ft_atoi (color));
 }
 
+void	set_color(t_parse *vars, char **colors)
+{
+	t_it		it;
+	t_rgb_data	rgb_data;
+	char		**data_color;
+
+	it.i = 0;
+	it.j = 0;
+	it.k = 0;
+	while (colors[it.i])
+	{
+		data_color = ft_split2(colors[it.i], ' ');
+		check_color(data_color);
+		if (!ft_strcmp("F", data_color[0]))
+			rgb_data.rgb_f = ft_split2(data_color[1], ',');
+		else if (!ft_strcmp("C", data_color[0]))
+			rgb_data.rgb_c = ft_split2(data_color[1], ',');
+		it.i++;
+		free(data_color);
+	}
+	set_color3(vars, &rgb_data);
+}
+
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data)
 {
 	t_it	it;
 
 	it.i = 0;
+	if (!rgb_data->rgb_c || !rgb_data->rgb_f)
+	{
+		printf ("Error\n");
+		custom_exit(1);
+	}
 	vars->c_rgb.red = ft_my_atoi(rgb_data->rgb_c[0]);
 	vars->c_rgb.green = ft_my_atoi(rgb_data->rgb_c[1]);
 	vars->c_rgb.blue = ft_my_atoi(rgb_data->rgb_c[2]);
@@ -269,26 +284,15 @@ void	set_color3(t_parse *vars, t_rgb_data *rgb_data)
 		|| vars->f_rgb.blue > 255 || vars->f_rgb.blue < 0
 		|| vars->f_rgb.green > 255 || vars->f_rgb.green < 0)
 		{
+			free (rgb_data->rgb_c);
+			free (rgb_data->rgb_f);
 			write(2, "Error\nvalue of rgb must be 0 to 255", 36);
 			custom_exit(1);
 		}
+	free (rgb_data->rgb_c);
+	free (rgb_data->rgb_f);
 }
 
-void	set_color(t_parse *vars, char **colors)
-{
-	t_it		it;
-	t_rgb_data	rgb_data;
-	char		**data_color;
-
-	it.i = 0;
-	while (colors[it.i])
-	{
-		data_color = ft_split(colors[it.i], ' ');
-		check_color(data_color, &rgb_data);
-		it.i++;
-	}
-	set_color3(vars, &rgb_data);
-}
 
 
 void	set_path(t_parse *vars, char **paths)
@@ -348,7 +352,7 @@ void	check_array(char **array)
 	check_calc(&calc);
 }
 
-void	set_data(t_parse *vars, char *arr)//
+void		set_data(t_parse *vars, char *arr)//
 {
 	char	**array;
 	char	**paths;
@@ -415,27 +419,9 @@ void	map_operations(char *map_name, t_parse *vars)
 	if (check_map2(vars))
 	{
 		printf ("Valid Map\n");
-		// printf("c_rgb.blue : %d\n", vars->c_rgb.blue);
-		// printf("c_rgb.green : %d\n", vars->c_rgb.green);
-		// printf("c_rgb.red : %d\n", vars->c_rgb.red);
-
-		// printf("\nf_rgb.blue : %d\n", vars->f_rgb.blue);
-		// printf("f_rgb.green : %d\n", vars->f_rgb.green);
-		// printf("f_rgb.red : %d\n", vars->f_rgb.red);
-
-		// printf("\npath NO %s\n", vars->no);
-		// printf("path SO %s\n", vars->so);
-		// printf("path WE %s\n", vars->we);
-		// printf("path EA %s\n", vars->ea);
-
-		// printf ("\n------------MAP-----------\n\n");
-		// for (int i = 0; vars->map[i]; i++)
-		// {
-		// 	printf ("|%s|\n", vars->map[i]);
-		// }
 	}
 	else
 	{
-		printf ("CHECK MAP AGAIN!\n");
+		error_msg();
 	}
 }

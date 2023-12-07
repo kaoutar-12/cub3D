@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 13:18:22 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:23:43 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ enum				e_colors
 	C
 };
 
+void fun();
+
 // movements.c
 void	move_down(t_game *game, double move_step);
 void	move_up(t_game *game, double move_step);
@@ -227,7 +229,6 @@ void	error_msg(void);
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
 void	map_operations(char *map_name, t_parse *vars);
 void	set_map(char **a_map,char **map, int longest);
-void	check_color(char **color, t_rgb_data *data);
 int		is_surrounded(t_parse *vars, int i, int j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
@@ -239,6 +240,7 @@ void	set_map_size(t_parse *vars, int y);
 void	check_calc(t_var_calc	*calc);
 int		detect_type(char *element);
 char	**set_color2(char *color);
+void	check_color(char **color);
 void	check_array(char **array);
 int		check_map2(t_parse *vars);
 int		ft_chrstr(char *s, int c);
