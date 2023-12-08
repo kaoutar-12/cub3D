@@ -6,20 +6,16 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 10:21:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:40:07 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	error_msg(void)
+void	set_player_direction_pos(t_game *game)
 {
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-void	set_player_direction(t_game *game)
-{
+	game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
+	game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
 	if (game->parse->player_direction == NORTH)
 		game->player->rotation_angle = M_PI * 1.5;
 	else if (game->parse->player_direction == SOUTH)
@@ -30,11 +26,6 @@ void	set_player_direction(t_game *game)
 		game->player->rotation_angle = M_PI;
 }
 
-void	fun()
-{
-	system("leaks Cub3d");
-}
-
 int	main(int ac, char **av)
 {
 	t_game		*game;
@@ -42,10 +33,8 @@ int	main(int ac, char **av)
 	t_ray		*ray;
 	t_parse		parse;
 
-
 	if (ac == 2)
 	{
-		atexit(fun);
 		map_operations(av[1], &parse);
 		game = malloc(sizeof(t_game));
 		player = malloc(sizeof(t_player));
@@ -57,9 +46,7 @@ int	main(int ac, char **av)
 		game->player = player;
 		game->ray = ray;
 		game->parse = &parse;
-		game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
-		game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
-		set_player_direction(game);
+		set_player_direction_pos(game);
 		ft_game(game);
 		free_game(game);
 	}

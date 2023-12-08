@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:06:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 13:32:53 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:42:09 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,26 +95,6 @@ void	projectd_wall(t_game *game)
 			draw_textures(game, i, wall_strip_height, EAST);
 		if (game->ray->is_ray_facing_right[i] && game->ray->to_hit[i] == true)
 			draw_textures(game, i, wall_strip_height, WEST);
-		i++;
-	}
-}
-
-void	draw_square(t_game *game, int x, int y, int color)
-{
-	int	i;
-	int	j;
-	int	size;
-
-	i = 0;
-	size = TILE_SIZE * MINI_MAP;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			mlx_put_pixel(game->img, x + i, y + j, color);
-			j++;
-		}
 		i++;
 	}
 }

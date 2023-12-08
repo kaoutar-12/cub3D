@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/08 09:50:09 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/08 10:56:07 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= Cub3d
 NAME_B= Cub3d_bonus
 CC= cc
 CN= rm -rf
-# FLAGS= -Wall -Wextra -Werror 
+FLAGS= -Wall -Wextra -Werror 
 LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/Homebrew/opt/glfw/lib/
 
 PREFIX = ./obj/
@@ -29,6 +29,7 @@ SOURCE =	mandatory/cast_rays.c \
 			mandatory/main.c \
 			mandatory/movements.c \
 			mandatory/init.c \
+			mandatory/exit.c \
 			mandatory/parsing/allocation.c \
 			mandatory/parsing/map_operations.c \
 			mandatory/parsing/read_map.c \
@@ -44,8 +45,13 @@ SOURCE_B = 	bonus/cast_rays.c \
 			bonus/cast_vertical.c \
 			bonus/main.c \
 			bonus/movements.c \
-			bonus/draw_minimap.c \
 			bonus/init.c \
+			bonus/exit.c \
+			bonus/parsing/allocation.c \
+			bonus/parsing/map_operations.c \
+			bonus/parsing/read_map.c \
+			libraries/gnl/get_next_line.c \
+			libraries/gnl/get_next_line_utils.c \
 
 
 OBJECT = $(addprefix ${PREFIX}, $(SOURCE:.c=.o))
@@ -67,21 +73,27 @@ ${PREFIX}:
 	mkdir -p ${PREFIX}mandatory/parsing
 	mkdir -p ${PREFIX}libraries/gnl
 	mkdir -p ${PREFIX}bonus
+	mkdir -p ${PREFIX}bonus/parsing
+	mkdir -p ${PREFIX}bonus/gnl
 
 ${NAME}: ${PREFIX} ${OBJECT} libft libmlx42
 	${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
 
-${PREFIX}%.o: %.c mandatory/cub3d.h
+${PREFIX}%.o: %.c mandatory/cub3d.h bonus/cub3d_bonus.h
 	${CC} ${FLAGS} -c $< -o $@
 
-bonus: ${PREFIX} ${OBJECT_B}
-	${CC} ${FLAGS} ${OBJECT_B} ${LINKS} -o ${NAME_B}
+bonus: ${PREFIX} ${OBJECT_B} libft libmlx42 ${NAME}
+	${CC} ${FLAGS} ${OBJECT_B} libraries/libft/libft.a ${LINKS} -o ${NAME_B}
 
 clean:
 	${CN} ${PREFIX}
 	${CN} ${PREFIX}mandatory
+	${CN} ${PREFIX}mandatory/parsing
+	${CN} ${PREFIX}libraries/gnl
 	${CN} ${OBJECT}
 	${CN} ${PREFIX}bonus
+	${CN} ${PREFIX}bonus/parsing
+	${CN} ${PREFIX}bonus/gnl
 	${CN} ${OBJECT_B}
 	make -C libraries/MLX42/build clean
 	make -C libraries/libft clean

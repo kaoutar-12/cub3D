@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 10:24:06 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:43:30 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,28 @@ void	ft_hook(void *param)
 
 void	free_textures(t_game *game)
 {
-	if (game->textures[NORTH]) {
-		free(game->textures[NORTH]->pixels);
-		free(game->textures[NORTH]);
-	}
-	if (game->textures[SOUTH]) {
-		free(game->textures[SOUTH]->pixels);
-		free(game->textures[SOUTH]);
-	}
-	if (game->textures[EAST]) {
-		free(game->textures[EAST]->pixels);
-		free(game->textures[EAST]);
-	}
-	if (game->textures[WEST]) {
-		free(game->textures[WEST]->pixels);
-		free(game->textures[WEST]);
+	if (game->textures)
+	{
+		if (game->textures[NORTH])
+		{
+			free(game->textures[NORTH]->pixels);
+			free(game->textures[NORTH]);
+		}
+		if (game->textures[SOUTH])
+		{
+			free(game->textures[SOUTH]->pixels);
+			free(game->textures[SOUTH]);
+		}
+		if (game->textures[EAST])
+		{
+			free(game->textures[EAST]->pixels);
+			free(game->textures[EAST]);
+		}
+		if (game->textures[WEST])
+		{
+			free(game->textures[WEST]->pixels);
+			free(game->textures[WEST]);
+		}
 	}
 }
 
@@ -93,13 +100,4 @@ void	free_game(t_game *game)
 	free(game->textures);
 	free(game->ray);
 	free(game);
-	printf("All Freed\n");
-}
-
-int	close_win(t_game *game)
-{
-	mlx_close_window(game->mlx);
-	free_game(game);
-	// printf("Game Over\n");
-	exit(0);
 }

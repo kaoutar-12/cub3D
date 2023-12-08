@@ -3,57 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:08:07 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:54:40 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-// void	player_direction(player)
-// {
-	
-// }
+#include "cub3d_bonus.h"
 
 void	init_player(t_player *player)
 {
-	player->fov_angle = 120 * (M_PI / 360);
+	player->fov_angle = 90 * (M_PI / 360);
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->rotation_angle = M_PI / 2;
-	// player_direction(player);
-	player->move_speed = 2.0;
+	player->move_speed = 3.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
-	player->rotation_speed = 3 * (M_PI / 180);
-	get_player_position(player);
+	player->rotation_speed = 2 * (M_PI / 180);
 }
 
 void	init_textures(t_game *game)
 {
 	game->textures = malloc(sizeof(mlx_texture_t) * 4);
-	game->textures[NORTH] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[SOUTH] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[WEST] = mlx_load_png("mandatory/textures/north.png");
-	game->textures[EAST] = mlx_load_png("mandatory/textures/north.png");
-	if (!game->textures[NORTH] || !game->textures[SOUTH] ||
-		!game->textures[WEST] || !game->textures[EAST])
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+	game->textures[NORTH] = mlx_load_png(game->parse->no);
+	game->textures[SOUTH] = mlx_load_png(game->parse->so);
+	game->textures[WEST] = mlx_load_png(game->parse->we);
+	game->textures[EAST] = mlx_load_png(game->parse->ea);
+	if (!game->textures[NORTH] || !game->textures[SOUTH]
+		|| !game->textures[WEST] || !game->textures[EAST])
+		error_msg();
 }
 
 void	ft_game(t_game *game)
 {
-	game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d_bonus", false);
+	game->mlx = mlx_init(WIN_W, WIN_H, "Cub3d", false);
 	if (!game->mlx)
-		write(2, "Error\n", 6); 
+		error_msg();
 	game->img = mlx_new_image(game->mlx, WIN_W, WIN_H);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
+	if (!game->img)
+	{
+		mlx_close_window(game->mlx);
+		error_msg();
+	}
+	if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
+	{
+		mlx_close_window(game->mlx);
+		error_msg();
+	}
 	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);

@@ -6,11 +6,11 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:32:19 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/11/28 12:52:01 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:54:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -28,8 +28,8 @@ double	normalize_angle(double angle)
 {
 	angle = remainder(angle, 2 * M_PI);
 	if (angle < 0)
-		angle = (2 * M_PI) + angle; 
-	return (angle); 
+		angle = (2 * M_PI) + angle;
+	return (angle);
 }
 
 double	distance_between_points(double x1, double y1, double x2, double y2)
