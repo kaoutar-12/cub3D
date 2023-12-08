@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 11:02:38 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:06:09 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,12 +233,12 @@ int		is_surrounded(t_parse *vars, int i, int j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
 void	surround_map(char **a_map, char **map);
-char	*allocate_space(int count, int size);
 void	set_data(t_parse *vars, char *arr);
 void	set_map_size(t_parse *vars, int y);
 void	check_calc(t_var_calc	*calc);
 int		detect_type(char *element);
 char	**set_color2(char *color);
+char	*allocate_space(int size);
 void	check_color(char **color);
 void	check_array(char **array);
 int		check_map2(t_parse *vars);

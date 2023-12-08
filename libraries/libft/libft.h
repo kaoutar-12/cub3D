@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:58:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 18:27:23 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:23:12 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t destsize);
 size_t	ft_strcpy(char *dest, const char *src);
 size_t	ft_strlcat(char	*dst, const	char *src, size_t destsize);
-char	*ft_strjoin(char  *s1, char  *s2);
+char	*ft_strjoin(char *s1, char *s2);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
+size_t	ft_strcpy_map(char *dest, const char *src);
 void	*ft_calloc2(size_t count, size_t size);
 char	**ft_split2(char *s, char c);
 void	ft_putstr_fd(char *s, int fd);

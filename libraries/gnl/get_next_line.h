@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:51 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 10:49:50 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:49:26 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../../mandatory/cub3d.h"
 
+int		ft_putstr(char *str);
 char	*get_next_line(int fd);
+size_t	ft_strlen_gnl(char *s);
+char	*ft_strdup_gnl(char *s1);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_strchr_gnl(char *s, int c);
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-char	*ft_strchr2(char *s, int c);
-char	*ft_strjoin2(char *s1, char *s2);
-size_t	ft_strlen2(char *s);
+#  define BUFFER_SIZE 1000
 
 # endif
 #endif

@@ -4,6 +4,20 @@
 		"cub3d.h": "c",
 		"__node_handle": "c",
 		"__tuple": "c",
-		"array": "c"
+		"array": "c",
+		"__locale": "c",
+		"__string": "c",
+		"string": "c",
+		"string_view": "c",
+		"get_next_line.h": "c",
+		"stdlib.h": "c",
+		"__hash_table": "c",
+		"__split_buffer": "c",
+		"bitset": "c",
+		"initializer_list": "c",
+		"iterator": "c",
+		"unordered_map": "c",
+		"utility": "c",
+		"vector": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 11:59:04 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:00:05 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	main(int ac, char **av)
 	t_ray		*ray;
 	t_parse		parse;
 
-
 	if (ac == 2)
 	{
 		atexit(fun);
 		map_operations(av[1], &parse);
+		custom_exit(0);
 		game = malloc(sizeof(t_game));
 		player = malloc(sizeof(t_player));
 		ray = malloc(sizeof(t_ray));

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:50:16 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 11:09:52 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:30:31 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	check_player(char *map)
 	}
 }
 
-int		check_map2(t_parse *vars)
+int	check_map2(t_parse *vars)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	while (vars->actual_map[i])
 	{
 		j = 0;
@@ -57,7 +60,9 @@ int		check_map2(t_parse *vars)
 
 void	check_map(char *map, int length)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (length < 9)
 	{
 		write(2, "Error\nInvalid map content\n", 27);
@@ -65,10 +70,14 @@ void	check_map(char *map, int length)
 	}
 	while (map[i])
 	{
-		if (map[i] != '0' && map[i] != '1' && map[i] != 'P' && map[i] != 'N' && map[i] != 'S' && map[i] != 'W' && map[i] != 'E'
+		if (map[i] != '0' && map[i] != '1'
+			&& map[i] != 'N' && map[i] != 'S'
+			&& map[i] != 'W' && map[i] != 'E'
 			&& map[i] != ' ' && map[i] != '\n')
 		{
-			write (2, "Error\nThe provided map contains an invalid character\n", 54);
+			printf ("\n%c\n", map[i]);
+			write (2, "Error\nThe provided map "
+				"contains an invalid character\n", 54);
 			custom_exit(1);
 		}
 		i++;

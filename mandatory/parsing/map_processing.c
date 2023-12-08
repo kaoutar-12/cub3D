@@ -6,11 +6,22 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:47:36 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 11:44:53 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:00:21 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	initialise_variables(t_it *it, t_var_calc *calc)
+{
+	it->i = 0;
+	calc->f = 0;
+	calc->c = 0;
+	calc->no = 0;
+	calc->so = 0;
+	calc->we = 0;
+	calc->ea = 0;
+}
 
 int	is_surrounded(t_parse *vars, int i, int j)
 {
@@ -41,7 +52,7 @@ void	check_color(char **color)
 		custom_exit (1);
 	}
 	it.i = 0;
-	while(color[1][it.i])
+	while (color[1][it.i])
 	{
 		if (color[1][it.i] == ',')
 			it.j++;
@@ -70,14 +81,8 @@ void	check_array(char **array)
 	t_it		it;
 	t_var_calc	calc;
 
-	it.i = 0;
-	calc.f = 0;
-	calc.c = 0;
-	calc.no = 0;
-	calc.so = 0;
-	calc.we = 0;
-	calc.ea = 0;
-	while(array[it.i])
+	initialise_variables(&it, &calc);
+	while (array[it.i])
 	{
 		if (!ft_strncmp(array[it.i], "SO ", 3))
 			calc.so++;

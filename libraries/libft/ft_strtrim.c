@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:35:01 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/11/30 11:03:35 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:36:02 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,5 @@ char	*ft_strtrim_fh(char const *s1, char const *set)
 		i++;
 	if (!s1[i])
 		return (ft_substr(s1, i, 0));
-	// while (s1[j] && ft_strchr(set, s1[j]))
-	// 	j--;
-	// if (j == -1)
-	// 	return (ft_substr(s1, i, 0));
 	return (ft_substr(s1, i, (j - i + 1)));
 }

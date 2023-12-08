@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 12:00:12 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:14:31 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	surround_map(char **a_map, char **map)
 				map[i][j] = '1';
 			j++;
 		}
+		printf ("%s\n", a_map[i]);
 		i++;
 	}
 	a_map[i] = NULL;
@@ -42,12 +43,18 @@ void	set_map(char **a_map,char **map, int longest)
 	i = 0;
 	while (map[i])
 	{
-		tmp = allocate_space(sizeof(char), longest - 1);
+		tmp = allocate_space(longest);
 		ft_strcpy(tmp, map[i]);
-		map[i] = tmp;
+		tmp[longest] = '\0';
+		ft_strcpy(map[i], tmp);
+		map[i][longest] = '\0';
+		free(tmp);
 		i++;
 	}
-	surround_map(a_map, map);
+	for (int i = 0; map[i]; i++)
+		printf ("|%s|\n", map[i]);
+	exit (0);
+	// surround_map(a_map, map);
 }
 
 void	set_map_size(t_parse *vars, int y)
@@ -55,7 +62,7 @@ void	set_map_size(t_parse *vars, int y)
 	int	x;
 
 	x = 0;
-	while(vars->map[x])
+	while (vars->map[x])
 	{
 		x++;
 	}
@@ -74,7 +81,8 @@ int	ft_my_atoi(char *color)
 			it.i++;
 		if (!ft_isdigit(color[it.i]))
 		{
-			write(2, "Error:\nMap content must be in the format \"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
+			write(2, "Error:\nMap content must be in the format"
+				"\"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
 			custom_exit(1);
 		}
 		it.i++;
@@ -100,10 +108,10 @@ void	map_operations(char *map_name, t_parse *vars)
 		custom_exit(1);
 	}
 	arr = read_map(fd, vars);
-	set_data(vars, arr);
-	if (!check_map2(vars))
-	{
-		write(2, "Error\nMap is not valid\n", 24);
-		custom_exit(1);
-	}
+	// set_data(vars, arr);
+	// if (!check_map2(vars))
+	// {
+	// 	write(2, "Error\nMap is not valid\n", 24);
+	// 	custom_exit(1);
+	// }
 }

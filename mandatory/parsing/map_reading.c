@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:17:14 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 11:34:18 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:01:54 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	find_player(t_parse *vars)
 
 	it.i = 0;
 	it.j = 0;
-	while(vars->map[it.i])
+	while (vars->map[it.i])
 	{
 		it.j = 0;
-		while(vars->map[it.i][it.j])
+		while (vars->map[it.i][it.j])
 		{
 			if (vars->map[it.i][it.j] == 'N'
 			|| vars->map[it.i][it.j] == 'S'
@@ -62,13 +62,13 @@ char	*read_map(int fd, t_parse *vars)
 	char	*line;
 	int		length;
 	int		longest_line;
+	char	*ptr;
 
+	length = 0;
 	longest_line = 0;
 	map = ft_strdup("");
 	map_vars = ft_strdup("");
-	length = 0;
 	line = get_next_line(fd);
-	char *ptr;
 	while (line)
 	{
 		ptr = ft_strtrim_fh(line, " \t\n");
@@ -89,16 +89,11 @@ char	*read_map(int fd, t_parse *vars)
 		}
 		else if (line[0] == '\n' && length > 6)
 		{
-			write(2, "Invalid map content", 20);
+			write(2, "Error\nInvalid map content\n", 27);
 			close(fd);
 			custom_exit(1);
 		}
-		else if (line[0] != '\n' && !ptr[0])
-		{
-			write(2, "Invalid map content", 20);
-			close(fd);
-			custom_exit(1);
-		}
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);

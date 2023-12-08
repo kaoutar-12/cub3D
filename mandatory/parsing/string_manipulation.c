@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basic_funcs.c                                      :+:      :+:    :+:   */
+/*   string_manipulation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:46:13 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 09:46:32 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:30:19 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		ft_chrstr(char *s, int c)
+int	ft_chrstr(char *s, int c)
 {
 	int		i;
 	char	find;

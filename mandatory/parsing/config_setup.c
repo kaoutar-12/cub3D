@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:41:43 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 11:55:54 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:59:36 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	path_is_valid(char **path)
 		it.i++;
 	if (it.i != 2)
 	{
-		write(2, "Error\nInvalid map content, please ensure path name doesn't contain spaces\n", 75);
+		write(2, "Error\nInvalid map content,"
+			"path name should not contain spaces\n", 63);
 		exit (1);
 	}
 	if (ft_strcmp(path[1] + strlen(path[1]) - 4, ".png")

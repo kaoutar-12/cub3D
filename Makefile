@@ -6,7 +6,7 @@
 #    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/08 11:12:09 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/08 15:57:02 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,27 +74,27 @@ ${PREFIX}:
 	@mkdir -p ${PREFIX}bonus
 
 ${NAME}: ${PREFIX} ${OBJECT} libft libmlx42
-	@${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
+	${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
 
 ${PREFIX}%.o: %.c mandatory/cub3d.h
-	@${CC} ${FLAGS} -c $< -o $@
+	${CC} ${FLAGS} -c $< -o $@
 
 bonus: ${PREFIX} ${OBJECT_B}
-	@${CC} ${FLAGS} ${OBJECT_B} ${LINKS} -o ${NAME_B}
+	${CC} ${FLAGS} ${OBJECT_B} ${LINKS} -o ${NAME_B}
 
 clean:
-	@${CN} ${PREFIX}
-	@${CN} ${PREFIX}mandatory
-	@${CN} ${OBJECT}
-	@${CN} ${PREFIX}bonus
-	@${CN} ${OBJECT_B}
-	@make -C libraries/MLX42/build clean
-	@make -C libraries/libft clean
+	${CN} ${PREFIX}
+	${CN} ${PREFIX}mandatory
+	${CN} ${OBJECT}
+	${CN} ${PREFIX}bonus
+	${CN} ${OBJECT_B}
+	make -C libraries/MLX42/build clean
+	make -C libraries/libft clean
 
 fclean: clean
-	@${CN} ${NAME}
-	@${CN} ${NAME_B}
-	@make -C libraries/libft fclean
+	${CN} ${NAME}
+	${CN} ${NAME_B}
+	make -C libraries/libft fclean
 
 re: fclean all
 

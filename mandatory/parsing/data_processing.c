@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:44:40 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 11:58:27 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:00:27 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	initialise_colors(t_parse *vars, t_rgb_data *rgb_data)
 	{
 		free (rgb_data->rgb_c);
 		free (rgb_data->rgb_f);
-		write(2, "Error:\nMap content must be in the format \"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
+		write(2, "Error:\nMap content must be in the format"
+			"\"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
 		custom_exit(1);
 	}
 	vars->c_rgb.red = ft_my_atoi(rgb_data->rgb_c[0]);
