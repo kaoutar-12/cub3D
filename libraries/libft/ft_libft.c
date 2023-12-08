@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:09:57 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 17:43:10 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:39:32 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_calloc2(size_t count, size_t size)
 {
 	char	*str;
 
-	str =  malloc(count * size);
+	str =  gc_malloc(count * size);
 	if (!str)
 		return (0);
 	ft_bzero(str, count * size);
@@ -27,7 +27,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
 
-	str =  gc_malloc(count * size);
+	str =  malloc(count * size);
 	if (!str)
 		return (0);
 	ft_bzero(str, count * size);
@@ -52,7 +52,7 @@ char	*ft_strdup(const char *s1)
 	dup[i] = '\0';
 	return (dup);
 }
-#include <stdio.h>
+
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;

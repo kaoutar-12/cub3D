@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 20:45:39 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:59:04 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	main(int ac, char **av)
 		game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
 		set_player_direction(game);
 		ft_game(game);
+		garbage_collector(NULL, 1);
+		free (parse.map);
 	}
 	else
 		error_msg();

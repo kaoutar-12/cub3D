@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:09:57 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 18:27:29 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:37:22 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ char	**ft_split2(char *s, char c)
 	int		i;
 	char	**strs;
 
+	i = 0;
 	if (!s)
 		return (NULL);
-	while (*s && *s == c)
-		s++;
-	strs = ft_calloc2(ft_count(NULL, s, c) + 1, sizeof(char *));
+	while (s[i] && s[i] == c)
+		i++;
+	strs = ft_calloc2(ft_count(NULL, s + i, c) + 1, sizeof(char *));
 	if (!strs)
 		return (NULL);
-	if (ft_count(strs, s, c) == -1)
+	if (ft_count(strs, s + i, c) == -1)
 	{
 		i = 0;
 		return (NULL);

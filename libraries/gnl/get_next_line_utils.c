@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:17 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/05 15:01:52 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:49:42 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,6 @@ size_t	ft_strlen2(char *s)
 	return (i);
 }
 
-char	*ft_strdup2(char *s1)
-{
-	char	*dup;
-	int		i;
-
-	if (!s1)
-		return (NULL);
-	i = ft_strlen2(s1);
-	dup = (char *)gc_malloc((sizeof(char) * i + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
 char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*res;
@@ -53,9 +32,9 @@ char	*ft_strjoin2(char *s1, char *s2)
 
 	i = 0;
 	if (!s1 && s2)
-		return (ft_strdup2(s2));
+		return (ft_strdup(s2));
 	if (!s2 && s1)
-		return (ft_strdup2(s1));
+		return (ft_strdup(s1));
 	if (!s1 && !s2)
 		return (NULL);
 	res = (char *)gc_malloc((sizeof(char) * (ft_strlen2(s1) + ft_strlen2(s2)) + 1));

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:08:07 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:20:27 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	init_player(t_player *player)
 	player->walk = 0;
 	player->rotation_angle = M_PI / 2;
 	// player_direction(player);
-	player->move_speed = 2.0;
+	player->move_speed = 5.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
-		player->move_speed = 2.0;
+		player->move_speed = 5.0;
 	player->rotation_speed = 3 * (M_PI / 180);
 	get_player_position(player);
 }

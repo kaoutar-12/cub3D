@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   basic_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:51:51 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 10:49:50 by mboukaiz         ###   ########.fr       */
+/*   Created: 2023/12/08 09:46:13 by mboukaiz          #+#    #+#             */
+/*   Updated: 2023/12/08 09:46:32 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../cub3d.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "../../mandatory/cub3d.h"
+int		ft_chrstr(char *s, int c)
+{
+	int		i;
+	char	find;
 
-char	*get_next_line(int fd);
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-char	*ft_strchr2(char *s, int c);
-char	*ft_strjoin2(char *s1, char *s2);
-size_t	ft_strlen2(char *s);
-
-# endif
-#endif
+	find = (char)c;
+	i = 0;
+	if (!find)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] == find)
+			return (1);
+		i++;
+	}
+	if (s[i] == find)
+		return (1);
+	return (0);
+}

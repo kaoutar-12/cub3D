@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/06 14:28:14 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:18:49 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_hook(void *param)
 	double	move_step;
 
 	game = (t_game *)param;
-	move_step = game->player->walk * game->player->move_speed; 
+	move_step = game->player->walk * game->player->move_speed;
 	game->player->rotation_angle = 
 		normalize_angle(game->player->rotation_angle);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))

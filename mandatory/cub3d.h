@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 17:23:43 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:02:38 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,6 @@ void	draw_rect(t_game *game, int x, int height, int color);
 void	init_rays(t_ray *ray);
 void	ft_game(t_game *game);
 void	init_player(t_player *player);
-
 int		draw_player(t_game *game);
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
@@ -224,16 +223,16 @@ void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 int		close_win(t_game *game);
 void	error_msg(void);
-
-// map_operations.c
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
+
+
+void	set_path(t_parse *vars, char **paths, t_it it);
 void	map_operations(char *map_name, t_parse *vars);
 void	set_map(char **a_map,char **map, int longest);
 int		is_surrounded(t_parse *vars, int i, int j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
 void	surround_map(char **a_map, char **map);
-void	set_path(t_parse *vars, char **paths);
 char	*allocate_space(int count, int size);
 void	set_data(t_parse *vars, char *arr);
 void	set_map_size(t_parse *vars, int y);
@@ -248,13 +247,9 @@ void	set_map2(t_parse *vars);
 int		ft_my_atoi(char *color);
 void	free_2d(char **data);
 int		table_size(char **map);
-
-//allocation.c
 void	*gc_malloc(int size);
 void	garbage_collector(void	*ptr, int del);
 void	custom_exit(int status);
-
-//read_map.c
 void	check_player(char *map);
 char	*read_map(int fd, t_parse *vars);
 void	check_map(char *map, int length);

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:09:47 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 17:32:03 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 11:14:02 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ char	**ft_split(char *s, char c)
 		i = 0;
 		return (NULL);
 	}
-	free(s);
 	return (strs);
 }

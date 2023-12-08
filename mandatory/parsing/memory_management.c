@@ -1,17 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocation.c                                       :+:      :+:    :+:   */
+/*   memory_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:08:44 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 17:13:19 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:23:07 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+void	free_2d(char **data)
+{
+	int i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
+}
+
+char	*allocate_space(int count, int size)
+{
+	char	*str;
+
+	str = gc_malloc (size * count);
+	ft_memset(str, ' ', size * count);
+	return (str);
+}
 
 void	garbage_collector(void	*ptr, int del)
 {
