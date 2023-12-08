@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 17:23:43 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 09:53:31 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	move_right(t_game *game, double move_step);
 void	rotate_left(t_game *game);
 void	rotate_right(t_game *game);
 void	ft_hook(void *param);
+void	free_game(t_game *game);
 
 // cast_rays.c
 void	get_direction(t_game *game, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/07 21:09:26 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/08 10:24:06 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	ft_hook(void *param)
 		move_up(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_down(game, move_step);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move_left(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		move_left(game, move_step);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_right(game, move_step);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_right(game);
@@ -55,9 +55,29 @@ void	ft_hook(void *param)
 		rotate_left(game);
 }
 
-int	close_win(t_game *game)
+void	free_textures(t_game *game)
 {
-	mlx_close_window(game->mlx);
+	if (game->textures[NORTH]) {
+		free(game->textures[NORTH]->pixels);
+		free(game->textures[NORTH]);
+	}
+	if (game->textures[SOUTH]) {
+		free(game->textures[SOUTH]->pixels);
+		free(game->textures[SOUTH]);
+	}
+	if (game->textures[EAST]) {
+		free(game->textures[EAST]->pixels);
+		free(game->textures[EAST]);
+	}
+	if (game->textures[WEST]) {
+		free(game->textures[WEST]->pixels);
+		free(game->textures[WEST]);
+	}
+}
+
+void	free_game(t_game *game)
+{
+	free(game->player);
 	free(game->ray->wall_hit_x);
 	free(game->ray->wall_hit_y);
 	free(game->ray->ray_angles);
@@ -69,9 +89,17 @@ int	close_win(t_game *game)
 	free(game->ray->found_h_wall_hit);
 	free(game->ray->found_v_wall_hit);
 	free(game->ray->to_hit);
+	free_textures(game);
+	free(game->textures);
 	free(game->ray);
-	free(game->player);
 	free(game);
-	printf("Game Over\n");
+	printf("All Freed\n");
+}
+
+int	close_win(t_game *game)
+{
+	mlx_close_window(game->mlx);
+	free_game(game);
+	// printf("Game Over\n");
 	exit(0);
 }

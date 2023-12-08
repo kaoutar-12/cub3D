@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
+#    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/07 17:14:12 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/08 09:50:09 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME_B= Cub3d_bonus
 CC= cc
 CN= rm -rf
 # FLAGS= -Wall -Wextra -Werror 
-LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/mboukaiz/.brew/opt/glfw/lib/
+LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/Homebrew/opt/glfw/lib/
 
 PREFIX = ./obj/
 
