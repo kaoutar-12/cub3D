@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 14:44:26 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:48:11 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define WIN_W 1440
 # define WIN_H 900
-# define MINI_MAP 0.5
+# define MINI_MAP 1
 
 # define WALL_STRIP_WIDTH 1
 

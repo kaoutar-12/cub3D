@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 15:14:59 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:11:35 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,91 @@ void	draw_sprite(t_game *game)
 	}
 }
 
+int draw_player(t_game *game)
+{
+    int y = -game->player->radius;
+
+    while (y <= game->player->radius)
+    {
+        int x = -game->player->radius;
+        while (x <= game->player->radius)
+        {
+            // Check if the pixel is inside the circular boundary
+            if (x * x + y * y <= game->player->radius * game->player->radius)
+            {	
+                int drawX = WIN_W / 2 + x;  // Always draw at the center
+                int drawY = WIN_H / 2 + y;  // Always draw at the center
+
+                // Draw the pixel
+                if (drawX >= 0 && drawX < WIN_W && drawY >= 0 && drawY < WIN_H)
+                    mlx_put_pixel(game->img, drawX, drawY, ft_rgba(255, 0, 0, 255));
+            }
+            x++;
+        }
+        y++;
+    }
+
+    return (0);
+}
+
+void draw_wall(t_game *game)
+{
+    int i;
+    int j;
+    int x;
+    int y;
+
+    i = 0;
+    while (i < game->parse->map_h)
+    {
+        j = 0;
+        while (j < game->parse->map_w)
+        {
+            x = (WIN_W / 2) - game->player->x + (j * TILE_SIZE);
+            y = (WIN_H / 2) - game->player->y + (i * TILE_SIZE);
+            if (game->parse->actual_map[i][j] == '1')
+                draw_square(game, x, y, ft_rgba(255, 255, 255, 255));
+			else if (game->parse->actual_map[i][j] == '0' || game->parse->actual_map[i][j] == 'E'
+				|| game->parse->actual_map[i][j] == 'W'
+				|| game->parse->actual_map[i][j] == 'N'
+				|| game->parse->actual_map[i][j] == 'S')
+				draw_square(game, x, y, ft_rgba(0, 0, 0, 255));
+            j++;
+        }
+        i++;
+    }
+    draw_player(game);
+}
+
+void draw_square(t_game *game, int x, int y, int color)
+{
+    int i;
+    int j;
+    int size;
+
+    i = 0;
+    size = TILE_SIZE;
+    while (i < size)
+    {
+        j = 0;
+        while (j < size)
+        {
+            mlx_put_pixel(game->img, x + j, y + i, color);
+            j++;
+        }
+        i++;
+    }
+}
+
 void	draw(void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-	draw_sky(game);
-	draw_floor(game);
-	projectd_wall(game);
+	// draw_sky(game);
+	// draw_floor(game);
+	// projectd_wall(game);
 	cast_rays(game);
-	draw_sprite(game);
+	// draw_sprite(game);
+	draw_wall(game);
 }
