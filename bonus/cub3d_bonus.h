@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 19:48:11 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:31:52 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include "../libraries/gnl/get_next_line.h"
 
 # define TILE_SIZE 64 
-# define WINDOW_WIDTH 33 * TILE_SIZE
-# define WINDOW_HEIGHT 14 * TILE_SIZE
 
 # define WIN_W 1440
 # define WIN_H 900

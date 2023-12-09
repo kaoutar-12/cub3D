@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 20:14:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:34:02 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,16 @@ int draw_player(t_game *game)
     return (0);
 }
 
+int clamp(int value, int min, int max) {
+    if (value < min) {
+        return min;
+    } else if (value > max) {
+        return max;
+    } else {
+        return value;
+    }
+}
+
 void draw_wall(t_game *game)
 {
     int i;
@@ -150,15 +160,19 @@ void draw_wall(t_game *game)
     int x;
     int y;
 
-	int start_i = MAX(0, game->player->y - 400 / TILE_SIZE);
-    int end_i = MIN(game->parse->map_h, game->player->y + 400 / TILE_SIZE);
-    int start_j = MAX(0, game->player->x - 400 / TILE_SIZE);
-    int end_j = MIN(game->parse->map_w, game->player->x + 400 / TILE_SIZE);
+	// int start_i = clamp(game->player->y - 800 / TILE_SIZE, 0, game->parse->map_h);
+	int end_i = clamp(game->player->y + 800 / TILE_SIZE, 0, game->parse->map_h);
+	// int start_j = clamp(game->player->x - 400 / TILE_SIZE, 0, game->parse->map_w);
+	int end_j = clamp(game->player->x + 400 / TILE_SIZE, 0, game->parse->map_w);
 
-    i = start_i;
+	// draw_square(game, start_i, end_i, ft_rgba(0, 0, 0, 255));
+	// draw_square(game, start_j, end_j, ft_rgba(0, 0, 0, 255));
+
+    i = 0;
+			// printf("start_i = %d, end_i = %d\n", start_i, end_i);			
     while (i < end_i)
     {
-        j = start_j;
+        j = 0;
         while (j < end_j)
         {
             x = (WIN_W / 2) - game->player->x + (j * TILE_SIZE);
@@ -205,7 +219,7 @@ void	draw(void *param)
 	// draw_sky(game);
 	// draw_floor(game);
 	// projectd_wall(game);
-	cast_rays(game);
+	// cast_rays(game);
 	// draw_sprite(game);
 	draw_wall(game);
 }
