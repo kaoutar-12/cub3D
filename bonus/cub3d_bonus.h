@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 11:01:27 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 14:44:26 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define WEST  2
 # define EAST  3
 
+
+uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
 // movements.c
 void	move_down(t_game *game, double move_step);
 void	move_up(t_game *game, double move_step);

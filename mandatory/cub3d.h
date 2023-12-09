@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 09:53:30 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 15:10:15 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_game
 	t_parse			*parse;
 	mlx_texture_t	**textures;
 	mlx_image_t		*img;
+	bool			shoot;
 }	t_game;
 
 typedef	struct	s_it

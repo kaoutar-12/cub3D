@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 10:54:35 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:17:28 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	ft_hook(void *param)
 		rotate_right(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_left(game);
+	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT) || mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
+		game->shoot = true;
+	else
+		game->shoot = false;
 }
 
 void	free_textures(t_game *game)
