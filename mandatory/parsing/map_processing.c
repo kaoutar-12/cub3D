@@ -27,6 +27,10 @@ int	is_surrounded(t_parse *vars, int i, int j)
 {
 	if (ft_chrstr("0SWNEP", vars->actual_map[i][j]))
 	{
+		if (i == table_size(vars->actual_map) - 1
+		|| i == 0 || j == 0
+		|| j == ft_strlen(vars->actual_map[i]))
+			return (0);
 		if (ft_chrstr("01SWNEP", vars->actual_map[i][j + 1])
 		&& ft_chrstr("01SWNEP", vars->actual_map[i][j - 1])
 		&& ft_chrstr("01SWNEP", vars->actual_map[i + 1][j])

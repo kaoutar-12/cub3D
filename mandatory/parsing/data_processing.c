@@ -34,7 +34,7 @@ void	initialise_colors(t_parse *vars, t_rgb_data *rgb_data)
 		free (rgb_data->rgb_c);
 		free (rgb_data->rgb_f);
 		write(2, "Error:\nMap content must be in the format"
-			"\"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 93);
+			"\"ddd, ddd, ddd,\" with each 'ddd' between 0 and 255\n", 92);
 		custom_exit(1);
 	}
 	vars->c_rgb.red = ft_my_atoi(rgb_data->rgb_c[0]);

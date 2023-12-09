@@ -39,7 +39,7 @@ void	garbage_collector(void	*ptr, int del)
 	static t_list	*head;
 	t_list			*node;
 
-	if (del && head && head->content)
+	if (del == 1 && head && head->content)
 		ft_lstclear(&head, free);
 	else
 	{
@@ -50,8 +50,7 @@ void	garbage_collector(void	*ptr, int del)
 
 void	custom_exit(int status)
 {
-	if (status != 1)
-		garbage_collector(NULL, 1);
+	// garbage_collector(NULL, -1);
 	exit(status);
 }
 
@@ -59,12 +58,9 @@ void	*gc_malloc(int size)
 {
 	void	*ptr;
 
-	ptr = malloc (size);
+	ptr = malloc(size);
 	if (!ptr)
-	{
-		free(ptr);
 		error_msg();
-	}
 	ft_memset(ptr, 0, size);
 	garbage_collector (ptr, 0);
 	return (ptr);

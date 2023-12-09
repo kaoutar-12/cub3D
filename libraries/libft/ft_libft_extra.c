@@ -87,7 +87,6 @@ char	**ft_split2(char *s, char c)
 
 char	**ft_split(char *s, char c)
 {
-	int		i;
 	char	**strs;
 
 	if (!s)
@@ -99,13 +98,32 @@ char	**ft_split(char *s, char c)
 		return (NULL);
 	if (ft_count(strs, s, c) == -1)
 	{
-		i = 0;
 		return (NULL);
 	}
 	return (strs);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*result;
+	unsigned int	size;
+
+	size = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	if (size < start)
+		len = 0;
+	if (size - start < len)
+		len = size - start;
+	result = (char *)gc_malloc(len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '\0';
+	result = ft_memmove(result, s + start, len);
+	return (result);
+}
+
+char	*ft_substr2(char const *s, unsigned int start, size_t len)
 {
 	char			*result;
 	unsigned int	size;

@@ -55,6 +55,20 @@ void	find_player(t_parse *vars)
 	}
 }
 
+char	*join_map(char *map, char *line)
+{
+	char	*str;
+
+	if (!map)
+	{
+		map = ft_strdup(line);
+		return (map);
+	}
+	else
+		str = ft_strjoin_gnl(map, line);
+	return (str);
+}
+
 char	*read_map(int fd, t_parse *vars)
 {
 	char	*map_vars;
@@ -77,11 +91,11 @@ char	*read_map(int fd, t_parse *vars)
 			if (length < 6)
 			{
 				ptr = ft_strtrim_fh(line, " \t");
-				map_vars = ft_strjoin (map_vars, ptr);
+				map_vars = ft_strjoin(map_vars, ptr);
 			}
 			else
 			{
-				map = ft_strjoin (map, line);
+				map = ft_strjoin(map, line);
 				if ((int)ft_strlen(line) > longest_line)
 					longest_line = ft_strlen(line);
 			}
@@ -99,8 +113,8 @@ char	*read_map(int fd, t_parse *vars)
 	close(fd);
 	check_map(map, length);
 	vars->map = ft_split(map, '\n');
-	vars->actual_map = gc_malloc(sizeof(char *) * table_size(vars->map) + 1);
-	set_map(vars->actual_map, vars->map, longest_line);
+	vars->actual_map = ft_split(map, '\n');
+	set_map(vars, longest_line);
 	set_map_size(vars, longest_line);
 	find_player(vars);
 	return (map_vars);

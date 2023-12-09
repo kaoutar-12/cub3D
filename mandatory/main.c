@@ -44,25 +44,43 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		atexit(fun);
 		map_operations(av[1], &parse);
-		custom_exit(0);
-		game = malloc(sizeof(t_game));
-		player = malloc(sizeof(t_player));
-		ray = malloc(sizeof(t_ray));
-		if (!game || !player || !ray)
-			error_msg();
-		init_rays(ray);
-		init_player(player);
-		game->player = player;
-		game->ray = ray;
-		game->parse = &parse;
-		game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
-		game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
-		set_player_direction(game);
-		ft_game(game);
-		garbage_collector(NULL, 1);
-		free (parse.map);
+
+		// char *ptr = ft_strtrim_fh("   \nmakram\nmakram", " \n");
+		// ptr = ft_strtrim_fh("   \nmakram\nmakram2", " \n");
+		// ptr = ft_strtrim_fh("   \nmakram\nmakram3", " \n");
+		// ptr = ft_strtrim_fh("   \nmakram\nmakram4", " \n");
+		// ptr = ft_strtrim_fh("\n", " \n");
+		// char *line = ft_strjoin(ptr, "\nks\nmakram");
+		// line = ft_strjoin(ptr, "\nks\nmakra2m");
+		// ptr = ft_strjoin(ptr, line);
+		// char **map = ft_split(ptr, '\n');
+		// for (int i = 0; map[i]; i++)
+		// {
+		// 	printf ("%s\n", map[i]);
+		// }
+		// free(map);
+		// custom_exit(0);
+
+		// char *ptr = ft_strdup("makram\nmakram");
+		// while (1);
+		// custom_exit(0);
+		// game = malloc(sizeof(t_game));
+		// player = malloc(sizeof(t_player));
+		// ray = malloc(sizeof(t_ray));
+		// if (!game || !player || !ray)
+		// 	error_msg();
+		// init_rays(ray);
+		// init_player(player);
+		// game->player = player;
+		// game->ray = ray;
+		// game->parse = &parse;
+		// game->player->y = game->parse->player_x * TILE_SIZE + TILE_SIZE / 2;
+		// game->player->x = game->parse->player_y * TILE_SIZE + TILE_SIZE / 2;
+		// set_player_direction(game);
+		// ft_game(game);
+		// garbage_collector(NULL, 1);
+		// free (parse.map);
 	}
 	else
 		error_msg();

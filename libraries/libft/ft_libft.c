@@ -27,7 +27,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
 
-	str = malloc(count * size);
+	str = gc_malloc(count * size);
 	if (!str)
 		return (0);
 	ft_bzero(str, count * size);

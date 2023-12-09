@@ -15,20 +15,11 @@ NAME_B= Cub3d_bonus
 CC= cc
 CN= rm -rf
 # FLAGS= -Wall -Wextra -Werror
-LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/mboukaiz/.brew/opt/glfw/lib/
+# LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/mboukaiz/.brew/opt/glfw/lib/
 
 PREFIX = ./obj/
 
-SOURCE =	mandatory/cast_rays.c \
-			mandatory/ft_draw.c \
-			mandatory/ft_game.c \
-			mandatory/helpers.c \
-			mandatory/keys_hooks.c \
-			mandatory/cast_horizontal.c \
-			mandatory/cast_vertical.c \
-			mandatory/main.c \
-			mandatory/movements.c \
-			mandatory/init.c \
+SOURCE =	mandatory/main.c \
 			mandatory/parsing/config_setup.c \
 			mandatory/parsing/data_processing.c \
 			mandatory/parsing/map_operations.c \
@@ -52,50 +43,19 @@ SOURCE_B = 	bonus/cast_rays.c \
 			bonus/draw_minimap.c \
 			bonus/init.c \
 
+all : $(NAME)
 
-OBJECT = $(addprefix ${PREFIX}, $(SOURCE:.c=.o))
+libft : 
+	make -C libraries/libft
 
-OBJECT_B = $(addprefix ${PREFIX}, $(SOURCE_B:.c=.o))
-
-all: ${NAME}
-
-libmlx42:
-	@cmake -B ./libraries/MLX42/build ./libraries/MLX42
-	@make -C libraries/MLX42/build
-
-libft:
-	@make -C libraries/libft
-
-${PREFIX}:
-	@mkdir -p ${PREFIX}
-	@mkdir -p ${PREFIX}mandatory
-	@mkdir -p ${PREFIX}mandatory/parsing
-	@mkdir -p ${PREFIX}libraries/gnl
-	@mkdir -p ${PREFIX}bonus
-
-${NAME}: ${PREFIX} ${OBJECT} libft libmlx42
-	${CC} ${FLAGS} ${OBJECT} libraries/libft/libft.a ${LINKS} -o ${NAME}
-
-${PREFIX}%.o: %.c mandatory/cub3d.h
-	${CC} ${FLAGS} -c $< -o $@
-
-bonus: ${PREFIX} ${OBJECT_B}
-	${CC} ${FLAGS} ${OBJECT_B} ${LINKS} -o ${NAME_B}
+$(NAME) : $(SOURCE) $(HEADER) libft
+	$(CC) $(SOURCE) $(CFLAGS) $(LINKS) libraries/libft/libft.a -o $(NAME)
 
 clean:
-	${CN} ${PREFIX}
-	${CN} ${PREFIX}mandatory
-	${CN} ${OBJECT}
-	${CN} ${PREFIX}bonus
-	${CN} ${OBJECT_B}
-	make -C libraries/MLX42/build clean
-	make -C libraries/libft clean
 
 fclean: clean
-	${CN} ${NAME}
-	${CN} ${NAME_B}
-	make -C libraries/libft fclean
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

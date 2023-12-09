@@ -23,7 +23,6 @@ SRC=	ft_atoi.c \
 		ft_memchr.c \
 		ft_memcmp.c \
 		ft_memset.c \
-		ft_split.c \
 		ft_strcpy.c \
 		ft_strncmp.c \
 		ft_strtrim.c \

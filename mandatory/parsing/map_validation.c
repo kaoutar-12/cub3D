@@ -32,7 +32,7 @@ void	check_player(char *map)
 	}
 	if (j == 0)
 	{
-		write(2, "Error\nNo player found in the map", 34);
+		write(2, "Error\nNo player found in the map\n", 34);
 		custom_exit(1);
 	}
 }
@@ -75,7 +75,7 @@ void	check_map(char *map, int length)
 			&& map[i] != 'W' && map[i] != 'E'
 			&& map[i] != ' ' && map[i] != '\n')
 		{
-			printf ("\n%c\n", map[i]);
+			printf ("|%c|\n", map[i]);
 			write (2, "Error\nThe provided map "
 				"contains an invalid character\n", 54);
 			custom_exit(1);

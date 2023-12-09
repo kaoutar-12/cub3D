@@ -228,7 +228,7 @@ void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
 
 void	set_path(t_parse *vars, char **paths, t_it it);
 void	map_operations(char *map_name, t_parse *vars);
-void	set_map(char **a_map,char **map, int longest);
+void	set_map(t_parse *vars, int longest);
 int		is_surrounded(t_parse *vars, int i, int j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
