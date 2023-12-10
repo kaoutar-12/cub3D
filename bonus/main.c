@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 10:54:28 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 11:51:43 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	set_player_direction_pos(t_game *game)
 		game->player->rotation_angle = 0;
 	else if (game->parse->player_direction == WEST)
 		game->player->rotation_angle = M_PI;
+	game->player->begin_x = (100 + game->player->x) * MINI_MAP - 100;
+	game->player->end_x = (100 + game->player->x) * MINI_MAP + 100;
+	game->player->begin_y = (100 + game->player->y) * MINI_MAP - 100;
+	game->player->end_y = (100 + game->player->y) * MINI_MAP + 100;
 }
 
 int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 15:10:50 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 11:22:14 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_game(t_game *game)
 	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
-	mlx_cursor_hook(game->mlx, mouse_hook, game);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	// mlx_cursor_hook(game->mlx, mouse_hook, game);
+	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }

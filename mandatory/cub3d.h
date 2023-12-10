@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/09 18:26:29 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 09:57:19 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ typedef struct s_player
 	double	move_speed;
 	double	rotation_speed;
 	double	fov_angle;
+	double	begin_x;
+	double	end_x;
+	double	begin_y;
+	double	end_y;
 }	t_player;
 
 typedef struct s_ray
