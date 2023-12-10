@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:18:48 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 15:56:12 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:57:00 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	draw_idle_sprite(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_y;
 
 	sprite = mlx_load_png("bonus/textures/sprite.png");
+	if (!sprite)
+		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
 	i = win_x;
 	while (i < win_x + sprite->width)
@@ -48,6 +50,8 @@ void	draw_shoot_sprite(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_y;
 
 	sprite = mlx_load_png("bonus/textures/sprite_shot.png");
+	if (!sprite)
+		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
 	i = win_x;
 	while (i < win_x + sprite->width)
