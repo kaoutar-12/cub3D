@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 15:51:16 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:59:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_player(t_player *player)
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
 	player->rotation_speed = 2 * (M_PI / 180);
+	player->ammo = 10;
 }
 
 void	init_textures(t_game *game)

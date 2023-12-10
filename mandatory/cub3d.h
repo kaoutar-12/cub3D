@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 15:51:07 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:58:56 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_player
 	double	end_x;
 	double	begin_y;
 	double	end_y;
+	int		ammo;
 }	t_player;
 
 typedef struct s_ray
