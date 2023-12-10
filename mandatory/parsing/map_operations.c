@@ -44,9 +44,7 @@ void	set_map(t_parse *vars, int longest)
 	{
 		tmp = allocate_space(longest - 1);
 		ft_strcpy(tmp, vars->map[i]);
-		tmp[longest] = '\0';
-		vars->map[i] = ft_strdup(tmp);
-		free(tmp);
+		vars->map[i] = tmp;
 		i++;
 	}
 	printf ("%d\n", longest);
