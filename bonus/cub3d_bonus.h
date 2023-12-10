@@ -1,0 +1,137 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
+/*   Updated: 2023/12/10 14:11:23 by kmouradi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include "../libraries/MLX42/include/MLX42/MLX42.h"
+# include <ctype.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include <math.h>
+# include <limits.h>
+# include "../libraries/libft/libft.h"
+# include "../libraries/gnl/get_next_line.h"
+
+# define TILE_SIZE 64 
+
+# define WIN_W 1440
+# define WIN_H 900
+# define MINI_MAP 0.2
+
+# define WALL_STRIP_WIDTH 1
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST  2
+# define EAST  3
+
+
+uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
+void	draw_sprite(t_game *game);
+void draw_square_around_player(t_game *game);
+void draw_wall(t_game *game);
+// movements.c
+void	move_down(t_game *game, double move_step);
+void	move_up(t_game *game, double move_step);
+void	move_left(t_game *game, double move_step);
+void	move_right(t_game *game, double move_step);
+
+// key_hooks.c
+void	rotate_left(t_game *game);
+void	rotate_right(t_game *game);
+void	ft_hook(void *param);
+void	free_game(t_game *game);
+void	mouse_hook(double xpos, double ypos, void* param);
+
+// cast_rays.c
+void	get_direction(t_game *game, int i);
+void	check_distance(t_game *game, double h_distance, 
+			double v_distance, int i);
+void	cast_v_h_rays(t_game *game, int i);
+void	cast_rays(t_game *game);
+
+// ft_draw.c
+void	draw_sky(t_game *game);
+void	draw_floor(t_game *game);
+void	draw(void *param);
+
+
+// cast_horizontal.c
+void	calculate_horizontal_interception(t_game *game, int i);
+void	next_horizontal_intercept(t_game *game, double next_h_xintercept,
+			double next_h_yintercept, int i);
+void	cast_horizontal_rays(t_game *game, int i);
+
+// cast_verticl.c
+void	calculate_vertical_interception(t_game *game, int i);
+void	next_vertical_intercept(t_game *game, double next_v_xintercept,
+			double next_v_yintercept, int i);
+void	cast_vertical_rays(t_game *game, int i);
+
+// helpers.c
+int		ft_strcmp(char *s1, char *s2);
+double	normalize_angle(double angle);
+double	distance_between_points(double x1, double y1, double x2, double y2);
+int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+void	draw_rect(t_game *game, int x, int height, int color);
+
+// init.c
+void	init_rays(t_ray *ray);
+void	ft_game(t_game *game);
+void	init_player(t_player *player);
+
+int		is_wall(t_game *game, double x, double y);
+void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
+void	projectd_wall(t_game *game);
+int		close_win(t_game *game);
+void	error_msg(void);
+
+// map_operations.c
+void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
+void	map_operations(char *map_name, t_parse *vars);
+void	set_map(char **a_map,char **map, int longest);
+int		is_surrounded(t_parse *vars, int i, int j);
+void	set_color(t_parse *vars, char **colors);
+void	check_path(t_parse *vars, char **path);
+void	surround_map(char **a_map, char **map);
+void	set_path(t_parse *vars, char **paths);
+char	*allocate_space(int count, int size);
+void	set_data(t_parse *vars, char *arr);
+void	set_map_size(t_parse *vars, int y);
+void	check_calc(t_var_calc	*calc);
+int		detect_type(char *element);
+char	**set_color2(char *color);
+void	check_color(char **color);
+void	check_array(char **array);
+int		check_map2(t_parse *vars);
+int		ft_chrstr(char *s, int c);
+void	set_map2(t_parse *vars);
+int		ft_my_atoi(char *color);
+void	free_2d(char **data);
+int		table_size(char **map);
+
+//allocation.c
+void	*gc_malloc(int size);
+void	garbage_collector(void	*ptr, int del);
+void	custom_exit(int status);
+
+//read_map.c
+void	check_player(char *map);
+char	*read_map(int fd, t_parse *vars);
+void	check_map(char *map, int length);
+
+#endif
