@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 11:22:14 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:20:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_player(t_player *player)
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->move_speed = 3.0;
+	player->move_speed = 4.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
 	player->rotation_speed = 2 * (M_PI / 180);
@@ -56,8 +56,8 @@ void	ft_game(t_game *game)
 	init_textures(game);
 	mlx_loop_hook(game->mlx, draw, game);
 	mlx_loop_hook(game->mlx, ft_hook, game);
-	// mlx_cursor_hook(game->mlx, mouse_hook, game);
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	mlx_cursor_hook(game->mlx, mouse_hook, game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }

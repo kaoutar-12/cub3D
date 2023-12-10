@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/08 10:56:07 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/10 13:50:27 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,8 @@ SOURCE_B = 	bonus/cast_rays.c \
 			bonus/movements.c \
 			bonus/init.c \
 			bonus/exit.c \
+			bonus/sprites_bonus.c \
+			bonus/minimap_bonus.c \
 			bonus/parsing/allocation.c \
 			bonus/parsing/map_operations.c \
 			bonus/parsing/read_map.c \

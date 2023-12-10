@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 09:40:45 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:50:08 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 
 
 uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
+void	draw_sprite(t_game *game);
+void draw_square_around_player(t_game *game);
+void draw_wall(t_game *game);
 // movements.c
 void	move_down(t_game *game, double move_step);
 void	move_up(t_game *game, double move_step);
