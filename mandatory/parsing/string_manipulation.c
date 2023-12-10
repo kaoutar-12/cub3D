@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:46:13 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 15:30:19 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:50:21 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,14 @@ int	ft_chrstr(char *s, int c)
 	if (s[i] == find)
 		return (1);
 	return (0);
+}
+
+int	table_size(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }

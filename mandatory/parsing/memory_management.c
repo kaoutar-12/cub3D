@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:08:44 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 18:13:36 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:55:18 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	garbage_collector(void	*ptr, int del)
 
 void	custom_exit(int status)
 {
-	// garbage_collector(NULL, -1);
+	garbage_collector(NULL, -1);
 	exit(status);
 }
 

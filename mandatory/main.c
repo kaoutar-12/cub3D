@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 18:00:05 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:44:13 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,57 @@ void	fun()
 	system("leaks Cub3d");
 }
 
+void	close_all()
+{
+	int	i;
+
+	i = 3;
+	while (i < 255)
+	{
+		close(i);
+		i++;
+	}
+}
+
+void	print_all_vars(t_parse *vars)
+{
+	printf("vars->a_map\n");
+	for (int i = 0; vars->actual_map[i]; i++)
+		printf("|%s|\n", vars->actual_map[i]);
+	printf("vars->map\n");
+	for (int i = 0; vars->map[i]; i++)
+		printf("|%s|\n", vars->map[i]);
+
+	printf("vars->c_rgb.red\n");
+	printf("|%d|\n", vars->c_rgb.red);
+	printf("vars->c_rgb.green\n");
+	printf("|%d|\n", vars->c_rgb.green);
+	printf("vars->c_rgb.blue\n");
+	printf("|%d|\n", vars->c_rgb.blue);
+	
+	printf("vars->f_rgb.red\n");
+	printf("|%d|\n", vars->f_rgb.red);
+	printf("vars->f_rgb.green\n");
+	printf("|%d|\n", vars->f_rgb.green);
+	printf("vars->f_rgb.blue\n");
+	printf("|%d|\n", vars->f_rgb.blue);
+
+	printf("vars->ea\n");
+	printf("|%s|\n", vars->ea);
+	printf("vars->we\n");
+	printf("|%s|\n", vars->we);
+	printf("vars->so\n");
+	printf("|%s|\n", vars->so);
+	printf("vars->no\n");
+	printf("|%s|\n", vars->no);
+
+	printf("x |%d|\n", vars->player_x);
+	printf("y |%d|\n", vars->player_y);
+
+	printf("h |%d|\n", vars->map_h);
+	printf("w |%d|\n", vars->map_w);
+}
+
 int	main(int ac, char **av)
 {
 	t_game		*game;
@@ -44,8 +95,10 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
+		atexit(fun);
 		map_operations(av[1], &parse);
-
+		print_all_vars(&parse);
+		// while (1);
 		// char *ptr = ft_strtrim_fh("   \nmakram\nmakram", " \n");
 		// ptr = ft_strtrim_fh("   \nmakram\nmakram2", " \n");
 		// ptr = ft_strtrim_fh("   \nmakram\nmakram3", " \n");

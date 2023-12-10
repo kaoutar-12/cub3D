@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:58:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 17:23:12 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:00:23 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_substr2(char const *s, unsigned int start, size_t len);
@@ -71,5 +70,6 @@ int		ft_isalnum(int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strtrim_fh(char const *s1, char const *set);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
+
 #endif

@@ -6,19 +6,11 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:35:19 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 15:35:46 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:56:52 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-}
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
@@ -34,4 +26,24 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		*lst = tmp;
 	}
 	free(tmp);
+}
+
+char	*ft_substr2(char const *s, unsigned int start, size_t len)
+{
+	char			*result;
+	unsigned int	size;
+
+	size = ft_strlen(s);
+	if (!s)
+		return (NULL);
+	if (size < start)
+		len = 0;
+	if (size - start < len)
+		len = size - start;
+	result = (char *)gc_malloc(len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '\0';
+	result = ft_memmove(result, s + start, len);
+	return (result);
 }

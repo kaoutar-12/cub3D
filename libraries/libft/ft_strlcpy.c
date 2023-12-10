@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:34:19 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 16:51:25 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:59:25 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t destsize)
 			dest[i] = src[i];
 			i++;
 		}
-	dest[i] = '\0';
+		dest[i] = '\0';
 	}
 	return (ft_strlen(src));
 }

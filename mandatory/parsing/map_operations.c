@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 18:14:31 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:43:35 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	set_map(t_parse *vars, int longest)
 	i = 0;
 	while (vars->map[i])
 	{
-		tmp = allocate_space(longest - 1);
+		tmp = allocate_space(longest + 1);
+		tmp[longest] = '\0';
 		ft_strcpy(tmp, vars->map[i]);
 		vars->map[i] = tmp;
 		i++;
 	}
-	printf ("%d\n", longest);
 	surround_map(vars->actual_map, vars->map);
 }
 
@@ -108,40 +108,5 @@ void	map_operations(char *map_name, t_parse *vars)
 		write(2, "Error\nMap is not valid\n", 24);
 		custom_exit(1);
 	}
-	printf("vars->a_map\n");
-	for (int i = 0; vars->actual_map[i]; i++)
-		printf("|%s|\n", vars->actual_map[i]);
-	printf("vars->map\n");
-	for (int i = 0; vars->map[i]; i++)
-		printf("|%s|\n", vars->map[i]);
-
-	printf("vars->c_rgb.red\n");
-	printf("|%d|\n", vars->c_rgb.red);
-	printf("vars->c_rgb.green\n");
-	printf("|%d|\n", vars->c_rgb.green);
-	printf("vars->c_rgb.blue\n");
-	printf("|%d|\n", vars->c_rgb.blue);
-	
-	printf("vars->f_rgb.red\n");
-	printf("|%d|\n", vars->f_rgb.red);
-	printf("vars->f_rgb.green\n");
-	printf("|%d|\n", vars->f_rgb.green);
-	printf("vars->f_rgb.blue\n");
-	printf("|%d|\n", vars->f_rgb.blue);
-
-	printf("vars->ea\n");
-	printf("|%s|\n", vars->ea);
-	printf("vars->we\n");
-	printf("|%s|\n", vars->we);
-	printf("vars->so\n");
-	printf("|%s|\n", vars->so);
-	printf("vars->no\n");
-	printf("|%s|\n", vars->no);
-
-	printf("x |%d|\n", vars->player_x);
-	printf("y |%d|\n", vars->player_y);
-
-	printf("h |%d|\n", vars->map_h);
-	printf("w |%d|\n", vars->map_w);
-	custom_exit(0);
+	close (fd);
 }

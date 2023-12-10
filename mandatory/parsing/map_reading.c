@@ -6,28 +6,11 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:17:14 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 18:01:54 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:50:14 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	set_direction(char c, t_parse *vars)
-{
-	if (c == 'N')
-		vars->player_direction = NORTH;
-	else if (c == 'S')
-		vars->player_direction = SOUTH;
-	else if (c == 'W')
-		vars->player_direction = WEST;
-	else if (c == 'E')
-		vars->player_direction = EAST;
-	else
-	{
-		write(2, "Error\nPlayer is nowhere to be found", 36);
-		custom_exit(1);
-	}
-}
 
 void	find_player(t_parse *vars)
 {
@@ -69,63 +52,59 @@ char	*join_map(char *map, char *line)
 	return (str);
 }
 
-char	*read_map(int fd, t_parse *vars)
+void	invalid_map(int fd)
 {
-	char	*map_vars;
-	char	*map;
+	write(2, "Error\nInvalid map content\n", 27);
+	close(fd);
+	custom_exit(1);
+}
+
+int	map_fill(int fd, char **map, char **map_vars, int *longest_line)
+{
 	char	*line;
 	int		length;
-	int		longest_line;
-	char	*ptr;
 
 	length = 0;
-	longest_line = 0;
-	map = ft_strdup("");
-	map_vars = ft_strdup("");
 	line = get_next_line(fd);
 	while (line)
 	{
-		ptr = ft_strtrim_fh(line, " \t\n");
-		if (ptr[0])
+		if (ft_strlen(ft_strtrim_fh(line, " \t\n")) > 0)
 		{
 			if (length < 6)
-			{
-				ptr = ft_strtrim_fh(line, " \t");
-				map_vars = ft_strjoin(map_vars, ptr);
-			}
+				*map_vars = ft_strjoin(*map_vars, ft_strtrim_fh(line, " \t"));
 			else
 			{
-				map = ft_strjoin(map, line);
-				if ((int)ft_strlen(line) > longest_line)
-					longest_line = ft_strlen(line);
+				*map = ft_strjoin(*map, line);
+				if ((int)ft_strlen(line) > *longest_line)
+					*longest_line = ft_strlen(line);
 			}
 			length++;
 		}
 		else if (line[0] == '\n' && length > 6)
-		{
-			write(2, "Error\nInvalid map content\n", 27);
-			close(fd);
-			custom_exit(1);
-		}
+			invalid_map(fd);
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (length);
+}
+
+char	*read_map(int fd, t_parse *vars)
+{
+	char	*map_vars;
+	char	*map;
+	int		length;
+	int		longest_line;
+
+	longest_line = 0;
+	map = ft_strdup("");
+	map_vars = ft_strdup("");
+	length = map_fill(fd, &map, &map_vars, &longest_line);
 	close(fd);
 	check_map(map, length);
 	vars->map = ft_split(map, '\n');
-	vars->actual_map = ft_split(map, '\n');
+	vars->actual_map = gc_malloc(sizeof(char *) * table_size(vars->map) + 1);
 	set_map(vars, longest_line);
 	set_map_size(vars, longest_line);
 	find_player(vars);
 	return (map_vars);
-}
-
-int	table_size(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
 }

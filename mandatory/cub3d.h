@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 18:06:09 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:53:52 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ int		close_win(t_game *game);
 void	error_msg(void);
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
 
-
+void	set_direction(char c, t_parse *vars);
 void	set_path(t_parse *vars, char **paths, t_it it);
 void	map_operations(char *map_name, t_parse *vars);
 void	set_map(t_parse *vars, int longest);

@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:47:36 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 17:00:21 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:50:57 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	is_surrounded(t_parse *vars, int i, int j)
 	if (ft_chrstr("0SWNEP", vars->actual_map[i][j]))
 	{
 		if (i == table_size(vars->actual_map) - 1
-		|| i == 0 || j == 0
-		|| j == ft_strlen(vars->actual_map[i]))
+			|| i == 0 || j == 0
+			|| j == ft_strlen(vars->actual_map[i]))
 			return (0);
 		if (ft_chrstr("01SWNEP", vars->actual_map[i][j + 1])
 		&& ft_chrstr("01SWNEP", vars->actual_map[i][j - 1])

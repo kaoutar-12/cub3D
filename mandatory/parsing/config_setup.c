@@ -6,11 +6,28 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:41:43 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 14:59:36 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:49:58 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	set_direction(char c, t_parse *vars)
+{
+	if (c == 'N')
+		vars->player_direction = NORTH;
+	else if (c == 'S')
+		vars->player_direction = SOUTH;
+	else if (c == 'W')
+		vars->player_direction = WEST;
+	else if (c == 'E')
+		vars->player_direction = EAST;
+	else
+	{
+		write(2, "Error\nPlayer is nowhere to be found", 36);
+		custom_exit(1);
+	}
+}
 
 void	set_color(t_parse *vars, char **colors)
 {
