@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:18:48 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 15:51:58 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:56:12 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	draw_sprite(t_game *game)
 	j = win_y;
 	color = 0;
 	if (game->change == GUN)
-	{	
+	{
 		if (!game->shoot)
 			draw_idle_sprite(game, win_y, j, color);
 		else
