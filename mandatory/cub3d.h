@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 11:55:15 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:51:07 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define SOUTH 1
 # define WEST  2
 # define EAST  3
+
+# define KNIFE 5
+# define GUN 6
 
 typedef struct s_player
 {
@@ -127,6 +130,7 @@ typedef struct s_game
 	mlx_texture_t	**textures;
 	mlx_image_t		*img;
 	bool			shoot;
+	int				change;
 }	t_game;
 
 typedef	struct	s_it

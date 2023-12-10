@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 14:18:26 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:52:59 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ void	rotate_right(t_game *game)
 		= normalize_angle(game->player->rotation_angle);
 }
 
+void	mouse_clicks(t_game *game)
+{
+	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
+		game->shoot = true;
+	else
+		game->shoot = false;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_UP))
+		game->change = KNIFE;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_DOWN))
+		game->change = GUN;
+}
+
 void	ft_hook(void *param)
 {
 	t_game	*game;
@@ -73,9 +86,5 @@ void	ft_hook(void *param)
 		rotate_right(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_left(game);
-	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT)
-		|| mlx_is_key_down(game->mlx, MLX_KEY_SPACE))
-		game->shoot = true;
-	else
-		game->shoot = false;
+	mouse_clicks(game);
 }

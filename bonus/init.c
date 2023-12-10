@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 13:20:08 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:51:16 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_textures(t_game *game)
 		|| !game->textures[WEST] || !game->textures[EAST])
 		error_msg();
 	game->shoot = false;
+	game->change = GUN;
 }
 
 void	ft_game(t_game *game)
