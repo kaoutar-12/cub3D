@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:18:48 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 16:02:16 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:09:54 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,13 @@ void	draw_sprite(t_game *game)
 	color = 0;
 	if (game->player->ammo == 0)
 		game->change = KNIFE;
-	mlx_put_string(game->mlx, ft_itoa(game->player->ammo), 10, WIN_H - 50);
 	if (game->change == GUN)
 	{
 		if (!game->shoot)
 			draw_idle_sprite(game, win_y, j, color);
 		else
 		{
-			game->player->ammo--;	
+			game->player->ammo -= 1;	
 			draw_shoot_sprite(game, win_y, j, color);
 		}
 	}
