@@ -6,7 +6,7 @@
 #    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 10:30:09 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/08 16:28:03 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/10 15:13:17 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ NAME=libft.a
 
 all:${NAME}
 
-${NAME}:${OBJ}
+${NAME}:${OBJ} libft.h
 	${CL} ${NAME} ${OBJ}
 
 %.o: %.c  libft.h

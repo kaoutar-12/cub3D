@@ -6,7 +6,7 @@
 #    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/08 15:57:02 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/10 15:14:55 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -C libraries/libft
 
 re: fclean all
 

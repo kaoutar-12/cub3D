@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:17 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 17:50:12 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:04:20 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		return (ft_strdup_gnl(s1));
 	if (!s1 && !s2)
 		return (NULL);
-	res = (char *)malloc((sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2)) + 1));
+	res = malloc((sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2)) + 1));
 	if (!res)
 		return (NULL);
 	while (s1[i])

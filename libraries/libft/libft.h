@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:58:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/10 14:00:23 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:14:06 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../../mandatory/cub3d.h"
 
 typedef struct s_list
 {
@@ -23,6 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+void	*gc_malloc(int size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_substr2(char const *s, unsigned int start, size_t len);
 t_list	*ft_lstlast(t_list *lst);
