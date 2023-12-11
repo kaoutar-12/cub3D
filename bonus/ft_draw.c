@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:36:09 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 16:09:44 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:07:59 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,16 @@ void	draw_floor(t_game *game)
 
 void	draw(void *param)
 {
-	t_game	*game;
+	t_game		*game;
+	uint32_t	color;
 
 	game = (t_game *)param;
+	color = 0;
 	draw_sky(game);
 	draw_floor(game);
 	projectd_wall(game);
 	cast_rays(game);
-	draw_sprite(game);
+	draw_sprite(game, color);
 	draw_square_around_player(game);
 	draw_wall(game);
 }

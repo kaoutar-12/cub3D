@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 16:06:41 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:00:11 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,29 @@ void	init_player(t_player *player)
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->move_speed = 4.0;
+	player->move_speed = 5.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
-	player->rotation_speed = 2 * (M_PI / 180);
+	player->rotation_speed = 3 * (M_PI / 180);
 	player->ammo = 10;
 }
 
 void	init_textures(t_game *game)
 {
 	game->textures = malloc(sizeof(mlx_texture_t) * 4);
+	game->sprite = malloc(sizeof(mlx_texture_t) * 4);
+	game->sprite[KNIFE] = mlx_load_png("bonus/textures/knife_idle.png");
+	game->sprite[GUN] = mlx_load_png("bonus/textures/gun_idle.png");
+	game->sprite[KNIFE_A] = mlx_load_png("bonus/textures/knife_attack.png");
+	game->sprite[GUN_A] = mlx_load_png("bonus/textures/gun_shooting.png");
 	game->textures[NORTH] = mlx_load_png(game->parse->no);
 	game->textures[SOUTH] = mlx_load_png(game->parse->so);
 	game->textures[WEST] = mlx_load_png(game->parse->we);
 	game->textures[EAST] = mlx_load_png(game->parse->ea);
 	if (!game->textures[NORTH] || !game->textures[SOUTH]
-		|| !game->textures[WEST] || !game->textures[EAST])
+		|| !game->textures[WEST] || !game->textures[EAST]
+		|| !game->sprite[KNIFE] || !game->sprite[GUN]
+		|| !game->sprite[KNIFE_A] || !game->sprite[GUN_A])
 		error_msg();
 	game->shoot = false;
 	game->change = GUN;

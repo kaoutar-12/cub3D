@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/10 13:50:27 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/11 12:48:46 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,14 @@ SOURCE =	mandatory/cast_rays.c \
 			mandatory/movements.c \
 			mandatory/init.c \
 			mandatory/exit.c \
-			mandatory/parsing/allocation.c \
+			mandatory/parsing/config_setup.c \
+			mandatory/parsing/data_processing.c \
 			mandatory/parsing/map_operations.c \
-			mandatory/parsing/read_map.c \
+			mandatory/parsing/map_processing.c \
+			mandatory/parsing/map_reading.c \
+			mandatory/parsing/map_validation.c \
+			mandatory/parsing/memory_management.c \
+			mandatory/parsing/string_manipulation.c \
 			libraries/gnl/get_next_line.c \
 			libraries/gnl/get_next_line_utils.c \
 
@@ -49,9 +54,14 @@ SOURCE_B = 	bonus/cast_rays.c \
 			bonus/exit.c \
 			bonus/sprites_bonus.c \
 			bonus/minimap_bonus.c \
-			bonus/parsing/allocation.c \
+			bonus/parsing/config_setup.c \
+			bonus/parsing/data_processing.c \
 			bonus/parsing/map_operations.c \
-			bonus/parsing/read_map.c \
+			bonus/parsing/map_processing.c \
+			bonus/parsing/map_reading.c \
+			bonus/parsing/map_validation.c \
+			bonus/parsing/memory_management.c \
+			bonus/parsing/string_manipulation.c \
 			libraries/gnl/get_next_line.c \
 			libraries/gnl/get_next_line_utils.c \
 

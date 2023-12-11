@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 15:58:56 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 12:46:44 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include "../libraries/gnl/get_next_line.h"
 
 # define TILE_SIZE 64 
-# define WINDOW_WIDTH 33 * TILE_SIZE
-# define WINDOW_HEIGHT 14 * TILE_SIZE
 
 # define WIN_W 1440
 # define WIN_H 900
@@ -39,9 +37,6 @@
 # define SOUTH 1
 # define WEST  2
 # define EAST  3
-
-# define KNIFE 5
-# define GUN 6
 
 typedef struct s_player
 {
@@ -172,8 +167,6 @@ enum				e_colors
 	C
 };
 
-void fun();
-
 // movements.c
 void	move_down(t_game *game, double move_step);
 void	move_up(t_game *game, double move_step);
@@ -235,21 +228,21 @@ void	draw_map(t_game *game);
 int		close_win(t_game *game);
 void	error_msg(void);
 
-// map_operations.c
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
+void	set_direction(char c, t_parse *vars);
+void	set_path(t_parse *vars, char **paths, t_it it);
 void	map_operations(char *map_name, t_parse *vars);
-void	set_map(char **a_map,char **map, int longest);
-int		is_surrounded(t_parse *vars, int i, int j);
+void	set_map(t_parse *vars, int longest);
+int		is_surrounded(t_parse *vars, int i, size_t j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
 void	surround_map(char **a_map, char **map);
-void	set_path(t_parse *vars, char **paths);
-char	*allocate_space(int count, int size);
 void	set_data(t_parse *vars, char *arr);
 void	set_map_size(t_parse *vars, int y);
 void	check_calc(t_var_calc	*calc);
 int		detect_type(char *element);
 char	**set_color2(char *color);
+char	*allocate_space(int size);
 void	check_color(char **color);
 void	check_array(char **array);
 int		check_map2(t_parse *vars);
@@ -258,13 +251,9 @@ void	set_map2(t_parse *vars);
 int		ft_my_atoi(char *color);
 void	free_2d(char **data);
 int		table_size(char **map);
-
-//allocation.c
 void	*gc_malloc(int size);
 void	garbage_collector(void	*ptr, int del);
 void	custom_exit(int status);
-
-//read_map.c
 void	check_player(char *map);
 char	*read_map(int fd, t_parse *vars);
 void	check_map(char *map, int length);

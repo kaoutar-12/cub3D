@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 19:00:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/07 17:13:50 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:55:32 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 		return ;
 	del(lst->content);
 	free(lst);
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*tmp;
-
-	if (!lst || !del)
-		return ;
-	tmp = *lst;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
-	}
-	free(tmp);
 }
 
 t_list	*ft_lstlast(t_list *lst)

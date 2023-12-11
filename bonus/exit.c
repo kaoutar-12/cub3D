@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 10:41:37 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 14:15:26 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:08:15 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,33 @@ void	error_msg(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
+}
+
+void	free_sprites(t_game *game)
+{
+	if (game->sprite)
+	{
+		if (game->sprite[KNIFE])
+		{
+			free(game->sprite[KNIFE]->pixels);
+			free(game->sprite[KNIFE]);
+		}
+		if (game->sprite[GUN])
+		{
+			free(game->sprite[GUN]->pixels);
+			free(game->sprite[GUN]);
+		}
+		if (game->sprite[KNIFE_A])
+		{
+			free(game->sprite[KNIFE_A]->pixels);
+			free(game->sprite[KNIFE_A]);
+		}
+		if (game->sprite[GUN_A])
+		{
+			free(game->sprite[GUN_A]->pixels);
+			free(game->sprite[GUN_A]);
+		}
+	}
 }
 
 void	free_textures(t_game *game)
@@ -50,6 +77,7 @@ void	free_textures(t_game *game)
 			free(game->textures[WEST]);
 		}
 	}
+	free_sprites(game);
 }
 
 void	free_game(t_game *game)
@@ -68,6 +96,7 @@ void	free_game(t_game *game)
 	free(game->ray->to_hit);
 	free_textures(game);
 	free(game->textures);
+	free(game->sprite);
 	free(game->ray);
 	free(game);
 }

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 13:18:48 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 18:09:15 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:07:39 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_shoot_knife(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_x;
 	double			sprite_y;
 
-	sprite = mlx_load_png("bonus/textures/knife_attack.png");
+	sprite = game->sprite[KNIFE_A];
 	if (!sprite)
 		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
@@ -49,7 +49,7 @@ void	draw_idle_knife(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_x;
 	double			sprite_y;
 
-	sprite = mlx_load_png("bonus/textures/knife_idle.png");
+	sprite = game->sprite[KNIFE];
 	if (!sprite)
 		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
@@ -78,7 +78,7 @@ void	draw_idle_sprite(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_x;
 	double			sprite_y;
 
-	sprite = mlx_load_png("bonus/textures/gun_idle.png");
+	sprite = game->sprite[GUN];
 	if (!sprite)
 		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
@@ -107,7 +107,7 @@ void	draw_shoot_sprite(t_game *game, double win_y, double j, uint32_t color)
 	double			sprite_x;
 	double			sprite_y;
 
-	sprite = mlx_load_png("bonus/textures/gun_shooting.png");
+	sprite = game->sprite[GUN_A];
 	if (!sprite)
 		error_msg();
 	win_x = (WIN_W / 2) - (sprite->width / 2);
@@ -128,15 +128,13 @@ void	draw_shoot_sprite(t_game *game, double win_y, double j, uint32_t color)
 	}
 }
 
-void	draw_sprite(t_game *game)
+void	draw_sprite(t_game *game, uint32_t color)
 {
 	double			j;
 	double			win_y;
-	uint32_t		color;
 
 	win_y = WIN_H / 2 - 50;
 	j = win_y;
-	color = 0;
 	if (game->player->ammo == 0)
 		game->change = KNIFE;
 	if (game->change == GUN)
@@ -145,7 +143,7 @@ void	draw_sprite(t_game *game)
 			draw_idle_sprite(game, win_y, j, color);
 		else
 		{
-			game->player->ammo -= 1;	
+			game->player->ammo -= 1;
 			draw_shoot_sprite(game, win_y, j, color);
 		}
 	}

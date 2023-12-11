@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 14:11:23 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:06:36 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,148 @@
 # define WEST  2
 # define EAST  3
 
+# define KNIFE 5
+# define GUN 6
+# define KNIFE_A 7
+# define GUN_A 8
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	radius;
+	int		turn;
+	int		walk;
+	double	rotation_angle;
+	double	move_speed;
+	double	rotation_speed;
+	double	fov_angle;
+	double	begin_x;
+	double	end_x;
+	double	begin_y;
+	double	end_y;
+	int		ammo;
+}	t_player;
+
+typedef struct s_ray
+{
+	double	num_rays;
+	double	*wall_hit_x;
+	double	*wall_hit_y;
+	double	*ray_angles;
+	double	*distances;
+	bool	*is_ray_facing_down;
+	bool	*is_ray_facing_up;
+	bool	*is_ray_facing_right;
+	bool	*is_ray_facing_left;
+	double	ray_angle;
+	double	h_x_intercept;
+	double	h_y_intercept;
+	double	v_x_intercept;
+	double	v_y_intercept;
+	double	x_check;
+	double	y_check;
+	double	x_step;
+	double	y_step;
+	double	h_wall_hit_x;
+	double	h_wall_hit_y;
+	double	v_wall_hit_x;
+	double	v_wall_hit_y;
+	bool	*found_h_wall_hit;
+	bool	*found_v_wall_hit;
+	bool	*to_hit;
+}	t_ray;
+
+typedef struct s_rgb_f
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_rgb_f;
+
+typedef struct s_rgb_c
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_rgb_c;
+
+typedef struct s_parse
+{
+	char	**map;
+	char	**actual_map;
+	int		player_x;
+	int		player_y;
+	int		player_direction;
+	int		map_h;
+	int		map_w;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	t_rgb_f	f_rgb;
+	t_rgb_c	c_rgb;
+}	t_parse;
+
+typedef struct s_game
+{
+	void			*mlx;
+	void			*mlx_win;
+	t_player		*player;
+	t_ray			*ray;
+	t_parse			*parse;
+	mlx_texture_t	**textures;
+	mlx_texture_t	**sprite;
+	mlx_image_t		*img;
+	bool			shoot;
+	int				change;
+}	t_game;
+
+typedef	struct	s_it
+{
+	int	i;
+	int	j;
+	int	k;
+} t_it;
+
+typedef	struct	s_rgb_data
+{
+	char	**rgb_f;
+	char	**rgb_c;
+} t_rgb_data;
+
+typedef struct s_var_calc
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+} t_var_calc;
+
+
+enum				e_directions
+{
+	NO,
+	SO,
+	WE,
+	EA
+};
+
+enum				e_colors
+{
+	F = 5,
+	C
+};
+
 
 uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
-void	draw_sprite(t_game *game);
-void draw_square_around_player(t_game *game);
-void draw_wall(t_game *game);
+void	draw_sprite(t_game *game, uint32_t color);
+void	draw_square_around_player(t_game *game);
+void	draw_wall(t_game *game);
+void	draw_square(t_game *game, int x, int y, int color);
+
 // movements.c
 void	move_down(t_game *game, double move_step);
 void	move_up(t_game *game, double move_step);
@@ -100,21 +237,22 @@ void	projectd_wall(t_game *game);
 int		close_win(t_game *game);
 void	error_msg(void);
 
-// map_operations.c
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
+
+void	set_direction(char c, t_parse *vars);
+void	set_path(t_parse *vars, char **paths, t_it it);
 void	map_operations(char *map_name, t_parse *vars);
-void	set_map(char **a_map,char **map, int longest);
-int		is_surrounded(t_parse *vars, int i, int j);
+void	set_map(t_parse *vars, int longest);
+int		is_surrounded(t_parse *vars, int i, size_t j);
 void	set_color(t_parse *vars, char **colors);
 void	check_path(t_parse *vars, char **path);
 void	surround_map(char **a_map, char **map);
-void	set_path(t_parse *vars, char **paths);
-char	*allocate_space(int count, int size);
 void	set_data(t_parse *vars, char *arr);
 void	set_map_size(t_parse *vars, int y);
 void	check_calc(t_var_calc	*calc);
 int		detect_type(char *element);
 char	**set_color2(char *color);
+char	*allocate_space(int size);
 void	check_color(char **color);
 void	check_array(char **array);
 int		check_map2(t_parse *vars);
@@ -123,13 +261,9 @@ void	set_map2(t_parse *vars);
 int		ft_my_atoi(char *color);
 void	free_2d(char **data);
 int		table_size(char **map);
-
-//allocation.c
 void	*gc_malloc(int size);
 void	garbage_collector(void	*ptr, int del);
 void	custom_exit(int status);
-
-//read_map.c
 void	check_player(char *map);
 char	*read_map(int fd, t_parse *vars);
 void	check_map(char *map, int length);

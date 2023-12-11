@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:58:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/08 10:58:36 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/10 15:14:06 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "../../mandatory/cub3d.h"
 
 typedef struct s_list
 {
@@ -23,6 +22,9 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+void	*gc_malloc(int size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr2(char const *s, unsigned int start, size_t len);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
@@ -33,7 +35,6 @@ int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		check_sep(char s1, char const *sep);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -43,11 +44,12 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t destsize);
 size_t	ft_strcpy(char *dest, const char *src);
 size_t	ft_strlcat(char	*dst, const	char *src, size_t destsize);
-char	*ft_strjoin(char  *s1, char  *s2);
+char	*ft_strjoin(char *s1, char *s2);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
+size_t	ft_strcpy_map(char *dest, const char *src);
 void	*ft_calloc2(size_t count, size_t size);
 char	**ft_split2(char *s, char c);
 void	ft_putstr_fd(char *s, int fd);
@@ -68,5 +70,6 @@ int		ft_isalnum(int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strtrim_fh(char const *s1, char const *set);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif
