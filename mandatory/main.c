@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/10 13:44:13 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:08:21 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		atexit(fun);
 		map_operations(av[1], &parse);
 		print_all_vars(&parse);
 		// while (1);

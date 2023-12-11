@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 09:50:16 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/10 12:17:45 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:15:30 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int	check_map2(t_parse *vars)
 void	check_map(char *map, int length)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	if (length < 9)
 	{
 		write(2, "Error\nInvalid map content\n", 27);
@@ -75,6 +77,7 @@ void	check_map(char *map, int length)
 			&& map[i] != 'W' && map[i] != 'E'
 			&& map[i] != ' ' && map[i] != '\n')
 		{
+			printf ("|%c|\n", map[i]);
 			write (2, "Error\nThe provided map "
 				"contains an invalid character\n", 54);
 			custom_exit(1);

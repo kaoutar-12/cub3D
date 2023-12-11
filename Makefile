@@ -6,7 +6,7 @@
 #    By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/10 15:14:55 by mboukaiz         ###   ########.fr        #
+#    Updated: 2023/12/11 15:31:37 by mboukaiz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= Cub3d
 NAME_B= Cub3d_bonus
 CC= cc
 CN= rm -rf
-# FLAGS= -Wall -Wextra -Werror
+FLAGS= -fsanitize=address
 # LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/mboukaiz/.brew/opt/glfw/lib/
 
 PREFIX = ./obj/
@@ -49,7 +49,7 @@ libft :
 	make -C libraries/libft
 
 $(NAME) : $(SOURCE) $(HEADER) libft
-	$(CC) $(SOURCE) $(CFLAGS) $(LINKS) libraries/libft/libft.a -o $(NAME)
+	$(CC) $(SOURCE) $(FLAGS) $(LINKS) libraries/libft/libft.a -o $(NAME)
 
 clean:
 
