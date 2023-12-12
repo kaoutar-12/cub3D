@@ -6,12 +6,12 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/12 14:46:37 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/12 14:55:05 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= Cub3d
-NAME_B= Cub3d_bonus
+NAME= cub3D
+NAME_B= cub3D_bonus
 CC= cc
 CN= rm -rf
 FLAGS= -Wall -Wextra -Werror

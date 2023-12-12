@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:05:03 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/12 14:53:55 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:58:57 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ void	set_player_direction_pos(t_game *game)
 		game->player->rotation_angle = 0;
 	else if (game->parse->player_direction == WEST)
 		game->player->rotation_angle = M_PI;
-}
-
-void	leaks() {
-	system("leaks cub3D");
 }
 
 int	main(int ac, char **av)
@@ -53,7 +49,6 @@ int	main(int ac, char **av)
 		set_player_direction_pos(game);
 		ft_game(game);
 		free_game(game);
-		atexit(leaks);
 	}
 	else
 		error_msg();
