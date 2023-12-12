@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:02:20 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/10 13:43:35 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:50:16 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	set_map(t_parse *vars, int longest)
 	i = 0;
 	while (vars->map[i])
 	{
-		tmp = allocate_space(longest + 1);
-		tmp[longest] = '\0';
+		tmp = allocate_space(longest);
+		tmp[longest - 1] = '\0';
 		ft_strcpy(tmp, vars->map[i]);
 		vars->map[i] = tmp;
 		i++;

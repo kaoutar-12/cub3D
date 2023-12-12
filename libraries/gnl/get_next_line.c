@@ -6,7 +6,7 @@
 /*   By: mboukaiz <mboukaiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:51:15 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/10 15:04:02 by mboukaiz         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:50:51 by mboukaiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_line(char *str)
 		tab[i] = str[i];
 		i++;
 	}
-	if (str[i++] == '\n')
+	if (str[i] == '\n' && ++i)
 		tab[i - 1] = str[i - 1];
 	tab[i] = '\0';
 	return (tab);

@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:07:16 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/08 10:43:30 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 10:17:21 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,6 @@ void	free_game(t_game *game)
 	free(game->textures);
 	free(game->ray);
 	free(game);
+	printf("game Over\n");
+	exit(0);
 }

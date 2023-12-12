@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:17:14 by mboukaiz          #+#    #+#             */
-/*   Updated: 2023/12/11 12:49:51 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:15:45 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*read_map(int fd, t_parse *vars)
 	close(fd);
 	check_map(map, length);
 	vars->map = ft_split(map, '\n');
-	vars->actual_map = gc_malloc(sizeof(char *) * table_size(vars->map) + 1);
+	vars->actual_map = gc_malloc(sizeof(char *) * (1 + table_size(vars->map)));
 	set_map(vars, longest_line);
 	set_map_size(vars, longest_line);
 	find_player(vars);
