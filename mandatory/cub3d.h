@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/11 12:46:44 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:45:29 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,18 +129,18 @@ typedef struct s_game
 	int				change;
 }	t_game;
 
-typedef	struct	s_it
+typedef struct s_it
 {
 	int	i;
 	int	j;
 	int	k;
-} t_it;
+}	t_it;
 
-typedef	struct	s_rgb_data
+typedef struct s_rgb_data
 {
 	char	**rgb_f;
 	char	**rgb_c;
-} t_rgb_data;
+}	t_rgb_data;
 
 typedef struct s_var_calc
 {
@@ -150,8 +150,7 @@ typedef struct s_var_calc
 	int	ea;
 	int	f;
 	int	c;
-} t_var_calc;
-
+}	t_var_calc;
 
 enum				e_directions
 {
@@ -181,7 +180,7 @@ void	free_game(t_game *game);
 
 // cast_rays.c
 void	get_direction(t_game *game, int i);
-void	check_distance(t_game *game, double h_distance, 
+void	check_distance(t_game *game, double h_distance,
 			double v_distance, int i);
 void	cast_v_h_rays(t_game *game, int i);
 void	cast_rays(t_game *game);
@@ -190,7 +189,6 @@ void	cast_rays(t_game *game);
 void	draw_sky(t_game *game);
 void	draw_floor(t_game *game);
 void	draw(void *param);
-
 
 // cast_horizontal.c
 void	calculate_horizontal_interception(t_game *game, int i);
@@ -215,19 +213,17 @@ void	draw_rect(t_game *game, int x, int height, int color);
 void	init_rays(t_ray *ray);
 void	ft_game(t_game *game);
 void	init_player(t_player *player);
-
 int		draw_player(t_game *game);
-void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	get_player_position(t_player *player);
 int		is_wall(t_game *game, double x, double y);
-void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
+void	draw_textures(t_game *game, int i, double wall_strip_height,
+			int direction);
 void	projectd_wall(t_game *game);
 void	draw_square(t_game *game, int x, int y, int color);
 void	draw_wall(t_game *game);
 void	draw_map(t_game *game);
 int		close_win(t_game *game);
 void	error_msg(void);
-
 void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
 void	set_direction(char c, t_parse *vars);
 void	set_path(t_parse *vars, char **paths, t_it it);

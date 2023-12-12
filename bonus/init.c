@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:00:28 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/12 12:17:58 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:20:51 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_player(t_player *player)
 	player->radius = 4;
 	player->turn = 0;
 	player->walk = 0;
-	player->move_speed = 5.0;
+	player->move_speed = 8.0;
 	if (player->move_speed > WIN_H || player->move_speed > WIN_W)
 		player->move_speed = 2.0;
 	player->rotation_speed = 3 * (M_PI / 180);

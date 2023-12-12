@@ -6,7 +6,7 @@
 /*   By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:04:07 by kmouradi          #+#    #+#             */
-/*   Updated: 2023/12/11 13:06:36 by kmouradi         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:43:29 by kmouradi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,18 @@ typedef struct s_game
 	int				change;
 }	t_game;
 
-typedef	struct	s_it
+typedef struct s_it
 {
 	int	i;
 	int	j;
 	int	k;
-} t_it;
+}	t_it;
 
-typedef	struct	s_rgb_data
+typedef struct s_rgb_data
 {
 	char	**rgb_f;
 	char	**rgb_c;
-} t_rgb_data;
+}	t_rgb_data;
 
 typedef struct s_var_calc
 {
@@ -157,8 +157,7 @@ typedef struct s_var_calc
 	int	ea;
 	int	f;
 	int	c;
-} t_var_calc;
-
+}	t_var_calc;
 
 enum				e_directions
 {
@@ -174,98 +173,78 @@ enum				e_colors
 	C
 };
 
-
 uint32_t	get_pixel_color(mlx_texture_t *texture, uint32_t x, uint32_t y);
-void	draw_sprite(t_game *game, uint32_t color);
-void	draw_square_around_player(t_game *game);
-void	draw_wall(t_game *game);
-void	draw_square(t_game *game, int x, int y, int color);
-
-// movements.c
-void	move_down(t_game *game, double move_step);
-void	move_up(t_game *game, double move_step);
-void	move_left(t_game *game, double move_step);
-void	move_right(t_game *game, double move_step);
-
-// key_hooks.c
-void	rotate_left(t_game *game);
-void	rotate_right(t_game *game);
-void	ft_hook(void *param);
-void	free_game(t_game *game);
-void	mouse_hook(double xpos, double ypos, void* param);
-
-// cast_rays.c
-void	get_direction(t_game *game, int i);
-void	check_distance(t_game *game, double h_distance, 
-			double v_distance, int i);
-void	cast_v_h_rays(t_game *game, int i);
-void	cast_rays(t_game *game);
-
-// ft_draw.c
-void	draw_sky(t_game *game);
-void	draw_floor(t_game *game);
-void	draw(void *param);
-
-
-// cast_horizontal.c
-void	calculate_horizontal_interception(t_game *game, int i);
-void	next_horizontal_intercept(t_game *game, double next_h_xintercept,
-			double next_h_yintercept, int i);
-void	cast_horizontal_rays(t_game *game, int i);
-
-// cast_verticl.c
-void	calculate_vertical_interception(t_game *game, int i);
-void	next_vertical_intercept(t_game *game, double next_v_xintercept,
-			double next_v_yintercept, int i);
-void	cast_vertical_rays(t_game *game, int i);
-
-// helpers.c
-int		ft_strcmp(char *s1, char *s2);
-double	normalize_angle(double angle);
-double	distance_between_points(double x1, double y1, double x2, double y2);
-int32_t	ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
-void	draw_rect(t_game *game, int x, int height, int color);
-
-// init.c
-void	init_rays(t_ray *ray);
-void	ft_game(t_game *game);
-void	init_player(t_player *player);
-
-int		is_wall(t_game *game, double x, double y);
-void	draw_textures(t_game *game, int i, double wall_strip_height, int direction);
-void	projectd_wall(t_game *game);
-int		close_win(t_game *game);
-void	error_msg(void);
-
-void	set_color3(t_parse *vars, t_rgb_data *rgb_data);
-
-void	set_direction(char c, t_parse *vars);
-void	set_path(t_parse *vars, char **paths, t_it it);
-void	map_operations(char *map_name, t_parse *vars);
-void	set_map(t_parse *vars, int longest);
-int		is_surrounded(t_parse *vars, int i, size_t j);
-void	set_color(t_parse *vars, char **colors);
-void	check_path(t_parse *vars, char **path);
-void	surround_map(char **a_map, char **map);
-void	set_data(t_parse *vars, char *arr);
-void	set_map_size(t_parse *vars, int y);
-void	check_calc(t_var_calc	*calc);
-int		detect_type(char *element);
-char	**set_color2(char *color);
-char	*allocate_space(int size);
-void	check_color(char **color);
-void	check_array(char **array);
-int		check_map2(t_parse *vars);
-int		ft_chrstr(char *s, int c);
-void	set_map2(t_parse *vars);
-int		ft_my_atoi(char *color);
-void	free_2d(char **data);
-int		table_size(char **map);
-void	*gc_malloc(int size);
-void	garbage_collector(void	*ptr, int del);
-void	custom_exit(int status);
-void	check_player(char *map);
-char	*read_map(int fd, t_parse *vars);
-void	check_map(char *map, int length);
+void		draw_sprite(t_game *game, uint32_t color);
+void		draw_square_around_player(t_game *game);
+void		draw_wall(t_game *game);
+void		draw_square(t_game *game, int x, int y, int color);
+void		move_down(t_game *game, double move_step);
+void		move_up(t_game *game, double move_step);
+void		move_left(t_game *game, double move_step);
+void		move_right(t_game *game, double move_step);
+void		rotate_left(t_game *game);
+void		rotate_right(t_game *game);
+void		ft_hook(void *param);
+void		free_game(t_game *game);
+void		mouse_hook(double xpos, double ypos, void *param);
+void		get_direction(t_game *game, int i);
+void		check_distance(t_game *game, double h_distance,
+				double v_distance, int i);
+void		cast_v_h_rays(t_game *game, int i);
+void		cast_rays(t_game *game);
+void		draw_sky(t_game *game);
+void		draw_floor(t_game *game);
+void		draw(void *param);
+void		calculate_horizontal_interception(t_game *game, int i);
+void		next_horizontal_intercept(t_game *game, double next_h_xintercept,
+				double next_h_yintercept, int i);
+void		cast_horizontal_rays(t_game *game, int i);
+void		calculate_vertical_interception(t_game *game, int i);
+void		next_vertical_intercept(t_game *game, double next_v_xintercept,
+				double next_v_yintercept, int i);
+void		cast_vertical_rays(t_game *game, int i);
+int			ft_strcmp(char *s1, char *s2);
+double		normalize_angle(double angle);
+double		distance_between_points(double x1, double y1, double x2, double y2);
+int32_t		ft_rgba(int32_t r, int32_t g, int32_t b, int32_t a);
+void		draw_rect(t_game *game, int x, int height, int color);
+void		init_rays(t_ray *ray);
+void		ft_game(t_game *game);
+void		init_player(t_player *player);
+int			is_wall(t_game *game, double x, double y);
+void		draw_textures(t_game *game, int i,
+				double wall_strip_height, int direction);
+void		projectd_wall(t_game *game);
+int			close_win(t_game *game);
+void		error_msg(void);
+void		set_color3(t_parse *vars, t_rgb_data *rgb_data);
+void		set_direction(char c, t_parse *vars);
+void		set_path(t_parse *vars, char **paths, t_it it);
+void		map_operations(char *map_name, t_parse *vars);
+void		set_map(t_parse *vars, int longest);
+int			is_surrounded(t_parse *vars, int i, size_t j);
+void		set_color(t_parse *vars, char **colors);
+void		check_path(t_parse *vars, char **path);
+void		surround_map(char **a_map, char **map);
+void		set_data(t_parse *vars, char *arr);
+void		set_map_size(t_parse *vars, int y);
+void		check_calc(t_var_calc	*calc);
+int			detect_type(char *element);
+char		**set_color2(char *color);
+char		*allocate_space(int size);
+void		check_color(char **color);
+void		check_array(char **array);
+int			check_map2(t_parse *vars);
+int			ft_chrstr(char *s, int c);
+void		set_map2(t_parse *vars);
+int			ft_my_atoi(char *color);
+void		free_2d(char **data);
+int			table_size(char **map);
+void		*gc_malloc(int size);
+void		garbage_collector(void	*ptr, int del);
+void		custom_exit(int status);
+void		check_player(char *map);
+char		*read_map(int fd, t_parse *vars);
+void		check_map(char *map, int length);
 
 #endif

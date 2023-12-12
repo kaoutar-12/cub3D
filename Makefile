@@ -6,7 +6,7 @@
 #    By: kmouradi <kmouradi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 12:49:56 by kmouradi          #+#    #+#              #
-#    Updated: 2023/12/12 12:17:33 by kmouradi         ###   ########.fr        #
+#    Updated: 2023/12/12 12:20:03 by kmouradi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= Cub3d
 NAME_B= Cub3d_bonus
 CC= cc
 CN= rm -rf
-FLAGS= -Wall -Wextra -Werror 
+FLAGS= -Wall -Wextra -Werror -g -fsanitize=address
 LINKS= libraries/MLX42/build/libmlx42.a -Iinclude -lglfw -L /Users/kmouradi/Homebrew/opt/glfw/lib/
 
 PREFIX = ./obj/
